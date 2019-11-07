@@ -1,5 +1,6 @@
 //Contributors
 //G. Poppe
+//eclipse496
 //
 #include <stdlib.h>
 #include <ctype.h>
@@ -128,14 +129,32 @@ void main(void)
 					}
 					break;
 			}
-			case 13:
+			case 13: // this is mine
 			{
-					while(choice != 99)
-					{
-							puts("you open the door and find ........");
-							scanf("%d",&choice);
-					}
-					break;
+				while(choice != 99)
+				{
+						puts("You open the door and enter, closing it shut behind you. The door seals airtight, so hopefully no water will leak...");
+						puts("There is a single lightbulb hanging from the ceiling. Underneath it is a yellow sphere...");
+						puts("The dimly lit sphere floats in place, slowly bobbing up and down...");
+						puts("You cannot see anything else in the room.");
+						puts("What will you do?");
+						puts("1. Inspect the sphere.");
+						puts("2. Turn off the light.");
+						puts("3. Open the door.");
+						scanf("%d",&choice);
+
+						if(choice == 1)
+						{
+							puts("The sphere turns slowly, revealing a an emoji-esque face...");
+							puts("Its eyes widen, pupils dilated.");
+							puts("A yellow hand uncloaks itself from the darkness, holding a gun...");
+							puts("You hear the gun click, and the sphere opens its mouth, revealing 2 rows of large molars");
+							puts("The gun's barrel is fixated on you, and before you have time to preemptively act...");
+							puts("The words sound from the its mouth, reverberating through the room, ringing clear through your eardrums.");
+							puts("=-=-= \" V I B E  C H E C K \" =-=-=");
+						}
+				}
+				break;
 			}
 			case 14:
 			{
