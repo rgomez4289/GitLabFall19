@@ -125,6 +125,31 @@ void main(void)
 			{
 					while(choice != 99)
 					{
+						puts("you find yourself in a room full of dogs");
+						puts("you choose:");
+						puts("1. pet them all one by one, because you hope they have been trained to wait their turn");
+						puts("2. run away, you are deathly allergic to dogs");
+						puts("3. dive in, you accept your death by dog snuggles");
+						scanf("%d", &choice);
+						if (choice ==1)
+						{
+							puts("\n\nthe dogs start barking as you approach, you run back out the door");
+							puts("rejected!");
+							break;
+						} else if (choice ==2)
+						{
+							puts("\n\nthe dogs tackle you before you can leave, they sensed your fear!");
+							puts("fatality.");
+							break;
+						} else if (choice ==3) 
+						{
+							puts("\n\nyou die a quick and easy death by snuggles.");
+							puts("R.I.P");
+							break;
+						} else 
+						{
+							puts("come on just pick any");
+						}
 					}
 					break;
 			}
