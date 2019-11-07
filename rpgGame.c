@@ -69,7 +69,15 @@ void main(void)
 					while(choice != 99)
 					{
 							puts("you open the door and find ........");
-							scanf("%d",&choice);
+							puts("the loop monster!");
+							while(choice != 99)
+							{
+								puts("the loop monster will end its reign of terror if you enter");
+								puts("the magic number it seeks");
+								scanf("%d", &choice);
+								//if (choice == 99) break;
+							}
+							puts("the loop monster has seized to exist");
 					}
 					break;
 			}
