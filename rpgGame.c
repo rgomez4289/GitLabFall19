@@ -148,8 +148,23 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
-							scanf("%d",&choice);
+						char userOption[256];
+						char red[256]={"red"};
+						char blue[256]={"blue"};
+						char yellow[256]={"yellow"};
+					
+						puts("You open the door and find 3 pills. A man wearing all back asks you to take one. There is a red pill, a blue pill, and a yellow pill. Which one do you choose?");
+						scanf(" %s",&userOption);
+						
+						if(strcmp(userOption,red) == 0)
+							puts("You chose the red pill!");
+						if(strcmp(userOption,blue) == 0)
+							puts("You chose the blue pill!");
+						if(strcmp(userOption,yellow) == 0)
+							puts("You chose the yellow pill!");
+
+						puts("Please enter a room to enter:");
+						scanf("%d",&choice);
 					}
 					break;
 			}
