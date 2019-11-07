@@ -1,6 +1,6 @@
 //Contributors
 //G. Poppe
-//
+// Mir Hassan Talpur #17
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
@@ -83,7 +83,7 @@ void main(void)
 			case 7:
 			{
 					while(choice != 99)
-				{ 
+				{
 				}
 					break;
 			}
@@ -179,12 +179,33 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find a basketball.");
+							puts("All of a sudden Shaq pops out of the dark.");
+							puts("He challenges you to a 1 on 1 game.");
+							printf("1. You accept his challenge because Shaq aint ready for you.\n");
+							printf("2. You decline his challenge because it's SHAQ.\n");
+							printf("3. You decide to do something else.\n");
 							scanf("%d",&choice);
+							if (choice == 1)
+							{
+								puts("Unfortunately, since Shaq is 7 feet 300 pounds. He dunks on you and says bbq chicken.");
+								break;
+							}
+							else if (choice == 2)
+							{
+								puts("You tell Shaq you're good. Shaq picks you up and dunks you instead.");
+								break;
+							}
+							else
+							{
+								puts("You call Charles Barkely. Barkley hypocritically calls Shaq fat. Shaq tells Barkely he has no rings.");
+								puts("They continue to argue and you slip past Shaq's insane 1 on 1 challenge. Success.");
+								break;
+							}
 					}
 					break;
 			}
-			case 18:			
+			case 18:
 			{
 					while(choice != 99)
 					{
@@ -287,7 +308,6 @@ void main(void)
 
 
 			}
-		}	
+		}
 	}
     }
-
