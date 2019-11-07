@@ -39,9 +39,23 @@ void main(void)
 			}
 			case 2:
 			{
+					
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							char drinkChoice[1];
+							puts("you open the door and find a river.");
+							puts("Would you like to drink from the river?(y/n): ");
+							scanf("%s", &drinkChoice);
+							if(strcmp(drinkChoice, "y") == 0)
+							{
+								puts("YOU HAVE DIED OF DYSENTERY.");
+								puts("");
+								break;
+							}
+							else
+								puts("Okay... return to the beginning then.");
+								puts("");
+								break;
 							scanf("%d",&choice);
 					}
 					break;
