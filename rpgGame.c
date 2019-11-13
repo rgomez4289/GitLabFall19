@@ -100,8 +100,37 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find a hideous cat. It's wearing a cloak to hide from the bright light.\n");
+							puts("It's so ugly you stare amazed, and forget to close the door.");
+							puts("Choice 1: Say hello\n.");
+							puts("Choice 2: Tell the cat your a dog person.\n");
+							puts("Choice 3: Tell the cat your on a search for treasure..\n");
+							puts("Choice 4: Just stare... like a weirdo\n");
+							puts("What do you do?");
 							scanf("%d",&choice);
+
+							if(choice == 1)
+							{
+								puts("Leave me be, stranger.\n.");
+							}
+							
+							else if(choice == 2)
+							{
+								puts("About a year ago, I came upon a wishing well and approached it with the few coins I had left. I wished to be born as a great husky in the next life.");
+							}
+							
+							else if(choice == 3)
+							{
+								puts("Your search ends here, you seem to have searched far and wide. I'll tell you the treasure is hidden further inside. The dungeon is filled with 25 rooms, your search is almost over.");
+							}
+							
+							else if(choice == 4)
+							{
+								puts("Stop staring you weirdo or you might get turned to stone.");
+							}
+							break;
+
+								
 					}
 					break;
 			}
