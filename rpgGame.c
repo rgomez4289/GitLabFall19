@@ -6,7 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
-
+int goblin(int choice);
 
 void main(void)
 {
@@ -109,8 +109,31 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							
+							puts("you open the door and find a unicorn eating gold bars");
+							printf("Save the gold bars? Enter 1 for yes. 2 for no.");
 							scanf("%d",&choice);
+							
+							
+							if(choice==1)
+							{
+								puts("As you try to pick up the gold bar a goblin comes out and attacks you");
+								puts("You pull out your sword.");
+								printf("Try to attack or run away? Enter 1 to fight. 2 to run ");
+								scanf("%d",&choice);
+								goblin(choice);
+							//	printf("%d\n",choice);
+								choice=99;
+								
+							}
+							else
+							{
+								printf("You decided not to pick up the gold. You leave and the goblin goes back into hiding\n");
+								printf("You decide to walk past the unicorn and come to a pathway labled 'Pathway A' and 'Pathway B'\n");
+								
+								//goblin(choice);
+								choice=99;
+							}
 					}
 					break;
 			}
@@ -275,4 +298,18 @@ void main(void)
 		}	
 	}
     }
+int goblin(int choice)
+{
+	if(choice==1)
+	{
+		printf("'So you have chosen to fight me'\n");
+
+	}
+	else 
+	{
+		printf("Oh no, the goblin has stabbed you!\n");
+
+	}
+	return choice;
+}
 
