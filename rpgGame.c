@@ -290,7 +290,7 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find another door");
 							scanf("%d",&choice);
 					}
 					break;
