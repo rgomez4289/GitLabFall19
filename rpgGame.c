@@ -14,7 +14,7 @@ void main(void)
 	char name[256];
 	int boxNum=0;
 
-	printf("Please enter your name: "); //Input any number of array inputs
+	printf("Please enter your name: "); 
 	scanf("%s",name);
 
 	printf("Hello %s welcome to the rpgGame!\n",name);
