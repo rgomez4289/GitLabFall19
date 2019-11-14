@@ -1,6 +1,7 @@
 //Contributors
 //G. Poppe
 // Mir Hassan Talpur #17
+// Amado Rodriguez III #21
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
@@ -13,6 +14,7 @@ void main(void)
 	int x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
+	srand(time(NULL));
 
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
@@ -269,11 +271,43 @@ void main(void)
 			}
 			case 21:
 			{
-					while(choice != 99)
+					puts("you open the door and find a skeleton in a suit.");
+					printf("It invites you to play a game of blackjack. ");
+					printf("If you win, it will grant you a wish, but if you lose ");
+					printf("you must stay trapped in this room as its card playing ");
+					puts("buddy forever.");
+					puts("Will you play?");
+					puts("1. Yes.");
+					puts("2. No.");
+					scanf("%d",&choice);
+
+					if(choice == 1)
 					{
-							puts("you open the door and find ........");
-							scanf("%d",&choice);
+						/*int cont = 0;
+						int c1;
+						int c2;
+						*/
+						//while(cont != 1)
+						//{
+							puts("The Skeleton laughs and deals each of you 2 cards");
+							/*c1 = ((1 + rand()) % 13);
+							c2 = ((1 + rand()) % 13);
+							if(c1 > 10)
+							{
+								puts
+							*/
+							printf("Before you can even look at your cards ");
+							printf("the skeleton reveals a Blackjack. ");
+							puts("you should've known it was a cheater");
+						//}
 					}
+					else if(choice == 2)
+					{
+						printf("Seeing as it isn't even Halloween season ");
+						printf("you decide not to humor The Skeleton. ");
+						puts("You exit the room.");
+					}
+						
 					break;
 			}
 			case 22:
