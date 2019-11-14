@@ -19,7 +19,7 @@ void main(void)
 	char name[256];
 	int boxNum=0;
 
-	printf("Please enter your name: "); //Input any number of array inputs
+	printf("Please enter your name: "); 
 	scanf("%s",name);
 
 
@@ -37,8 +37,43 @@ void main(void)
 		{
 			case 1:
 			{
+				char choice;
 				while(choice != 99)
 				{
+					puts("You open the door then, close it behind you.");
+					puts("You start freaking out because the water is starting to rise.");
+					puts("You notice that there is a table with 3 boxes and an envelope on top of the table.");
+					puts("One box has the key to freedom it in.");
+					puts("Open the envelope, read the question and select the right answer from the choices given.");
+					puts("1. Which of the following is the correct format to compile a c program?");
+					puts("A. gcc o rpgGame rpgGame.c");
+					puts("B. gcc -o rpgGame.c rpgGame.c");
+					puts("C. gcc -o rpgGame rpgGame.c");
+					scanf("%s", &choice);
+
+				while(choice != 'C' || choice != 'c')
+				{
+					scanf("%s", &choice);
+					if(choice == 'A' || choice == 'a')
+					{	
+						puts("Put your hand on box 1 and grab the key.");
+						puts("Ouch! you just got bitten by a snake. Try again before the poisen takes effect.");
+					}
+					else if(choice == 'B' || choice == 'b')
+					{
+						puts("Put your hand in box 2 and grab the key.");
+						puts("Oh no! my hands caught in a Funnel-web spider nest. Make another choice before you become paralyzed.");
+					}
+					else if(choice == 'C' || choice == 'c')
+					{
+						puts("Put your hand in box 3 and grab the key");
+						puts("You have chosen wisely! take the key and escape to freedom then choose another room.");
+					}
+					//scanf("%s", &choice);
+				}
+					break;
+						
+
 
 				}
 				break;
