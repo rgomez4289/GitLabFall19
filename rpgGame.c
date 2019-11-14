@@ -1,6 +1,7 @@
 //Contributors
 //G. Poppe
 // Mir Hassan Talpur #17
+// Ivan Khaffaji Room #15
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
@@ -186,20 +187,43 @@ void main(void)
 					while(choice != 99)
 					{
 						char userOption[256];
-						char red[256]={"red"};
-						char blue[256]={"blue"};
-						char yellow[256]={"yellow"};
+						char red[4]={"red"};
+						char blue[5]={"blue"};
+						char yellow[7]={"yellow"};
+						char stay[5]={"STAY"};
+						char go[3]={"GO"};
+						char yes[4]={"YES"};
 					
 						puts("You open the door and find 3 pills. A man wearing all back asks you to take one. There is a red pill, a blue pill, and a yellow pill. Which one do you choose?");
 						scanf(" %s",&userOption);
 						
 						if(strcmp(userOption,red) == 0)
+						{
 							puts("You chose the red pill!");
+							puts("Whoa! Whats going on?? All of a sudden, the bookcase in the back of the room swings wide open! Do you enter the opened room or stay where you are? (Enter STAY or GO)");
+							scanf(" %s",&userOption);
+							if(strcmp(userOption,stay)==0)
+							{
+								puts("Why are you scared? You should just go into the room anyways. Are you sure you want to stay? (Enter YES or NO)");
+								scanf(" %s",&userOption);
+								if(strcmp(userOption,yes)==0)
+								{	
+									puts("Fine. You're no fun.");
+									choice = 99;
+								}
+								else
+								{
+									puts("Wow! You changed your mind and entered the hidden room! What happens next?");
+								}
+							}
+						}
 						if(strcmp(userOption,blue) == 0)
 							puts("You chose the blue pill!");
 						if(strcmp(userOption,yellow) == 0)
 							puts("You chose the yellow pill!");
-
+						
+						if(strcmp(userOption,"99") == 0)
+							choice = 99;
 						puts("Please enter a room to enter:");
 						scanf("%d",&choice);
 					}
