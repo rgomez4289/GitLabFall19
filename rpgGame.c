@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
+#include<math.h>
 
 
 void main(void)
@@ -180,8 +181,21 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find an empty space. Suddenly, you heard a voice. It sounded like your friend's mother. 'Please open the door. Your friend and i were in a car accident.. we are badly hurt... please open the door and help us. You tried to open the door again but you saw something on the wall. It said 'TO OPEN THE DOOR AGAIN YOU HAVE TO SPIN THE SPINNING WHEEL AND GET NUMBER 83 .");
+
 							scanf("%d",&choice);
+							
+							
+							int c,n;
+							printf("Ten Random Numbers[1,100]\n");
+							for (c=1; c<=10; c++)
+							{
+								n=rand()%100+1;
+								printf("%d\n",n);
+							}
+							return 0;
+							
+						
 					}
 					break;
 			}
