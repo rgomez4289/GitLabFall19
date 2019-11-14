@@ -1,11 +1,16 @@
 //Contributors
 //G. Poppe
+
 //Mjkli - room number #3
+
+// Mir Hassan Talpur #17
+
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
+#include<math.h>
 
 
 void main(void)
@@ -301,7 +306,15 @@ void main(void)
 					while(choice != 99)
 					{
 							puts("you open the door and find ........");
-							scanf("%d",&choice);
+							puts("the loop monster!");
+							while(choice != 99)
+							{
+								puts("the loop monster will end its reign of terror if you enter");
+								puts("the magic number it seeks");
+								scanf("%d", &choice);
+								//if (choice == 99) break;
+							}
+							puts("the loop monster has seized to exist");
 					}
 					break;
 			}
@@ -315,7 +328,7 @@ void main(void)
 			case 7:
 			{
 					while(choice != 99)
-				{ 
+				{
 				}
 					break;
 			}
@@ -332,8 +345,37 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find a hideous cat. It's wearing a cloak to hide from the bright light.\n");
+							puts("It's so ugly you stare amazed, and forget to close the door.");
+							puts("Choice 1: Say hello\n.");
+							puts("Choice 2: Tell the cat your a dog person.\n");
+							puts("Choice 3: Tell the cat your on a search for treasure..\n");
+							puts("Choice 4: Just stare... like a weirdo\n");
+							puts("What do you do?");
 							scanf("%d",&choice);
+
+							if(choice == 1)
+							{
+								puts("Leave me be, stranger.\n.");
+							}
+							
+							else if(choice == 2)
+							{
+								puts("About a year ago, I came upon a wishing well and approached it with the few coins I had left. I wished to be born as a great husky in the next life.");
+							}
+							
+							else if(choice == 3)
+							{
+								puts("Your search ends here, you seem to have searched far and wide. I'll tell you the treasure is hidden further inside. The dungeon is filled with 25 rooms, your search is almost over.");
+							}
+							
+							else if(choice == 4)
+							{
+								puts("Stop staring you weirdo or you might get turned to stone.");
+							}
+							break;
+
+								
 					}
 					break;
 			}
@@ -380,8 +422,23 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
-							scanf("%d",&choice);
+						char userOption[256];
+						char red[256]={"red"};
+						char blue[256]={"blue"};
+						char yellow[256]={"yellow"};
+					
+						puts("You open the door and find 3 pills. A man wearing all back asks you to take one. There is a red pill, a blue pill, and a yellow pill. Which one do you choose?");
+						scanf(" %s",&userOption);
+						
+						if(strcmp(userOption,red) == 0)
+							puts("You chose the red pill!");
+						if(strcmp(userOption,blue) == 0)
+							puts("You chose the blue pill!");
+						if(strcmp(userOption,yellow) == 0)
+							puts("You chose the yellow pill!");
+
+						puts("Please enter a room to enter:");
+						scanf("%d",&choice);
 					}
 					break;
 			}
@@ -396,12 +453,33 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find a basketball.");
+							puts("All of a sudden Shaq pops out of the dark.");
+							puts("He challenges you to a 1 on 1 game.");
+							printf("1. You accept his challenge because Shaq aint ready for you.\n");
+							printf("2. You decline his challenge because it's SHAQ.\n");
+							printf("3. You decide to do something else.\n");
 							scanf("%d",&choice);
+							if (choice == 1)
+							{
+								puts("Unfortunately, since Shaq is 7 feet 300 pounds. He dunks on you and says bbq chicken.");
+								break;
+							}
+							else if (choice == 2)
+							{
+								puts("You tell Shaq you're good. Shaq picks you up and dunks you instead.");
+								break;
+							}
+							else
+							{
+								puts("You call Charles Barkely. Barkley hypocritically calls Shaq fat. Shaq tells Barkely he has no rings.");
+								puts("They continue to argue and you slip past Shaq's insane 1 on 1 challenge. Success.");
+								break;
+							}
 					}
 					break;
 			}
-			case 18:			
+			case 18:
 			{
 					while(choice != 99)
 					{
@@ -412,8 +490,21 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find an empty space. Suddenly, you heard a voice. It sounded like your friend's mother. 'Please open the door. Your friend and i were in a car accident.. we are badly hurt... please open the door and help us. You tried to open the door again but you saw something on the wall. It said 'TO OPEN THE DOOR AGAIN YOU HAVE TO SPIN THE SPINNING WHEEL AND GET NUMBER 83 .");
+
 							scanf("%d",&choice);
+							
+							
+							int c,n;
+							printf("Ten Random Numbers[1,100]\n");
+							for (c=1; c<=10; c++)
+							{
+								n=rand()%100+1;
+								printf("%d\n",n);
+							}
+							return 0;
+							
+						
 					}
 					break;
 			}
@@ -504,7 +595,6 @@ void main(void)
 
 
 			}
-		}	
+		}
 	}
     }
-
