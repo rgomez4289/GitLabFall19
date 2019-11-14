@@ -512,8 +512,42 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+						
+							puts("you open the door and find a rather normal bed with an old bed with blue covers and a broken down wardrobe");
+							puts("Around the room there is also a strange substance dripping from the ceiling");
+							puts("Do you \n(1)walk towards the bed \n(2)Examine the wardrobe \n(3)walkback out");
 							scanf("%d",&choice);
+							if (choice ==1)
+							{
+								puts("Its a rather plain bed with nothing there");
+								puts("It looks rather comfortable so you decide to take a nap");
+								puts("zzzzzz");
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");
+								choice =99;	
+							}
+							else if(choice == 2)
+							{
+							       puts("There seems to be somthing odd about this wardrobe");
+							       puts("you step inside and...");
+							       puts("find nothing but an empty wardrobe");
+					       		       choice =99;	
+							}
+							else if(choice ==3)
+							{
+								puts("You go to open the door but find that at the other side of the door has been walled off");
+								choice =99;	
+							}
+							else 
+							{
+								puts("You continue standing at the entrance contemplating life");
+								choice =99;	
+							}
+
 					}
 					break;
 			}
