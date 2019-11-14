@@ -148,7 +148,7 @@ void main(void)
 							break;
 						} else 
 						{
-							puts("come on just pick any");
+							puts("come on just pick any! \n\n");
 						}
 					}
 					break;
