@@ -502,7 +502,7 @@ void main(void)
 								n=rand()%100+1;
 								printf("%d\n",n);
 							}
-							return 0;
+							return;
 							
 						
 					}
