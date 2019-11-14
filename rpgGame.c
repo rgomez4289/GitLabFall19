@@ -199,7 +199,7 @@ void main(void)
                           }
                           puts("You Attack the zombie!");
                           //Sword Attack
-                          if(wepr = 10)
+                          if(wepr == 10)
                           {
                             if(zom < 11){
                               puts("You kill the zombie with one final stroke!");
@@ -212,7 +212,7 @@ void main(void)
                             zom -= wep;
                           }
                           //Knife Attack
-                          else if(wepr = 5)
+                          else if(wepr == 5)
                           {
                             puts("You stab the zombie in the head and flip over him");
                             puts("Zombie to you - 5 (units)");
