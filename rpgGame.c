@@ -91,17 +91,18 @@ case 6:
 		{
 			puts("You respond with Hello, sit down and he brings out a small kettle from his bag and brews tea for two");
 			puts("Congradualations on making a friend");
-		break;
+			puts("Achievement unlocked ... The happy ending!");
+			break;
 		}
 		else if(choice ==2)
 		{
-			puts("you ignored the man and attempt to walk away out of the building. He tells you to freeze and pulls out a broom stick. As you stare at him confused, he charges towards you and knocks you out...");
-		break;		
+			puts("you ignored the man and attempt to walk away out of the building. He tells you to freeze and pulls out a broom stick. As you stare at him confused, he charges towards you and knocks you out... To be continuted....");
+			break;		
 		}
 		else if (choice ==3) 
 		{
-		puts("You respond with 'General Kenobi'. He stares at you and says 'how do you know that name?' He takes out a broomstick and is ready to attack, when you are able to dodge his attack and run towards a wall. There is a large metal door, you run in and slam it shut behind you and it locks, keeping you safe... for now");
-		break;
+		puts("You respond with 'General Kenobi'. He stares at you and says 'how do you know that name?' He takes out a broomstick and is ready to attack, when you are able to dodge his attack and run towards a wall. There is a large metal door, you run in and slam it shut behind you and it locks, keeping you safe... for now.");
+			break;
 		}
 		else
 		{
