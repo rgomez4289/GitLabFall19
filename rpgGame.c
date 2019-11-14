@@ -1,4 +1,6 @@
 //Contributors
+//Alejandra Villa
+//room #23
 //G. Poppe
 // Mir Hassan Talpur #17
 #include <stdlib.h>
@@ -6,7 +8,6 @@
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
-
 
 void main(void)
 {
