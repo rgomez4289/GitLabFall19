@@ -139,8 +139,62 @@ void main(void)
 			}
 			case 14:
 			{
+				int i, x, y, z;
 					while(choice != 99)
 					{
+						puts("you open the door and find 3 boxes, select 1, 2, or 3\n");
+						scanf("%d", &choice);
+						if(choice == 1)
+						{
+							srand(time(NULL));
+							puts("You have chosen box 1, inside you find 2 six sided dice.");
+							puts("If you roll a 7, you lose. Lets roll...");
+							x = 1 + (rand()%6);
+							y = 1 + (rand()%6);
+							z = x + y;
+							printf("Die 1: %d\n", x);
+							printf("Die 2: %d\n", y);
+							printf("You rolled a %d\n", z);
+							if(z > 7)
+							{
+								puts("You lose, goodbye!\n");
+								break;
+
+							}
+							else
+							{
+								puts("Live to roll again.\n");
+				
+
+							}
+						}
+						if(choice == 2)
+						{
+							puts("You have chosen box 2, inside you find a basketball and a hoop.\n");
+							puts("Lets shoot!\n");
+							srand(time(NULL));
+							x = 1 + (rand()%100);
+							if(x > 40)
+							{
+								printf("Shot percentage: %d\n", x);
+								printf("You made the shot, nice\n");
+							}
+							else
+							{
+								printf("Shot percentage: %d\n", x);
+								puts("Miss\n");
+								break;
+							}
+
+
+						}
+						if(choice == 3)
+						{
+							
+						}
+
+
+
 					}
 					break;
 			}
