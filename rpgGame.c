@@ -1,12 +1,20 @@
 //Contributors
 //G. Poppe
+
+//Mjkli - room number #3
+
 // Mir Hassan Talpur #17
 // Amado Rodriguez III #21
+// Ivan Khaffaji Room #15
+
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
+#include<math.h>
+
+int goblin(int choice);
 
 
 void main(void)
@@ -18,6 +26,7 @@ void main(void)
 
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
+
 
 	printf("Hello %s welcome to the rpgGame!\n",name);
 
@@ -50,12 +59,243 @@ void main(void)
 			}
 			case 3:
 			{
-					while(choice != 99)
-					{
-							puts("you open the door and find ........");
-							scanf("%d",&choice);
-					}
-					break;
+				 int boss[] = {0,1,0,1,1,1,1};
+   char area[9][200] ={
+     "You are in a Grave Yard surrounded by cliffs\n",
+     "You are standing on a cliff side\nBehind you is a graveyard\nIn front you see a shrine with a fading light\n",
+     "You are in a shrine.\nIn the middle you see a small bonfire.\nTo your left you see a wooden door\nForward You see a silver door.\nTo your right you see a black door\n",
+     "You are standing in what looks like an old library.\n",
+     "You are standing in what looks like an old temple. the ground looks burned from fire and an ominus glow comes from the celing.\n",
+     "You are standing on a black island. Surrounded by a lake of fire.\nThe door you came through is encased on light.\n",
+     "Black fire seems to spew from the bonfire.\n Filling the room and encompassing the shrine.\nAll Light fades.\nAre you alone?\n",
+     "From here adventurer you need to "
+   };
+
+
+
+
+
+
+   int loc = 0; //used for map placement
+   int move; //used for map progression
+   int op; // used for in combat options
+   int end; //Used to end game
+   int wep;
+   int health;
+   int build;
+
+   int swdmg = 20; //
+   int bowdmg = 10; // far range - low dmg
+   int sffdmg = 50; // sorsory - far range but 1 move cast time
+   int kndmg = 5; //bleed dmg but have to be close
+
+   //wepon ranges
+   int wepr;
+   int swra = 10;
+   int bowra = 30;
+   int sffra = 50;
+   int knra = 5;
+
+
+   //Boss Healths
+   int zom = 50;
+
+
+      puts("You awake on the ground in a graveyard.\n");
+      puts("You stand up and see 4 weponds at your feet:\n1 - Sword\n2 - Bow\n3 - Knife\n4 - Staff\nWhat do you grab");
+      puts("(0) to quit\n");
+      int ch;
+      scanf("%d",&ch);
+      //Wepon choice
+      switch(ch)
+      {
+          case 1:
+            wep = swdmg;
+            wepr = swra;
+            printf("Wepon damage: %d\n",wep);
+            printf("Wepon range(units): %d\n",wepr);
+            printf("So I see that you have chosen the knight class\n");
+            puts("Knights are tough. Lets see if you are tough enough.\n");
+            health = 100;
+            printf("Health: %d\n",health);
+            break;
+          case 2:
+            wep = bowdmg;
+            wepr = bowra;
+            printf("Wepon damage: %d\n",wep);
+            printf("Wepon range(units): %d\n",wepr);
+            printf("So I see that you have chosen the Ranger class\n");
+            puts("Rangers are must have quick wits. Lets see if you can think on your feet.\n");
+            health = 60;
+            printf("Health: %d\n",health);
+            break;
+          case 3:
+            wep = kndmg;
+            wepr = kndmg;
+            printf("Wepon damage: %d\n",wep);
+            printf("Wepon range(units): %d\n",wepr);
+            printf("So I see that you have chosen the Theif class\n");
+            puts("Theifs rely on getting in close. Can you close the gap?\n");
+            puts("Theifs have bleed dmg - every 4 attacks issues 4 x your base damage\n");
+            health = 40;
+            printf("Health: %d\n",health);
+            break;
+          case 4:
+            wep = sffdmg;
+            wepr = sffra;
+            printf("Wepon damage: %d\n",wep);
+            printf("Wepon range(units): %d\n",wepr);
+            printf("So I see that you have chosen the Wizard class\n");
+            puts("Wizards are old and wise. Do you have the mind to survive?\n");
+            health = 50;
+            printf("Health: %d\n",health);
+            break;
+          case 0:
+            puts("I guess that will be the end of it");
+            puts("You crawl into an empty grave and die");
+            return;
+          default:
+            wep = 2;
+            wepr = 1;
+            printf("Wepon damage: %d\n",wep);
+            printf("Wepon range(units): %d\n",wepr);
+            puts("Empty Handed it will be.");
+            puts("You must be a fool....");
+            health = 10;
+            printf("Health: %d\n",health);
+        }
+
+      while(loc != 8){
+        printf("%s",area[loc]);
+        switch(loc)
+        {
+            case 0: //Graveyard Site
+                puts("1 - Towards cliffs\n");
+                scanf("%d",&move);
+                if(move == 1){
+                  loc++;
+                }
+                else
+                  puts("You are in a canyon!\nOnly can go forward adventurer.");
+                break;
+            case 1: //Cliffs (Zombie Fight)
+                //Zombie fight
+                if(boss[loc] == 1)
+                {
+                  int zomD = 10;
+                      puts("\nYou move forward and a zombie holding a knife charges at you");
+                      puts("He is 10 units away");
+                      puts("What do you do?");
+                  while(zom > 0)
+                  {
+                      printf("Your Health: %d\n",health);
+                      printf("Zombie Health: %d\n",zom);
+                      printf("Zombie Distance: %d\n",zomD);
+                      puts("1 - Attack!\n2 - Dodge left\n3 - Dodge right\n4 - Fall back(Adds 10 units)");
+                      scanf("%d",&op);
+                      switch (op)
+                      {
+                        case 1:
+                          if(wepr > zomD)
+                          {
+                            puts("Too close!");
+                            puts("The zombie drops his shoulder and you flip over him");
+                            puts("Health - 5");
+                            health -= 5;
+                            puts("You scramble to get up");
+                            puts("The zombie turns around and runs at you");
+                            zomD = 5;
+                            break;
+                          }
+                          puts("You Attack the zombie!");
+                          //Sword Attack
+                          if(wepr == 10)
+                          {
+                            if(zom < 11){
+                              puts("You kill the zombie with one final stroke!");
+                              puts("");
+                            }
+                            puts("You slice the zombie as he tumbles over you");
+                            puts("Zombie to you - 5 (units)");
+                            zomD = 5;
+                            puts("Zombie health -10");
+                            zom -= wep;
+                          }
+                          //Knife Attack
+                          else if(wepr == 5)
+                          {
+                            puts("You stab the zombie in the head and flip over him");
+                            puts("Zombie to you - 5 (units)");
+                            puts("Zombie health -5");
+                            if(build == 4)
+                            {
+                              zom -= wep * 4;
+                              build = 0;
+                            }
+                            else
+                            {
+                                build++;
+                                zom -= wep;
+                            }
+                          }
+                          break;
+                        case 2:
+                          puts("You dodge left and the zombie stumbles over");
+                          puts("Zombie range - 10");
+                          break;
+                        case 3:
+                          puts("You dodge Right and the zombie catches you with with its Knife");
+                          puts("Health -5");
+                          health -= 5;
+                          break;
+                        case 4:
+                          puts("You fall back from the zombie! - Added 10 Units");
+                          zomD += 10;
+                          break;
+                        default:
+                          puts("you freeze and the zombie Stabs you!");
+                          health -= 20;
+                      }
+
+                  }
+
+                  boss[loc] = 0;
+                }
+                else
+                {
+                  move = 0;
+                  puts("1 - Go towards Shrine\n2 - Back to GraveYard");
+                  scanf("%d",&move);
+                  if(move == 1)
+                  {
+                    loc++;
+                  }
+                  else if(move == 2)
+                  {
+                    loc--;
+                  }
+                  else
+                    puts("Error input!");
+                }
+                break;
+            case 2: //Shrine
+                if(boss[loc] == 1)
+                {
+
+                  
+                }
+
+
+              break;
+
+
+              default:
+                puts("an error has occured!");
+                loc = 8;
+
+        }
+
+        }
 			}
 			case 4:
 			{
@@ -148,8 +388,31 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							
+							puts("you open the door and find a unicorn eating gold bars");
+							printf("Save the gold bars? Enter 1 for yes. 2 for no.");
 							scanf("%d",&choice);
+							
+							
+							if(choice==1)
+							{
+								puts("As you try to pick up the gold bar a goblin comes out and attacks you");
+								puts("You pull out your sword.");
+								printf("Try to attack or run away? Enter 1 to fight. 2 to run ");
+								scanf("%d",&choice);
+								goblin(choice);
+							//	printf("%d\n",choice);
+								choice=99;
+								
+							}
+							else
+							{
+								printf("You decided not to pick up the gold. You leave and the goblin goes back into hiding\n");
+								printf("You decide to walk past the unicorn and come to a pathway labled 'Pathway A' and 'Pathway B'\n");
+								
+								//goblin(choice);
+								choice=99;
+							}
 					}
 					break;
 			}
@@ -188,20 +451,43 @@ void main(void)
 					while(choice != 99)
 					{
 						char userOption[256];
-						char red[256]={"red"};
-						char blue[256]={"blue"};
-						char yellow[256]={"yellow"};
+						char red[4]={"red"};
+						char blue[5]={"blue"};
+						char yellow[7]={"yellow"};
+						char stay[5]={"STAY"};
+						char go[3]={"GO"};
+						char yes[4]={"YES"};
 					
 						puts("You open the door and find 3 pills. A man wearing all back asks you to take one. There is a red pill, a blue pill, and a yellow pill. Which one do you choose?");
 						scanf(" %s",&userOption);
 						
 						if(strcmp(userOption,red) == 0)
+						{
 							puts("You chose the red pill!");
+							puts("Whoa! Whats going on?? All of a sudden, the bookcase in the back of the room swings wide open! Do you enter the opened room or stay where you are? (Enter STAY or GO)");
+							scanf(" %s",&userOption);
+							if(strcmp(userOption,stay)==0)
+							{
+								puts("Why are you scared? You should just go into the room anyways. Are you sure you want to stay? (Enter YES or NO)");
+								scanf(" %s",&userOption);
+								if(strcmp(userOption,yes)==0)
+								{	
+									puts("Fine. You're no fun.");
+									choice = 99;
+								}
+								else
+								{
+									puts("Wow! You changed your mind and entered the hidden room! What happens next?");
+								}
+							}
+						}
 						if(strcmp(userOption,blue) == 0)
 							puts("You chose the blue pill!");
 						if(strcmp(userOption,yellow) == 0)
 							puts("You chose the yellow pill!");
-
+						
+						if(strcmp(userOption,"99") == 0)
+							choice = 99;
 						puts("Please enter a room to enter:");
 						scanf("%d",&choice);
 					}
@@ -255,8 +541,21 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find an empty space. Suddenly, you heard a voice. It sounded like your friend's mother. 'Please open the door. Your friend and i were in a car accident.. we are badly hurt... please open the door and help us. You tried to open the door again but you saw something on the wall. It said 'TO OPEN THE DOOR AGAIN YOU HAVE TO SPIN THE SPINNING WHEEL AND GET NUMBER 83 .");
+
 							scanf("%d",&choice);
+							
+							
+							int c,n;
+							printf("Ten Random Numbers[1,100]\n");
+							for (c=1; c<=10; c++)
+							{
+								n=rand()%100+1;
+								printf("%d\n",n);
+							}
+							return;
+							
+						
 					}
 					break;
 			}
@@ -264,8 +563,42 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+						
+							puts("you open the door and find a rather normal bed with an old bed with blue covers and a broken down wardrobe");
+							puts("Around the room there is also a strange substance dripping from the ceiling");
+							puts("Do you \n(1)walk towards the bed \n(2)Examine the wardrobe \n(3)walkback out");
 							scanf("%d",&choice);
+							if (choice ==1)
+							{
+								puts("Its a rather plain bed with nothing there");
+								puts("It looks rather comfortable so you decide to take a nap");
+								puts("zzzzzz");
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");	
+								puts("zzzzzz");puts("zzzzzz");
+								choice =99;	
+							}
+							else if(choice == 2)
+							{
+							       puts("There seems to be somthing odd about this wardrobe");
+							       puts("you step inside and...");
+							       puts("find nothing but an empty wardrobe");
+					       		       choice =99;	
+							}
+							else if(choice ==3)
+							{
+								puts("You go to open the door but find that at the other side of the door has been walled off");
+								choice =99;	
+							}
+							else 
+							{
+								puts("You continue standing at the entrance contemplating life");
+								choice =99;	
+							}
+
 					}
 					break;
 			}
@@ -382,3 +715,21 @@ void main(void)
 		}
 	}
     }
+
+int goblin(int choice)
+{
+	if(choice==1)
+	{
+		printf("'So you have chosen to fight me'\n");
+
+	}
+	else 
+	{
+		printf("Oh no, the goblin has stabbed you!\n");
+
+	}
+	return choice;
+}
+
+
+
