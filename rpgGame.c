@@ -133,26 +133,71 @@ void main(void)
 			{
 				while(choice != 99)
 				{
-						puts("You open the door and enter, closing it shut behind you. The door seals airtight, so hopefully no water will leak...");
-						puts("There is a single lightbulb hanging from the ceiling. Underneath it is a yellow sphere...");
-						puts("The dimly lit sphere floats in place, slowly bobbing up and down...");
-						puts("You cannot see anything else in the room.");
-						puts("What will you do?");
-						puts("1. Inspect the sphere.");
-						puts("2. Turn off the light.");
-						puts("3. Open the door.");
-						scanf("%d",&choice);
+					puts("You open the door and enter, closing it shut behind you. The door seals airtight, so hopefully no water will leak...");
+					puts("There is a single lightbulb hanging from the ceiling. Underneath it is a yellow sphere...");
+					puts("The dimly lit sphere floats in place, slowly bobbing up and down...");
+					puts("You cannot see anything else in the room.");
+					puts("What will you do?");
+					puts("1. Inspect the sphere.");
+					puts("2. Open the door.");
+					scanf("%d",&choice);
 
-						if(choice == 1)
+					if(choice == 1)
+					{
+						puts("The sphere turns slowly, revealing a an emoji-esque face...");
+						puts("Its eyes widen, pupils dilated.");
+						puts("A human-like hand uncloaks itself from the darkness, holding a gun...");
+						puts("You hear the gun click, and the sphere opens its mouth, revealing 2 rows of large molars");
+						puts("The gun's barrel is fixated on you, and before you have time to preemptively act...");
+						puts("The words sound from the its mouth, reverberating through the room, ringing clear through your eardrums.");
+						puts("\n=-=-= \" V I B E  C H E C K \" =-=-=\n");
+						puts("What do you do?");
+						puts("1. Open the door.");
+						puts("2. Laugh nervously.");
+						puts("3. Laugh wholeheartedly.");
+						puts("4. Sob in terror.");
+						puts("5. Growl in anger.");
+						scanf("%d",&choice);
+						if (choice == 1)
 						{
-							puts("The sphere turns slowly, revealing a an emoji-esque face...");
-							puts("Its eyes widen, pupils dilated.");
-							puts("A yellow hand uncloaks itself from the darkness, holding a gun...");
-							puts("You hear the gun click, and the sphere opens its mouth, revealing 2 rows of large molars");
-							puts("The gun's barrel is fixated on you, and before you have time to preemptively act...");
-							puts("The words sound from the its mouth, reverberating through the room, ringing clear through your eardrums.");
-							puts("=-=-= \" V I B E  C H E C K \" =-=-=");
+							puts("The water from outside rushes in, filling the room!");
+							puts("With your last breath you can see the emoji-sphere shaking its head in disappointment...");
+							choice = 99;
 						}
+						else if (choice == 2)
+						{
+							puts("\n=-=-= VIBE CHECK FAILED =-=-=\n");
+							puts("The last thing you hear is a single gunfire...");
+							choice = 99;
+						}
+						else if (choice == 3)
+						{
+							puts("The gun lowers, as does the emoji-sphere's head, in affirmation.");
+							puts("The lightbulb quickly glows increasingly brighter, and in a flash...");
+							puts("the room is fully lit, and empty, save for a door at the other end.");
+							puts("You enter the door.");
+							choice = 99;
+						}
+						else if (choice == 4)
+						{
+							puts("\n=-=-= VIBE CHECK FAILED =-=-=\n");
+							puts("The last thing you hear is a single gunfire...");
+							choice = 99;
+						}
+						else if (choice == 5)
+						{
+							puts("\n=-=-= VIBE CHECK FAILED =-=-=\n");
+							puts("The last thing you hear is a single gunfire...");
+							choice = 99;
+						}
+						choice = 99;
+					}
+					else if (choice == 2)
+					{
+						puts("The water from outside rushes in, filling the room!");
+						puts("After a brief moment of unconsciousness, you wake up in the previous room");
+						choice = 99;
+					}
 				}
 				break;
 			}
