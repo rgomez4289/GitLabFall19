@@ -73,13 +73,43 @@ void main(void)
 					}
 					break;
 			}
-			case 6:
-			{
-					while(choice != 99)
-					{
-					}
-					break;
-			}
+			
+case 6:
+{
+	while(choice != 99)
+	{
+		puts("You walk into a warehouse, and inside is large dark and damp  mechanical room");
+		puts("You wander further in and notice it must have been abandoned for years");
+		puts("All of a sudden,a young man wearing a coat leaps down from a catwalk above"); 
+		puts("Hello there - said the man");
+		puts("How do you respond?");
+	 	puts("1. Respond with Hello");
+		puts("2. Ignore him and walk away");
+		puts("3. Respond with General Kenobi");
+		scanf("%d", &choice);
+		if(choice ==1)
+		{
+			puts("You respond with Hello, sit down and he brings out a small kettle from his bag and brews tea for two");
+			puts("Congradualations on making a friend");
+		break;
+		}
+		else if(choice ==2)
+		{
+			puts("you ignored the man and attempt to walk away out of the building. He tells you to freeze and pulls out a broom stick. As you stare at him confused, he charges towards you and knocks you out...");
+		break;		
+		}
+		else if (choice ==3) 
+		{
+		puts("You respond with 'General Kenobi'. He stares at you and says 'how do you know that name?' He takes out a broomstick and is ready to attack, when you are able to dodge his attack and run towards a wall. There is a large metal door, you run in and slam it shut behind you and it locks, keeping you safe... for now");
+		break;
+		}
+		else
+		{
+		puts("You have choices, this isn't one of them.");
+		}
+	}
+break;
+}
 			case 7:
 			{
 					while(choice != 99)
@@ -267,10 +297,6 @@ void main(void)
 							}
 					}
 					break;
-
-
-
-
 			}
 		}	
 	}
