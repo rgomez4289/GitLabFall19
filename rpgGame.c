@@ -171,10 +171,53 @@ void main(void)
 			}
 			case 18:			
 			{
-					while(choice != 99)
-					{
-					}
-					break;
+				
+				
+				
+						int choice18, i, health =100, attack=0;
+						puts("You open the door and find two more doors");
+						puts("One door to the right and one door to the right ... a sign reads enter one of these doors\n");
+						puts("Enter 1 to enter the right door or enter 2 to enter left door");
+						scanf("%d" ,&choice18);
+	
+						if(choice18 == 1)//blue = 1, red = 2
+						{
+							puts("you found a chest, you opened the chest and found a sword\n");
+							puts("You picked up the sword, congrats you now yield a sword!\n");
+						}
+						else if(choice18 ==2)
+						{
+							puts("you found a ray gun, congrats!\n");
+							puts("you now wield a ray gun\n");
+
+						}
+						puts("Suddenly a dragon appears out of no where.... get ready to fight\n");
+						puts("The dragon has 100 health\n");
+						puts("Press 5 followed by enter to deal damage to the dragon\n");
+						scanf("%d", &attack);
+						if(attack == 5)
+						while(health > 0)
+						{
+							health-=20;
+							printf("You attacked the dragon, the dragon now has %d\n", health);
+							if(health == 0)
+							{
+								puts("you killed the dragon.... suddlenly you transportate back to Poppe's class where you eat pizza");
+								break;
+							}
+
+						}	
+						if(attack != 5)
+						{
+							puts("you ran away");
+							break;
+						}
+
+				break;
+				
+
+			
+					
 			}
 			case 19:
 			{
