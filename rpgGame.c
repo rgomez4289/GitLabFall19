@@ -26,6 +26,9 @@ int goblin(int choice);
 
 int blackPotionEffect();
 void bluePotionWorld();
+int randomAscii(void);
+void fillSumArray(int* ptr, int size);
+void printSumArray(int* ptr, int size);
 
 void main(void)
 {
@@ -352,16 +355,26 @@ void main(void)
 			{
 					while(choice != 99)
 					{
+							int num;
+							int arr[5];
+							int* ptr1 = arr;
+							num = randomAscii();
+							fillSumArray(ptr1, 5);	
+
 							puts("you open the door and find ........");
 							puts("the loop monster!");
-							while(choice != 99)
+							while(choice != num)
 							{
 								puts("the loop monster will end its reign of terror if you enter");
 								puts("the magic number it seeks");
+								printf("hint: the ascii value for %c\n", num);
 								scanf("%d", &choice);
-								//if (choice == 99) break;
 							}
 							puts("the loop monster has seized to exist");
+							puts("but a new evil lurks ahead...");
+							puts("the array monster!");
+							printSumArray(ptr1, 5);
+							return;
 					}
 					break;
 			}
@@ -1040,4 +1053,34 @@ void bluePotionWorld()
 
 
 }
+
+int randomAscii(void)
+{
+	int val;
+	val = 65 + rand()%25;
+	return val;
+}
+
+void fillSumArray(int* ptr, int size)
+{
+	int val, i;
+	for(i = 0; i < size; i++)
+	{
+		val = 1 + rand()%9;
+		*ptr = val;
+		ptr++;
+	}
+}
+
+void printSumArray(int* ptr, int size)
+{
+	int i;
+	for(i = 0; i < size; i++)
+	{
+		printf("%d\t", *ptr);
+		ptr++;
+	}
+}
+
+
 
