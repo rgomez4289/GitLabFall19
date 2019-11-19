@@ -1,3 +1,21 @@
+
+
+//Contributors
+//G. Poppe
+
+//eclipse496
+//
+
+
+
+//Mjkli - room number #3
+
+// Mir Hassan Talpur #17
+// Amado Rodriguez III #21
+// Ivan Khaffaji Room #15
+
+
+
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
@@ -202,8 +220,62 @@ int main(void)
 			}
 			case 14:
 			{
+				int i, x, y, z;
 					while(choice != 99)
 					{
+						puts("you open the door and find 3 boxes, select 1, 2, or 3\n");
+						scanf("%d", &choice);
+						if(choice == 1)
+						{
+							srand(time(NULL));
+							puts("You have chosen box 1, inside you find 2 six sided dice.");
+							puts("If you roll a 7, you lose. Lets roll...");
+							x = 1 + (rand()%6);
+							y = 1 + (rand()%6);
+							z = x + y;
+							printf("Die 1: %d\n", x);
+							printf("Die 2: %d\n", y);
+							printf("You rolled a %d\n", z);
+							if(z > 7)
+							{
+								puts("You lose, goodbye!\n");
+								break;
+
+							}
+							else
+							{
+								puts("Live to roll again.\n");
+				
+
+							}
+						}
+						if(choice == 2)
+						{
+							puts("You have chosen box 2, inside you find a basketball and a hoop.\n");
+							puts("Lets shoot!\n");
+							srand(time(NULL));
+							x = 1 + (rand()%100);
+							if(x > 40)
+							{
+								printf("Shot percentage: %d\n", x);
+								printf("You made the shot, nice\n");
+							}
+							else
+							{
+								printf("Shot percentage: %d\n", x);
+								puts("Miss\n");
+								break;
+							}
+
+
+						}
+						if(choice == 3)
+						{
+							
+						}
+
+
+
 					}
 					break;
 			}
@@ -259,11 +331,43 @@ int main(void)
 			}
 			case 21:
 			{
-					while(choice != 99)
+					puts("you open the door and find a skeleton in a suit.");
+					printf("It invites you to play a game of blackjack. ");
+					printf("If you win, it will grant you a wish, but if you lose ");
+					printf("you must stay trapped in this room as its card playing ");
+					puts("buddy forever.");
+					puts("Will you play?");
+					puts("1. Yes.");
+					puts("2. No.");
+					scanf("%d",&choice);
+
+					if(choice == 1)
 					{
-							puts("you open the door and find ........");
-							scanf("%d",&choice);
+						/*int cont = 0;
+						int c1;
+						int c2;
+						*/
+						//while(cont != 1)
+						//{
+							puts("The Skeleton laughs and deals each of you 2 cards");
+							/*c1 = ((1 + rand()) % 13);
+							c2 = ((1 + rand()) % 13);
+							if(c1 > 10)
+							{
+								puts
+							*/
+							printf("Before you can even look at your cards ");
+							printf("the skeleton reveals a Blackjack. ");
+							puts("you should've known it was a cheater");
+						//}
 					}
+					else if(choice == 2)
+					{
+						printf("Seeing as it isn't even Halloween season ");
+						printf("you decide not to humor The Skeleton. ");
+						puts("You exit the room.");
+					}
+						
 					break;
 			}
 			case 22:
