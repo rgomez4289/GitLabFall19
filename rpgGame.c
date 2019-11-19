@@ -698,30 +698,41 @@ break;
 			{
 					while(choice != 99)
 					{
-						
-							puts("you open the door and find a rather normal bed with an old bed with blue covers and a broken down wardrobe");
-							puts("Around the room there is also a strange substance dripping from the ceiling");
-							puts("Do you \n(1)walk towards the bed \n(2)Examine the wardrobe \n(3)walkback out");
-							scanf("%d",&choice);
-							if (choice ==1)
-							{
-								puts("Its a rather plain bed with nothing there");
-								puts("It looks rather comfortable so you decide to take a nap");
-								puts("zzzzzz");
-								puts("zzzzzz");puts("zzzzzz");	
-								puts("zzzzzz");puts("zzzzzz");	
-								puts("zzzzzz");puts("zzzzzz");	
-								puts("zzzzzz");puts("zzzzzz");	
-								puts("zzzzzz");puts("zzzzzz");	
-								puts("zzzzzz");puts("zzzzzz");
-								choice =99;	
-							}
-							else if(choice == 2)
-							{
-							       puts("There seems to be somthing odd about this wardrobe");
-							       puts("you step inside and...");
-							       puts("find nothing but an empty wardrobe");
-					       		       choice =99;	
+
+							FILE *wRiter;
+                                                        FILE *reAder;
+                                                        puts("you open the door and find a rather normal room which has bed wiht blue covers and a broken down wardrobe");
+                                                        puts("Around the room there is also a strange substance dripping from the ceiling");
+                                                        puts("Do you \n(1)walk towards the bed \n(2)Examine the wardrobe \n(3)walkback out");
+                                                        scanf("%d",&choice);
+                                                        if (choice ==1)
+                                                        {
+                                                                puts("Its a rather plain bed with nothing there");
+                                                                puts("It looks rather comfortable so you decide to take a nap");
+                                                                puts("zzzzzz");
+                                                                puts("zzzzzz");puts("zzzzzz");  
+                                                                puts("zzzzzz");puts("zzzzzz");  
+                                                                puts("zzzzzz");puts("zzzzzz");  
+                                                                puts("zzzzzz");puts("zzzzzz");  
+                                                                puts("zzzzzz");puts("zzzzzz");  
+                                                                puts("zzzzzz");puts("zzzzzz");
+                                                                puts("You awaken and notice somthing in your pocket");
+                                                                wRiter = fopen("Looking_for_help.txt","w");
+                                                                fprintf(wRiter, "Dear %s,\n",name);
+                                                                fprintf(wRiter,"My name is Abetha Winson I'm soory im bit shy so decided to write you this letter,\n The problem is that I have been stuck whitin this room.\n");
+                                                                fprintf(wRiter,"I saw you sleeping on the bed and I was wondering if you may lend me a hand.\n");
+                                                                fprintf(wRiter,"It seems as though I have become invisable but that is not important right now.\n");
+                                                                fprintf(wRiter,"What I want is number to one be seen again and number two is to escape this retched room.\n");
+                                                                fprintf(wRiter,"So what do you say will you help?\n");
+                                                                choice =99;     
+                                                        }
+                                                        else if(choice == 2)
+                                                        {   
+                                                               puts("There seems to be somthing odd about this wardrobe");
+                                                               puts("you step inside and...");
+                                                               puts("...\n...\n...\n...\n...\n...");
+                                                               puts("find nothing but an empty wardrobe");
+                                                               choice =99;      
 							}
 							else if(choice ==3)
 							{
