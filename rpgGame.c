@@ -456,7 +456,6 @@ void main(void)
 							puts("The lightbulb quickly glows increasingly brighter, and in a flash...");
 							puts("the room is fully lit, and empty, save for a door at the other end.");
 							puts("You enter the door.");
-							choice = 99;
 						}
 						else if (choice == 4)
 						{
@@ -478,6 +477,81 @@ void main(void)
 						puts("After a brief moment of unconsciousness, you wake up in the previous room");
 						choice = 99;
 					}
+					// PART 2
+					int gear1 = 0;
+					int gear2 = 0;
+					puts("You enter another room, nearly identical to the previous one.");
+					puts("There is a table with various items, clearly made for self-defense.");
+					puts("There is also another door at the other end of the room, emanating an ominous VIBE");
+					puts("You had best prepare yourself. On the table are: ");
+					puts("1. A large, heavy shield. (50\% damage reduction, speed penalty)");
+					puts("2. A smaller, more mobile buckler. (25\% damage reduction)");
+					puts("3. A magic wand, with an embedded red crystal. (enables fire magic)");
+					puts("4. A six-inch slim dagger (enables second action after attacking)");
+					puts("5. A poleaxe-like naginata (capable of area attacks)");
+					
+					while(gear1 < 1 || gear1 > 5)
+					{
+						puts("Seems like you can hold two of these five items. For your first item, you choose... (1 - 5)");
+						scanf("%d", &gear1);
+						if (gear1 < 1 || gear1 > 5)
+						{
+							puts("Invalid choice.");
+						}
+					}
+					while(gear2 < 1 || gear2 > 5)
+					{
+						puts("And for your second choice... (each combination is unique)");
+						scanf("%d", &gear2);
+						if (gear1 == gear2)
+						{
+							puts("You can't choose the same item twice!");
+							gear2 = 0;
+						}
+					}
+					int gearCombo = gear1 * 10 + gear2;
+					if (gearCombo == 12 || gearCombo == 21)
+					{
+						puts("Two shields? You'll make do somehow.");
+						puts("(Shield Showdown unlocked)");
+						gearCombo = 12;
+					}
+					else if (gearCombo == 13 || gearCombo == 31)
+					{
+						puts("Mage tank, an unorthodox yet versatile match.");
+						puts("(Self-Immolation unlocked)");
+						gearCombo = 13;
+					}
+					else if (gearCombo == 14 || gearCombo == 41)
+					{
+						puts("The weight of the shield is offset by the dagger.");
+						puts("(Counter-Parry unlocked)");
+						gearCombo = 14;
+					}
+					else if (gearCombo == 15 || gearCombo == 51)
+					{
+						puts("The combination of heavy gear gives you confidence.");
+						puts("(Steadfast Swing unlocked)");
+						gearCombo = 15;
+					}
+					else if (gearCombo == 23 || gearCombo == 32)
+					{
+						puts("You notice your buckler can sustain the flames from your wand.");
+						puts("(Flaming Boomerang unlocked)");
+						gearCombo = 23;
+					}
+					else if (gearCombo == 24 || gearCombo == 42)
+					{
+						puts("The combination of light gear somehow makes you feel even faster.");
+						puts("(Rapid Rushdown unlocked)");
+						gearCombo == 24;
+					}
+					else if (gearCombo == 25 || gearCombo == 52)
+					{
+					}
+
+					
+					
 				}
 				break;
 			}
