@@ -5,6 +5,7 @@
 //
 
 
+
 //Mjkli - room number #3
 
 // Mir Hassan Talpur #17
@@ -21,12 +22,16 @@
 
 int goblin(int choice);
 
+int blackPotionEffect();
+void bluePotionWorld();
+
 
 void main(void)
 {
 	int x,y,z,i,h,g,k,choice=0;
 	char name[256];
 	int boxNum=0;
+	srand(time(NULL));
 
 	printf("Please enter your name: "); //Input any number of array inputs
 	scanf("%s",name);
@@ -54,9 +59,41 @@ void main(void)
 			}
 			case 2:
 			{
+					
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							char drinkChoice[10];
+							puts("You open the door and see a table, on top are three potions.");
+							puts("You hear the door lock behind you.");
+							puts("The first is a blue potion, the second is a cloudy green,"); 
+							puts("the third is as black as the night sky");
+							puts("Which potion would you like to drink? (blue / green / black)");
+							scanf("%s", &drinkChoice);
+							if(strcmp(drinkChoice, "blue") == 0)
+							{
+								puts("");
+								puts("You taste pineapples before you fall asleep and can't help but ask why?");
+								bluePotionWorld();
+								puts("");
+								break;
+							}
+							else if(strcmp(drinkChoice, "green") == 0)
+							{
+								puts("You notice it tasted like rancid milk");
+								puts("You begin to feel nauseous....");
+								puts("You have died.");
+								exit(0);
+								break;
+							
+							
+							}
+							else if(strcmp(drinkChoice, "black") == 0)
+							{
+								puts("An interesting choice!");
+								blackPotionEffect();
+								puts("");
+								break;
+							}
 							scanf("%d",&choice);
 					}
 					break;
@@ -794,4 +831,65 @@ int goblin(int choice)
 }
 
 
+
+int blackPotionEffect()
+{
+	int poSelect = rand() % 5;
+
+	switch(poSelect)
+	{
+	
+		case 0:
+			puts("You awaken outside and are able to select another door, that all seemed pointless.");
+			return 0;
+			puts("");
+			break;
+		case 1:
+			puts("You die, bad luck I guess.");
+			return 1;
+			puts("");
+			exit(0);
+		case 2:
+			puts("That tasted like pineapples, why does everything taste like pineapples?");
+			puts("The door behind you unlocks and you leave the room...");
+			return 2;
+			break;
+		case 3:
+			puts("You awaken to a new world, one full of hope and promise..... or maybe you're still dreaming?");
+			puts("The door behind you unlocks and you leave the room...");
+			return 3;
+			break;
+		case 4:
+			puts("It was just oddly colored milk...");
+			puts("The door behind you unlocks and you leave the room...");
+			return 4;
+			break;
+		
+	}
+
+}
+
+void bluePotionWorld()
+{
+
+	int i, j, k;
+	char poChoice[5];
+	printf("You awaken and notice everything is backwards....\n");
+	printf("You see two potions on the table, one black as the night sky, and a green one.\n");
+	printf("Which would you like to drink? (black / green)\n");
+	scanf("%s", &poChoice);
+	if(strcmp(poChoice, "green") == 0)
+	{
+		i = blackPotionEffect();
+	}
+	if(strcmp(poChoice, "black") == 0)
+	{
+		puts("You noticed it tasted like rancid milk");
+		puts("You begin to feel nauseous....");
+		puts("You have died.");
+		exit(0);
+	}
+
+
+}
 
