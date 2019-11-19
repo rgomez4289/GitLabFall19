@@ -8,7 +8,7 @@
 //eclipse496
 //
 
-// aperez
+
 
 //Mjkli - room number #3
 
@@ -25,16 +25,8 @@
 #include <stdio.h>
 
 
-
-int blackPotionEffect();
-void bluePotionWorld();
-void rm11EnemyName(char *chPtr);
-void rm11Dialog(int temp);
-void rm11Battle(int *ptr, char *chPtr, char *nmPtr);
-
 int combo();
 void countDown();
-
 
 void main(void)
 
@@ -210,37 +202,6 @@ void main(void)
 			{
 					while(choice != 99)
 					{
-						char arrCh[30], enemyName[30], *chPtr, *nmPtr;     // array for choices
-			int health[5] = {10, 15, 20, 0, 0}, temp=0, *ptr; // elem 0: your health, elem 1: dwarf health, elem 2: enemy health
-			
-           
-                        srand(time(NULL));
-                        
-                        rm11Dialog(1);
-                        printf("- yes\n- no\nEnter your choice: ");
-                        scanf("%s", arrCh);
-                        temp = strcmp(arrCh, "yes");
-                        
-                        if(temp == 0)
-                        {
-                            rm11Dialog(2);
-                            chPtr = enemyName;
-                            rm11EnemyName(chPtr);
-                            printf("\"Over there %s! Its a %s!\",\n", name, chPtr);
-                            printf("yells the dwarf!\n");
-				ptr = health;
-				nmPtr = name;
-				rm11Battle(ptr, chPtr, nmPtr);
-                            printf("\nTo be continued.\n\n");
-                            choice = 99;
-                        }
-                        
-                        else
-                        {
-                            printf("The old dwarf, looking disappointed, sits back down.\n");
-                            printf("\nYou turn around and exit the room.\n");
-                            choice = 99;
-                        }
 					}
 					break;
 			}
@@ -557,93 +518,4 @@ void countDown()
 	}
 			
 	printf("\nTime's Out!\n");
-}
-
-
-void rm11EnemyName(char *chPtr)
-{
-    FILE *rptr;
-    
-    char chTemp[30];
-    
-    int itr=0, temp=0;
-    
-    if((rptr = fopen("enemynames.txt", "r")) == NULL)
-    {
-        
-        printf("Error: File could not be opened.\n\n");
-        strcpy(chPtr, "Angry Wild-Beast");
-    }
-    
-    else
-    {
-        // scans for the desciptive verb of the enemy in the file
-        temp = 1 + (rand() % 30);
-        fscanf(rptr, "%s", chTemp);
-        while(itr != temp)
-        {
-            itr++;
-            fscanf(rptr, "%s", chTemp);
-        }
-        
-        strcpy(chPtr, chTemp);
-        
-        // the words lists are separated by the digit 2
-        while(!isdigit(chTemp[0]))
-        {
-            fscanf(rptr, "%s", chTemp);
-        }
-        
-        // scans for the name of the enemy in the file
-        itr=0;
-        temp = 1 + (rand() % 19);
-        
-        fscanf(rptr, "%s", chTemp);
-        while(itr != temp)
-        {
-            fscanf(rptr, "%s", chTemp);
-            itr++;
-        }
-        
-        strcat(chPtr, chTemp);
-    }
-
-	fclose(rptr);
-}
-
-void rm11Dialog(int temp)
-{
-    if(temp == 1)
-    {
-        printf("\nYou open the door and find yourself at the edge of a forest.\n");
-        printf("Sitting on an old fallen log is an old, grey bearded dwarf\n");
-        printf("smoking his pipe.\n");
-        printf("The dwarf gets up and greets you.\n");
-        printf("\"Hello there! I am in need of help crossing this forest!\"\n");
-        printf("\"What do you say, will you help me\", asks the old dwarf.\n");
-        printf("------------------------------------------------------------\n\n");
-    }
-    
-    else if(temp == 2)
-    {
-        printf("\n\"Excellent! Let us depart then before sunsut!\"\n");
-        printf("The old dwarf and you begin your journey into the\n");
-        printf("forest. The forest is quiet, errie, and unsettling but the\n");
-        printf("dwarf is calm. He recounts to you old stories of his past\n");
-        printf("but is interrupted by the howl of some beast!\n");
-        printf("\"Quiet..\" says the old dwarf.. \n");
-        printf("------------------------------------------------------------\n\n");
-    }
-
-}
-
-void rm11Battle(int *ptr, char *chPtr, char *nmPtr)
-{
-	printf("\nThe old dwarf and you have now entered into a battle!\n");
-	printf("------------------------------------------------------\n\n");
-	printf("%s's health: %d ",nmPtr, *(ptr+0));
-	printf("|| Old Dwarf's health: %d\n\n", *(ptr+1));
-	printf("%s's health: %d\n", chPtr, *(ptr+2));
-	printf("------------------------------------------------------\n\n");
-
 }
