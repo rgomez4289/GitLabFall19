@@ -724,8 +724,8 @@ break;
 			{
 				
 				
-				
-						int choice18, i, health =100, attack=0;
+							
+						int choice18, i, level = 1,  health =100, attack=0;
 						if(choice18 == 1 || choice18 == 2)
 						{
 							puts("\nThis room is empty\n");
@@ -733,7 +733,7 @@ break;
 						}
 						puts("You open the door and find two more doors\n");
 						puts("One door to the right and one door to the left ... a sign reads enter one of these doors\n");
-						puts("Enter 1 to enter the right door or enter 2 to enter left door/n");
+						puts("Enter 1 to enter the right door or enter 2 to enter left door\n");
 						scanf("%d" ,&choice18);
 	
 						if(choice18 == 1)//blue = 1, red = 2
@@ -757,21 +757,27 @@ break;
 							printf("You attacked the dragon. the dragon now has %d health\n", health);
 							if(health == 0)
 							{
-								puts("you killed the dragon.... ");
+								puts("\nyou killed the dragon.... \n");
+								level++;
+								puts("\nYou move on to the next level\n");
 								break;
+								if(level !=1)
+									puts("\nThe dragon falls and a door appears, you walk towards the door, you open it...\n");								
 							}
-
-
-						
+													
 							if(attack != 5)
 							{
 								puts("you ran away");
 								break;
 							}
-							puts("Press 5 to attack again or any other num to run");
+					        
+							puts("Press 5 to attack again or any other num to run\n");
 							scanf("%d", &attack);
-						}	
-				break;
+						}
+						if(level == 1)
+							puts("\nThe dragon falls and a door appears, you open it...\n");
+								
+						break;
 				
 
 			
