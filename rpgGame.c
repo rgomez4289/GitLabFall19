@@ -1195,8 +1195,33 @@ break;
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find ........\n");
+							puts("Mike Tyson is looking at you menacingly\n");
+							puts("suddenly he bites you ear off\n");
+							puts("he wants to go 20 rounds with you pretty much beat you to death, which one do you choose?\n");
+							printf("1. Accept the challenge and fight him\n");
+							printf("2. Run and scream like a girl\n");
+							printf("3. Get punched\n");
 							scanf("%d",&choice);
+
+							if (choice == 1)
+							{
+								puts("Goodluck buddy hope you make it alive");
+								break;
+							}
+								
+							else if (choice == 2)
+							{
+								puts("Good choice, run as fast as you can!");
+								break;
+							}
+							else 
+							{
+								puts("Look on the bright side, you can attempt a lawsuit and get paid");
+								break;
+							}
+
+							
 					}
 					break;
 			}
