@@ -431,8 +431,59 @@ break;
 			case 7:
 			{
 					while(choice != 99)
-				{
-				}
+					{
+						puts("You open the door and close it behind you");
+                                                puts("You appear to be standing on a small patch of land in the middle of a small lake.");
+                                                puts("Then, your body feels light, and you slowly begin floating in mid air");
+                                                puts("You then notice that you are beginning to float upwards, and you feel as if you should be afraid, but are instead curious as you see three sources of light above you");
+                                                puts("The three sources of light appear to be gateways to alternate dimensions, so you must wade through the air to put yourself in a position to enter the dimension of your choosing");
+                                                puts("The three choices are 1) light 2) grey 3) dark");
+                                                scanf("%d", &x);
+
+                                                if(x == 1)
+                                                 {
+                                                         puts("You make it through the light portal and land face first in a field of grass.");
+                                                         puts("As you look up, you are in awe of the environment around you. You see green, grassy, plains and hills extending out to the horizon in every possibile direction you look");
+                                                         puts("You begin flying, feeling the slight breeze in your face, and looking down at all of the waterfalls and lakes within all of the green hills and plains.");
+							 puts("You are taking the entire scene in, and as you look out to the horizon you see the sun shining very brightly, which temporarily distorts your vision");
+                                                         puts("Once your vision clears up, you notice that you are rapidly falling through the sky, and brace for impact as you are about to land in a lake."); 
+                                                         puts("The end");
+
+                                                         break;
+                                                 }
+
+                                                 else if(x == 2)
+                                                 {
+                                                         puts("You make it through the grey portal and immediately feel the cold weather.");
+							 puts("You look around you, and all you see is mountains and hills completely covered in snow");
+                                                         puts("You begin flying through this cold, white, mysterious terrain, then you notice that the snow is falling a lot quicker");
+                                                         puts("The snow makes it so hard to see that you decide to fly all the way up but lose control of your flying and become trapped in a snowstorm");
+                                                         puts("The end");          
+
+                                                         break; 
+                                                 }
+
+                                                 else if(x == 3)
+                                                 {
+							puts("You make it through the dark portal and fall face first into a field of white grass");
+                                                        puts("You look up and notice the sunset, and white, grassy, plains and hills that extend out to the horizon in every direction you look");
+                                                        puts("You begin flying, taking in the scenery, and feeling the rain in your face, when suddenly you see a black void destroy everything behind you.");
+                                                        puts("The end");
+
+
+        
+                                                         break;
+                                                 }
+				        	 else
+                                                 {
+                                                         puts("Wrong choice");
+                                                 }
+
+					
+
+
+
+					}
 					break;
 			}
 			case 8:
