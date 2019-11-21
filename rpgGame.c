@@ -28,6 +28,7 @@ int blackPotionEffect();
 void bluePotionWorld();
 int randGen(int topNum);
 
+// enemynames.txt needed to run functions
 void rm11EnemyName(char *enPtr);
 void rm11Dialog(int temp, char *enPtr, char *nmPtr);
 void rm11Battle(int *ptr, char *enPtr, char *nmPtr);
