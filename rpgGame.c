@@ -5,7 +5,7 @@
 
 //eclipse496
 //
-
+// aperez
 
 
 //Mjkli - room number #3
@@ -39,6 +39,8 @@ void blackJack(int *cards);
 void rm11EnemyName(char *enPtr);
 void rm11Dialog(int temp, char *enPtr, char *nmPtr);
 void rm11Battle(int *ptr, char *enPtr, char *nmPtr);
+
+void rollDiceRoom17(int *arr); //allocates array with random numbers using a pointer to array (room 17)
 
 
 void main(void)
@@ -74,13 +76,13 @@ void main(void)
 			}
 			case 2:
 			{
-					
+
 					while(choice != 99)
 					{
 							char drinkChoice[10];
 							puts("You open the door and see a table, on top are three potions.");
 							puts("You hear the door lock behind you.");
-							puts("The first is a blue potion, the second is a cloudy green,"); 
+							puts("The first is a blue potion, the second is a cloudy green,");
 							puts("the third is as black as the night sky");
 							puts("Which potion would you like to drink? (blue / green / black)");
 							scanf("%s", &drinkChoice);
@@ -99,8 +101,8 @@ void main(void)
 								puts("You have died.");
 								exit(0);
 								break;
-							
-							
+
+
 							}
 							else if(strcmp(drinkChoice, "black") == 0)
 							{
@@ -338,7 +340,7 @@ void main(void)
                 if(boss[loc] == 1)
                 {
 
-                  
+
                 }
 
 
@@ -370,7 +372,7 @@ void main(void)
 							int arr[5];
 							int* ptr1 = arr;
 							num = randomAscii();
-							fillSumArray(ptr1, 5);	
+							fillSumArray(ptr1, 5);
 
 							puts("you open the door and find ........");
 							puts("the loop monster!");
@@ -389,14 +391,14 @@ void main(void)
 					}
 					break;
 			}
-			
+
 case 6:
 {
 	while(choice != 99)
 	{
 		puts("You walk into a warehouse, and inside is large dark and damp  mechanical room");
 		puts("You wander further in and notice it must have been abandoned for years");
-		puts("All of a sudden,a young man wearing a coat leaps down from a catwalk above"); 
+		puts("All of a sudden,a young man wearing a coat leaps down from a catwalk above");
 		puts("Hello there - said the man");
 		puts("How do you respond?");
 	 	puts("1. Respond with Hello");
@@ -413,9 +415,9 @@ case 6:
 		else if(choice ==2)
 		{
 			puts("you ignored the man and attempt to walk away out of the building. He tells you to freeze and pulls out a broom stick. As you stare at him confused, he charges towards you and knocks you out... To be continuted....");
-			break;		
+			break;
 		}
-		else if (choice ==3) 
+		else if (choice ==3)
 		{
 		puts("You respond with 'General Kenobi'. He stares at you and says 'how do you know that name?' He takes out a broomstick and is ready to attack, when you are able to dodge his attack and run towards a wall. There is a large metal door, you run in and slam it shut behind you and it locks, keeping you safe... for now.");
 			break;
@@ -430,8 +432,59 @@ break;
 			case 7:
 			{
 					while(choice != 99)
-				{
-				}
+					{
+						puts("You open the door and close it behind you");
+                                                puts("You appear to be standing on a small patch of land in the middle of a small lake.");
+                                                puts("Then, your body feels light, and you slowly begin floating in mid air");
+                                                puts("You then notice that you are beginning to float upwards, and you feel as if you should be afraid, but are instead curious as you see three sources of light above you");
+                                                puts("The three sources of light appear to be gateways to alternate dimensions, so you must wade through the air to put yourself in a position to enter the dimension of your choosing");
+                                                puts("The three choices are 1) light 2) grey 3) dark");
+                                                scanf("%d", &x);
+
+                                                if(x == 1)
+                                                 {
+                                                         puts("You make it through the light portal and land face first in a field of grass.");
+                                                         puts("As you look up, you are in awe of the environment around you. You see green, grassy, plains and hills extending out to the horizon in every possibile direction you look");
+                                                         puts("You begin flying, feeling the slight breeze in your face, and looking down at all of the waterfalls and lakes within all of the green hills and plains.");
+							 puts("You are taking the entire scene in, and as you look out to the horizon you see the sun shining very brightly, which temporarily distorts your vision");
+                                                         puts("Once your vision clears up, you notice that you are rapidly falling through the sky, and brace for impact as you are about to land in a lake."); 
+                                                         puts("The end");
+
+                                                         break;
+                                                 }
+
+                                                 else if(x == 2)
+                                                 {
+                                                         puts("You make it through the grey portal and immediately feel the cold weather.");
+							 puts("You look around you, and all you see is mountains and hills completely covered in snow");
+                                                         puts("You begin flying through this cold, white, mysterious terrain, then you notice that the snow is falling a lot quicker");
+                                                         puts("The snow makes it so hard to see that you decide to fly all the way up but lose control of your flying and become trapped in a snowstorm");
+                                                         puts("The end");          
+
+                                                         break; 
+                                                 }
+
+                                                 else if(x == 3)
+                                                 {
+							puts("You make it through the dark portal and fall face first into a field of white grass");
+                                                        puts("You look up and notice the sunset, and white, grassy, plains and hills that extend out to the horizon in every direction you look");
+                                                        puts("You begin flying, taking in the scenery, and feeling the rain in your face, when suddenly you see a black void destroy everything behind you.");
+                                                        puts("The end");
+
+
+        
+                                                         break;
+                                                 }
+				        	 else
+                                                 {
+                                                         puts("Wrong choice");
+                                                 }
+
+					
+
+
+
+					}
 					break;
 			}
 			case 8:
@@ -460,24 +513,24 @@ break;
 							{
 								puts("Leave me be, stranger.\n.");
 							}
-							
+
 							else if(choice == 2)
 							{
 								puts("About a year ago, I came upon a wishing well and approached it with the few coins I had left. I wished to be born as a great husky in the next life.");
 							}
-							
+
 							else if(choice == 3)
 							{
 								puts("Your search ends here, you seem to have searched far and wide. I'll tell you the treasure is hidden further inside. The dungeon is filled with 25 rooms, your search is almost over.");
 							}
-							
+
 							else if(choice == 4)
 							{
 								puts("Stop staring you weirdo or you might get turned to stone.");
 							}
 							break;
 
-								
+
 					}
 					break;
 			}
@@ -485,12 +538,12 @@ break;
 			{
 					while(choice != 99)
 					{
-							
+
 							puts("you open the door and find a unicorn eating gold bars");
 							printf("Save the gold bars? Enter 1 for yes. 2 for no.");
 							scanf("%d",&choice);
-							
-							
+
+
 							if(choice==1)
 							{
 								puts("As you try to pick up the gold bar a goblin comes out and attacks you");
@@ -500,13 +553,13 @@ break;
 								goblin(choice);
 							//	printf("%d\n",choice);
 								choice=99;
-								
+
 							}
 							else
 							{
 								printf("You decided not to pick up the gold. You leave and the goblin goes back into hiding\n");
 								printf("You decide to walk past the unicorn and come to a pathway labled 'Pathway A' and 'Pathway B'\n");
-								
+
 								//goblin(choice);
 								choice=99;
 							}
@@ -517,20 +570,20 @@ break;
 			{
 					while(choice != 99)
 					{
-						char arrCh[30], enemyName[30], *enPtr, *nmPtr;   
-                                int health[5] = {10, 15, 20, 0, 0}, temp=0, *ptr; 
+						char arrCh[30], enemyName[30], *enPtr, *nmPtr;
+                                int health[5] = {10, 15, 20, 0, 0}, temp=0, *ptr;
                                 srand(time(NULL));
                                 ptr = health;
                                 nmPtr = name;
                                 enPtr = enemyName;
 
-                                rm11Dialog(1, enPtr, nmPtr);                                      
+                                rm11Dialog(1, enPtr, nmPtr);
                                 scanf("%s", arrCh);
 
                                 if(strcmp(arrCh, "yes") == 0)
                                 {
                                     rm11EnemyName(enPtr);
-                                    rm11Dialog(2, enPtr, nmPtr);                     
+                                    rm11Dialog(2, enPtr, nmPtr);
                                     rm11Battle(ptr, enPtr, nmPtr);
                                     choice = 99;
                                 }
@@ -630,7 +683,7 @@ break;
 					puts("3. A magic wand, with an embedded red crystal. (enables fire magic)");
 					puts("4. A six-inch slim dagger (enables second action after attacking)");
 					puts("5. A poleaxe-like naginata (capable of area attacks)");
-					
+
 					while(gear1 < 1 || gear1 > 5)
 					{
 						puts("Seems like you can hold two of these five items. For your first item, you choose... (1 - 5)");
@@ -691,8 +744,8 @@ break;
 					{
 					}
 
-					
-					
+
+
 				}
 				break;
 			}
@@ -723,7 +776,7 @@ break;
 							else
 							{
 								puts("Live to roll again.\n");
-				
+
 
 							}
 						}
@@ -749,7 +802,7 @@ break;
 						}
 						if(choice == 3)
 						{
-							
+
 						}
 
 
@@ -771,7 +824,7 @@ break;
 
 						puts("You open the door and find 3 pills sitting on a tray. A man wearing all black asks you to take one. There is a red pill, a blue pill, and a yellow pill. Which one do you choose?");
 						scanf(" %s",&userOption);
-						
+
 						if(strcmp(userOption,red) == 0)
 						{
 							puts("You chose the red pill!");
@@ -782,7 +835,7 @@ break;
 								puts("Why are you scared? You should just go into the room anyways. Are you sure you want to stay? (Enter \"yes\" or \"no\")");
 								scanf(" %s",&userOption);
 								if(strcmp(userOption,yes)==0)
-								{	
+								{
 									printf("Fine. You're no fun. Game over, %s.\n",name);
 									choice = 99;
 									break;
@@ -824,7 +877,7 @@ break;
 									break;
 								}
 							}
-	
+
 						}
 						if(strcmp(userOption,blue) == 0)
 						{
@@ -838,7 +891,7 @@ break;
 							puts("You chose the yellow pill!");
 							puts("WHOA! What on Earth is going on? All of a sudden, you are transported to a random room!");
 							choice  = randGen(25);
-							break;	
+							break;
 						}
 						if(strcmp(userOption,"99") == 0)
 							choice = 99;
@@ -854,39 +907,108 @@ break;
 			}
 			case 17:
 			{
-					while(choice != 99)
-					{
-							puts("you open the door and find a basketball.");
-							puts("All of a sudden Shaq pops out of the dark.");
-							puts("He challenges you to a 1 on 1 game.");
-							printf("1. You accept his challenge because Shaq aint ready for you.\n");
-							printf("2. You decline his challenge because it's SHAQ.\n");
-							printf("3. You decide to do something else.\n");
-							scanf("%d",&choice);
-							if (choice == 1)
-							{
-								puts("Unfortunately, since Shaq is 7 feet 300 pounds. He dunks on you and says bbq chicken.");
-								break;
-							}
-							else if (choice == 2)
-							{
-								puts("You tell Shaq you're good. Shaq picks you up and dunks you instead.");
-								break;
-							}
-							else
-							{
-								puts("You call Charles Barkely. Barkley hypocritically calls Shaq fat. Shaq tells Barkely he has no rings.");
-								puts("They continue to argue and you slip past Shaq's insane 1 on 1 challenge. Success.");
-								break;
-							}
-					}
-					break;
+			  // used input output (lab 2)
+			  // used conditionals (lab 3)
+			  // used functions (lab 4)
+			  // used loops (lab 5)
+			  // used random (lab 6)
+			  // used arrays (lab 7)
+			  // used pointers (lab 8)
+			  // used string manipulation (lab 9)
+			  // used files (lab 10)
+			    while(choice != 99)
+			    {
+			        puts("\nYou open the door and find a basketball.");
+			        puts("\nAll of a sudden Shaq pops out of the dark.");
+			        puts("\nHe challenges you to a 1 on 1 game.");
+			        printf("1. You accept his challenge because Shaq aint ready for you.\n");
+			        printf("2. You decline his challenge because it's SHAQ.\n");
+			        printf("3. You decide to do something else.\n");
+			        scanf("%d",&choice);
+			        if (choice == 1)
+			        {
+			          printf("\nUnfortunately, since Shaq is 7 feet 300 pounds. He dunks on you, licks his fingers and says 'bbq chicken'\n\n");
+			          break;
+			        }
+			        else if (choice == 2)
+			        {
+			          puts("\nYou tell Shaq you're good. Shaq then challenges you to a dice roll game.");
+			          puts("The rules are simple. We roll a 12 sided die. If your result is lower than Shaq's you will lose!");
+			          puts("\nLet the games begin!!\n");
+
+			          int diceResult[2] = {0};
+			          int *pointerDiceResult;
+
+			          pointerDiceResult = diceResult;
+			          rollDiceRoom17(pointerDiceResult);
+
+			          printf("\nYou roll a %d!\n",diceResult[0]);
+			          printf("\nShaq rolls a %d!\n",diceResult[1]);
+
+			          if (diceResult[0] > diceResult[1])
+			          {
+			            printf("\nHaHa in your face Shaq. I'm outta here!!\n\n");
+			          }
+			          else if (diceResult[0] == diceResult[1])
+			          {
+			            printf("\nIt's a tie!! We did not calculate for this outcome. Glitch in the matrix. You're now free of the simulation. Success?\n\n");
+			          }
+			          else
+			          {
+			            printf("\nShaq wins and starts to dance in your face. You have lost. You must now watch this dance for eternity!\n\n");
+			          }
+			          break;
+			        }
+			        else
+			        {
+			          char insult[20];
+			          FILE *filePtr;
+			          int numInsults = 5;
+
+			          filePtr = fopen("insults.txt","w");
+
+			          puts("\nYou call Charles Barkely. Barkley hypocritically calls Shaq fat. Shaq tells Barkely he has no rings.");
+			          puts("Barkley needs your help to call Shaq 5 names!");
+
+			          while (numInsults > 0)
+			          {
+			            printf("\nWhat do you want to call Shaq?\n");
+			            scanf("%s",insult);
+			            fprintf(filePtr,"%s\n",insult);
+			            numInsults--;
+			          }
+
+			          puts("\nBarkely writes all these insults down in his file notebook.");
+			          fclose(filePtr);
+
+			          filePtr = fopen("insults.txt","r");
+			          rewind(filePtr);
+
+			          puts("\nBarkely picks a random insult and YELLS it at Shaq!!");
+
+			          char barkleyChoice[20];
+			          fscanf(filePtr,"%19s",barkleyChoice);
+
+			          int j;
+
+			          for (j = 0; j < 20; j++)
+			          {
+			            barkleyChoice[j] = toupper(barkleyChoice[j]);
+			          }
+
+			          printf("Barkely calls Shaq a %s!!\n",barkleyChoice);
+			          puts("Shaq is mortified!! How could Barkley be this mean! He retaliates by calling Barkley a donut shaped human.");
+			          printf("The two continue to argue and you slip past Shaq unnoticed. Success!!\n\n");
+			          break;
+			        }
+			    }
+			    break;
 			}
 			case 18:
 			{
-				
-				
-							
+
+
+
 						int choice18, i, level = 1,  health =100, attack=0;
 						if(choice18 == 1 || choice18 == 2)
 						{
@@ -897,7 +1019,7 @@ break;
 						puts("One door to the right and one door to the left ... a sign reads enter one of these doors\n");
 						puts("Enter 1 to enter the right door or enter 2 to enter left door\n");
 						scanf("%d" ,&choice18);
-	
+
 						if(choice18 == 1)//blue = 1, red = 2
 						{
 							puts("you found a chest, you opened the chest and found a sword\n");
@@ -924,26 +1046,26 @@ break;
 								puts("\nYou move on to the next level\n");
 								break;
 								if(level !=1)
-									puts("\nThe dragon falls and a door appears, you walk towards the door, you open it...\n");								
+									puts("\nThe dragon falls and a door appears, you walk towards the door, you open it...\n");
 							}
-													
+
 							if(attack != 5)
 							{
 								puts("you ran away");
 								break;
 							}
-					        
+
 							puts("Press 5 to attack again or any other num to run\n");
 							scanf("%d", &attack);
 						}
 						if(level == 1)
 							puts("\nThe dragon falls and a door appears, you open it...\n");
-								
-						break;
-				
 
-			
-					
+						break;
+
+
+
+
 			}
 			case 19:
 			{
@@ -952,8 +1074,8 @@ break;
 							puts("you open the door and find an empty space. Suddenly, you heard a voice. It sounded like your friend's mother. 'Please open the door. Your friend and i were in a car accident.. we are badly hurt... please open the door and help us. You tried to open the door again but you saw something on the wall. It said 'TO OPEN THE DOOR AGAIN YOU HAVE TO SPIN THE SPINNING WHEEL AND GET NUMBER 83 .");
 
 							scanf("%d",&choice);
-							
-							
+
+
 							int c,n;
 							printf("Ten Random Numbers[1,100]\n");
 							for (c=1; c<=10; c++)
@@ -962,8 +1084,8 @@ break;
 								printf("%d\n",n);
 							}
 							return;
-							
-						
+
+
 					}
 					break;
 			}
@@ -983,11 +1105,11 @@ break;
                                                                 puts("Its a rather plain bed with nothing there");
                                                                 puts("It looks rather comfortable so you decide to take a nap");
                                                                 puts("zzzzzz");
-                                                                puts("zzzzzz");puts("zzzzzz");  
-                                                                puts("zzzzzz");puts("zzzzzz");  
-                                                                puts("zzzzzz");puts("zzzzzz");  
-                                                                puts("zzzzzz");puts("zzzzzz");  
-                                                                puts("zzzzzz");puts("zzzzzz");  
+                                                                puts("zzzzzz");puts("zzzzzz");
+                                                                puts("zzzzzz");puts("zzzzzz");
+                                                                puts("zzzzzz");puts("zzzzzz");
+                                                                puts("zzzzzz");puts("zzzzzz");
+                                                                puts("zzzzzz");puts("zzzzzz");
                                                                 puts("zzzzzz");puts("zzzzzz");
                                                                 puts("You awaken and notice somthing in your pocket");
                                                                 wRiter = fopen("Looking_for_help.txt","w");
@@ -997,25 +1119,25 @@ break;
                                                                 fprintf(wRiter,"It seems as though I have become invisable but that is not important right now.\n");
                                                                 fprintf(wRiter,"What I want is number to one be seen again and number two is to escape this retched room.\n");
                                                                 fprintf(wRiter,"So what do you say will you help?\n");
-                                                                choice =99;     
+                                                                choice =99;
                                                         }
                                                         else if(choice == 2)
-                                                        {   
+                                                        {
                                                                puts("There seems to be somthing odd about this wardrobe");
                                                                puts("you step inside and...");
                                                                puts("...\n...\n...\n...\n...\n...");
                                                                puts("find nothing but an empty wardrobe");
-                                                               choice =99;      
+                                                               choice =99;
 							}
 							else if(choice ==3)
 							{
 								puts("You go to open the door but find that at the other side of the door has been walled off");
-								choice =99;	
+								choice =99;
 							}
-							else 
+							else
 							{
 								puts("You continue standing at the entrance contemplating life");
-								choice =99;	
+								choice =99;
 							}
 
 					}
@@ -1038,7 +1160,7 @@ break;
 					if(choice == 1)
 					{
 						int cont = 0;
-						int cards[2] = {};
+            int cards[2] = {};
 						
 						while(cont != 1)
 						{
@@ -1082,15 +1204,40 @@ break;
 						printf("you decide not to humor The Skeleton. ");
 						puts("You exit the room.");
 					}
-						
+
 					break;
 			}
 			case 22:
 			{
 					while(choice != 99)
 					{
-							puts("you open the door and find ........");
+							puts("you open the door and find ........\n");
+							puts("Mike Tyson is looking at you menacingly\n");
+							puts("suddenly he bites you ear off\n");
+							puts("he wants to go 20 rounds with you pretty much beat you to death, which one do you choose?\n");
+							printf("1. Accept the challenge and fight him\n");
+							printf("2. Run and scream like a girl\n");
+							printf("3. Get punched\n");
 							scanf("%d",&choice);
+
+							if (choice == 1)
+							{
+								puts("Goodluck buddy hope you make it alive");
+								break;
+							}
+								
+							else if (choice == 2)
+							{
+								puts("Good choice, run as fast as you can!");
+								break;
+							}
+							else 
+							{
+								puts("Look on the bright side, you can attempt a lawsuit and get paid");
+								break;
+							}
+
+							
 					}
 					break;
 			}
@@ -1161,7 +1308,7 @@ int goblin(int choice)
 		printf("'So you have chosen to fight me'\n");
 
 	}
-	else 
+	else
 	{
 		printf("Oh no, the goblin has stabbed you!\n");
 
@@ -1177,7 +1324,7 @@ int blackPotionEffect()
 
 	switch(poSelect)
 	{
-	
+
 		case 0:
 			puts("You awaken outside and are able to select another door, that all seemed pointless.");
 			return 0;
@@ -1203,7 +1350,7 @@ int blackPotionEffect()
 			puts("The door behind you unlocks and you leave the room...");
 			return 4;
 			break;
-		
+
 	}
 
 }
@@ -1244,18 +1391,18 @@ void bluePotionWorld()
 void rm11EnemyName(char *enPtr)
 {
     FILE *rptr;
-    
+
     char chTemp[30];
-    
+
     int itr=0, temp=0;
-    
+
     if((rptr = fopen("enemynames.txt", "r")) == NULL)
     {
-        
+
         printf("Error: File could not be opened.\n\n");
         strcpy(enPtr, "Angry Wild-Beast");
     }
-    
+
     else
     {
         // scans for the descriptive verb of the enemy in the file
@@ -1266,26 +1413,26 @@ void rm11EnemyName(char *enPtr)
             itr++;
             fscanf(rptr, "%s", chTemp);
         }
-        
+
         strcpy(enPtr, chTemp);
-        
+
         // the words lists are separated by the digit 2
         while(!isdigit(chTemp[0]))
         {
             fscanf(rptr, "%s", chTemp);
         }
-        
+
         // scans for the name of the enemy in the file
         itr=0;
         temp = 1 + (rand() % 19);
-        
+
         fscanf(rptr, "%s", chTemp);
         while(itr != temp)
         {
             fscanf(rptr, "%s", chTemp);
             itr++;
         }
-        
+
         strcat(enPtr, chTemp);
     }
 
@@ -1299,7 +1446,7 @@ void rm11Dialog(int temp, char *enPtr, char *nmPtr)
         printf("The old dwarf, looking disappointed, sits back down.\n");
         printf("\nYou turn around and exit the room.\n");
     }
-    
+
     else if(temp == 1)
     {
         printf("\nYou open the door and find yourself at the edge of a forest.\n");
@@ -1311,7 +1458,7 @@ void rm11Dialog(int temp, char *enPtr, char *nmPtr)
         printf("------------------------------------------------------------\n\n");
         printf("- yes\n- no\nEnter your choice: ");
     }
-    
+
     else if(temp == 2)
     {
         printf("\n\"Excellent! Let us depart then before sunset!\"\n");
@@ -1518,18 +1665,25 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
             *(ptr+2) += 5;
         }
         
-        if(*(ptr+0) <= 0 || *(ptr+1) <= 0)
+        if(*(ptr+0) <= 0)
         {
-            printf("The dwarf and you lost!\n");
-		printf("Game Over\n");
+            printf("\nYou died!\n");
+		printf("Game Over!\n\n");
             win = 2;
         }
+
+	else if(*(ptr+1) <= 0)
+	{
+		printf("\nThe dwarf died!\n");
+		printf("Game Over\n\n");
+
+	}
         
         else if(*(ptr+2) <= 0)
         {
             printf("\nThe %s dies. You win!\n", enPtr);
 		printf("You and the dwarf exit the forest safely!\n");
-		printf("Congratulations!\n");
+		printf("Congratulations!\n\n");
             win = 2;
         }
     }
@@ -1616,5 +1770,20 @@ void blackJack(int *cards)
 	else
 	{
 		printf("Your second card is a %d\n", *(cards+1));
+  }
+}
+
+void rollDiceRoom17(int *arr)
+{
+	int diceRollResult;
+	int i;
+
+	srand(time(NULL));
+
+	for (i = 0; i < 2; i++)
+	{
+		diceRollResult = (rand() % 12) + 1;
+		*arr = diceRollResult;
+		arr++;
 	}
 }
