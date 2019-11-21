@@ -34,6 +34,12 @@ void printSumArray(int* ptr, int size);
 int randGen(int topNum);
 
 
+// enemynames.txt needed to run functions
+void rm11EnemyName(char *enPtr);
+void rm11Dialog(int temp, char *enPtr, char *nmPtr);
+void rm11Battle(int *ptr, char *enPtr, char *nmPtr);
+
+
 void main(void)
 {
 	int x,y,z,i,h,g,k,choice=0;
@@ -510,6 +516,29 @@ break;
 			{
 					while(choice != 99)
 					{
+						char arrCh[30], enemyName[30], *enPtr, *nmPtr;   
+                                int health[5] = {10, 15, 20, 0, 0}, temp=0, *ptr; 
+                                srand(time(NULL));
+                                ptr = health;
+                                nmPtr = name;
+                                enPtr = enemyName;
+
+                                rm11Dialog(1, enPtr, nmPtr);                                      
+                                scanf("%s", arrCh);
+
+                                if(strcmp(arrCh, "yes") == 0)
+                                {
+                                    rm11EnemyName(enPtr);
+                                    rm11Dialog(2, enPtr, nmPtr);                     
+                                    rm11Battle(ptr, enPtr, nmPtr);
+                                    choice = 99;
+                                }
+
+                                else
+                                {
+                                    rm11Dialog(0, enPtr, nmPtr);
+                                    choice = 99;
+                                }
 					}
 					break;
 			}
@@ -1246,6 +1275,301 @@ void bluePotionWorld()
 
 }
 
+
+void rm11EnemyName(char *enPtr)
+{
+    FILE *rptr;
+    
+    char chTemp[30];
+    
+    int itr=0, temp=0;
+    
+    if((rptr = fopen("enemynames.txt", "r")) == NULL)
+    {
+        
+        printf("Error: File could not be opened.\n\n");
+        strcpy(enPtr, "Angry Wild-Beast");
+    }
+    
+    else
+    {
+        // scans for the descriptive verb of the enemy in the file
+        temp = 1 + (rand() % 30);
+        fscanf(rptr, "%s", chTemp);
+        while(itr != temp)
+        {
+            itr++;
+            fscanf(rptr, "%s", chTemp);
+        }
+        
+        strcpy(enPtr, chTemp);
+        
+        // the words lists are separated by the digit 2
+        while(!isdigit(chTemp[0]))
+        {
+            fscanf(rptr, "%s", chTemp);
+        }
+        
+        // scans for the name of the enemy in the file
+        itr=0;
+        temp = 1 + (rand() % 19);
+        
+        fscanf(rptr, "%s", chTemp);
+        while(itr != temp)
+        {
+            fscanf(rptr, "%s", chTemp);
+            itr++;
+        }
+        
+        strcat(enPtr, chTemp);
+    }
+
+	fclose(rptr);
+}
+
+void rm11Dialog(int temp, char *enPtr, char *nmPtr)
+{
+    if(temp == 0)
+    {
+        printf("The old dwarf, looking disappointed, sits back down.\n");
+        printf("\nYou turn around and exit the room.\n");
+    }
+    
+    else if(temp == 1)
+    {
+        printf("\nYou open the door and find yourself at the edge of a forest.\n");
+        printf("Sitting on an old fallen log is an old, grey bearded dwarf\n");
+        printf("smoking his pipe.\n");
+        printf("The dwarf gets up and greets you.\n");
+        printf("\"Hello there! I am in need of help crossing this forest!\"\n");
+        printf("\"What do you say, will you help me\", asks the old dwarf.\n");
+        printf("------------------------------------------------------------\n\n");
+        printf("- yes\n- no\nEnter your choice: ");
+    }
+    
+    else if(temp == 2)
+    {
+        printf("\n\"Excellent! Let us depart then before sunset!\"\n");
+        printf("The old dwarf and you begin your journey into the\n");
+        printf("forest. The forest is quiet, eerie, and unsettling but the\n");
+        printf("dwarf is calm. He recounts to you old stories of his past\n");
+        printf("but is interrupted by the howl of some beast!\n");
+        printf("\"Quiet..\" says the old dwarf.. \n");
+        printf("------------------------------------------------------------\n\n");
+        printf("\"Over there %s! Its a %s!\",\n", nmPtr, enPtr);
+        printf("yells the dwarf!\n");
+    }
+
+}
+
+void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
+{
+    int win=0, die=0;
+    
+    char ch=0;
+    
+    // elem 0: your health, elem 1: dwarf health, elem 2: enemy health
+    printf("\nThe old dwarf and you have now entered into a battle!\n");
+    
+    // win is 1, lose is 2
+    while(win <=0 || win > 3)
+    {
+        printf("\n------------------------------------------------------\n");
+        printf("%s's health: %d\t",nmPtr, *(ptr+0));
+        printf("||\tOld Dwarfs health: %d\n", *(ptr+1));
+        printf("------------------------------------------------------\n");
+        printf("%s's health: %d\n", enPtr, *(ptr+2));
+        printf("------------------------------------------------------\n\n");
+        
+        printf("OPTIONS\n");
+        printf("------------------\n");
+        printf("- Sword Attack (s)\n");
+        printf("- Dwarf Attack (d)\n");
+        printf("Enter the letter next to the choice: ");
+        scanf(" %c", &ch);
+        
+        if(ch == 's' || ch == 'S')
+        {
+            die = (rand() % 6) + 1;
+            
+            printf("\nYou thrust you sword towards the %s\n", enPtr);
+            
+            if(die == 1)
+            {
+                printf("but you are short and only scrape it!\n");
+                printf("The %s counter and hits you!\n", enPtr);
+                *(ptr+0) -= 1;
+                *(ptr+2) -= 1;
+                
+            }
+            
+            else if(die == 2)
+            {            
+                printf("and your sword makes solid contact with it!\n");
+                printf("The %s is slightly damaged\n", enPtr);
+                *(ptr+2) -= 2;
+            }
+            
+            else if(die == 3)
+            {
+                printf("and your sword draws blood from it!\n");
+                printf("The %s has taken damage.\n", enPtr);
+                *(ptr+2) -= 3;
+            }
+            
+            else if(die == 4)
+            {
+                printf("and your sword causes destructive damage!\n");
+                printf("The %s staggers from the intense blow.\n", enPtr);
+                *(ptr+2) -= 4;
+            }
+            
+            else if(die == 5)
+            {
+                printf("and your sword causes critical damage!\n");
+                printf("The %s has taken critical damage!\n", enPtr);
+                *(ptr+2) -= 5;
+            }
+            
+            else
+            {
+                printf("and your sword damages the beast and as \n");
+                printf("the beast staggers around you are able to\n");
+                printf("land another blow!\n");
+                printf("The %s has taken ultra X2 critical damage!\n", enPtr);
+                printf("The god Ares saw this and gives you a thumbs up!\n");
+                printf("You have gained health!\n");
+                *(ptr+0) += 2;
+                *(ptr+2) -= 7;
+            }
+                    
+        }
+       
+        else if(ch == 'd' || ch == 'D')
+        {
+            die = (rand() % 6) + 1;
+            
+            printf("\nThe old dwarf prepares his axe!\n");
+            
+            if(die == 1)
+            {
+                printf("The old dwarf trips on a rock, hurting his hip!\n");
+                printf("The %s tries to attack him but you \n", enPtr);
+                printf("block its blow and take damage!\n");
+                *(ptr+0) -= 2;
+                *(ptr+1) -= 1;
+                
+            }
+            
+            else if(die == 2)
+            {            
+                printf("The dwarf feels extra manly and drops his axe!\n");
+                printf("The dwarf punches the %s!\n", enPtr);
+                printf("The %s take no damage...\n", enPtr);
+                printf("The dwarfs pride is slightly damaged.\n");
+                *(ptr+1) -= 1;
+            }
+            
+            else if(die == 3)
+            {
+                printf("The dwarf hits the %s with his axe!\n", enPtr);
+                printf("The %s has taken damage.\n", enPtr);
+                *(ptr+2) -= 2;
+            }
+            
+            else if(die == 4)
+            {
+                printf("The dwarf throws his axe and misses!\n");
+                printf("The dwarfs pride is slightly damaged.\n");
+                *(ptr+1) -= 1;
+            }
+            
+            else if(die == 5)
+            {
+                printf("The dwarf hits the %s with his axe!\n", enPtr);
+                printf("The %s has taken damage!\n", enPtr);
+                *(ptr+2) -= 2;
+            }
+            
+            else
+            {
+                printf("The dwarf hands you a malt beer and you both\n");
+                printf("chug the drink!\n");
+                printf("The dwarf and you gain health and power!\n");
+                printf("The dwarf and you both attack the %s,\n", enPtr);
+                printf("it is overpowered and takes many blows!\n");
+                printf("The %s has taken x3 ultra critical damage!\n", enPtr);
+                *(ptr+0) += 2;
+                *(ptr+1) += 2;
+                *(ptr+2) -= 9;
+            }
+        }
+        
+        else
+        {
+            printf("You have entered the wrong choice!\n");
+            printf("In your confusion, the %s strikes you!\n", enPtr);
+            *(ptr+0) -= 1;
+        }
+               
+        die = (rand() % 6) + 1;
+            
+        printf("\nThe %s rushes towards you and the dwarf!\n", enPtr);
+
+        if(die == 1)
+        {
+            printf("You and the dwarf dodge the attack!\n");
+
+        }
+
+        else if(die == 2)
+        {            
+            printf("It attacks and slightly damages the dwarf!\n");
+            *(ptr+1) -= 1;
+            
+        }
+
+        else if(die == 3)
+        {
+            printf("It attacks and slightly damages you!\n");
+            *(ptr+0) -= 1;
+        }
+
+        else if(die == 4)
+        {
+            printf("It attacks and damages the dwarf!\n");
+            *(ptr+1) -= 2;
+        }
+
+        else if(die == 5)
+        {
+            printf("It attacks and damages you!\n");
+            *(ptr+0) -= 2;
+        }
+
+        else
+        {
+            printf("but at the last minute hesitates and heals itself!\n");
+            *(ptr+2) += 5;
+        }
+        
+        if(*(ptr+0) <= 0 || *(ptr+1) <= 0)
+        {
+            printf("The dwarf and you lost!\n");
+		printf("Game Over\n");
+            win = 2;
+        }
+        
+        else if(*(ptr+2) <= 0)
+        {
+            printf("\nThe %s dies. You win!\n", enPtr);
+		printf("You and the dwarf exit the forest safely!\n");
+		printf("Congratulations!\n");
+            win = 2;
+        }
+    }
+}
+
 int randomAscii(void)
 {
 	int val;
@@ -1273,6 +1597,5 @@ void printSumArray(int* ptr, int size)
 		ptr++;
 	}
 }
-
 
 
