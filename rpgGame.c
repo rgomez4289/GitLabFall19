@@ -33,6 +33,7 @@ void printSumArray(int* ptr, int size);
 
 int randGen(int topNum);
 
+void blackJack(int *cards);
 
 // enemynames.txt needed to run functions
 void rm11EnemyName(char *enPtr);
@@ -1032,70 +1033,22 @@ break;
 					puts("2. No.");
 					scanf("%d",&choice);
 
+					int timesPlayed = 0;
+
 					if(choice == 1)
 					{
 						int cont = 0;
-						int c1;
-						int c2;
+						int cards[2] = {};
 						
 						while(cont != 1)
 						{
-							puts("The Skeleton laughs and deals each of you 2 cards");
-							c1 = ((1 + rand()) % 13);
-							if(c1 == 1)
-							{
-								puts("Your first card is an Ace");
-							}
-							else if(c1 > 10)
-							{
-								printf("Your first card is a ");
-								if(c1 == 11)
-								{
-									puts("Jack");
-								}
-								else if(c1 == 12)
-								{
-									puts("Queen");
-								}
-								else if(c1 == 13)
-								{
-									puts("King");
-								}
-							}
-							else
-							{
-								printf("Your first card is a %d\n", c1);
-							}
-							
-							//card2
-							c2 = ((1 + rand()) % 13);
-							if(c2 == 1)
-							{
-								puts("Your second card is an Ace");
-							}
-							else if(c2 > 10)
-							{
-								printf("Your second card is a ");
-								if(c2 == 11)
-								{
-									puts("Jack");
-								}
-								else if(c2 == 12)
-								{
-									puts("Queen");
-								}
-								else if(c2 == 13)
-								{
-									puts("King");
-								}
-							}
-							else
-							{
-								printf("Your second card is a %d\n", c2);
-							}
+							cards[0] = (1 + (rand() % 13));
+							int *ptr = cards;
+							blackJack(ptr);
+							timesPlayed++;
 							
 							printf("Before you can even decide on what to do with ");
-							printf("your hand The Skeleton reveals a Blackjack. ");
+							printf("your hand, The Skeleton reveals a Blackjack. ");
 							puts("you should've known it was a cheater");
 							printf("The Skeleton says it will give you another ");
 							puts("chance.");
@@ -1103,13 +1056,25 @@ break;
 							puts("1. Yes");
 							puts("2. No");
 							scanf("%d", &choice);
+
 							if(choice == 2)
 							{
-								printf("You've accepted your fate and you ");
-								puts("are trapped forever.");
+								//name to caps
+								char str[256] = {};
+								int i = 0;
+								while(name[i])
+								{
+									str[i] = toupper(name[i]);
+									i++;
+								}
+								printf("You've accepted your fate, %s, and ", str);
+								puts("you are trapped forever.");
 								cont = 1;
 							}
 						}
+						FILE *wptr = fopen("timesPlayed.txt", "w");
+						fprintf(wptr, "Played BlackJack %d times", timesPlayed);
+						puts("Number of times played written to file timesPlayed.txt");
 					}
 					else if(choice == 2)
 					{
@@ -1598,4 +1563,58 @@ void printSumArray(int* ptr, int size)
 	}
 }
 
-
+void blackJack(int *cards)
+{
+	puts("The Skeleton laughs and deals each of you 2 cards");
+	if(*cards == 1)
+	{
+		puts("Your first card is an Ace");
+	}
+	else if(*cards > 10)
+	{
+		printf("Your first card is a ");
+		if(*cards == 11)
+		{
+			puts("Jack");
+		}
+		else if(*cards == 12)
+		{
+			puts("Queen");
+		}
+		else if(*cards == 13)
+		{
+			puts("King");
+		}
+	}
+	else
+	{
+		printf("Your first card is a %d\n", *cards);
+	}
+	
+	//card2
+	*(cards+1) = (1 + (rand() % 13));
+	if(*(cards+1) == 1)
+	{
+		puts("Your second card is an Ace");
+	}
+	else if(*(cards+1) > 10)
+	{
+		printf("Your second card is a ");
+		if(*(cards+1) == 11)
+		{
+			puts("Jack");
+		}
+		else if(*(cards+1) == 12)
+		{
+			puts("Queen");
+		}
+		else if(*(cards+1) == 13)
+		{
+			puts("King");
+		}
+	}
+	else
+	{
+		printf("Your second card is a %d\n", *(cards+1));
+	}
+}
