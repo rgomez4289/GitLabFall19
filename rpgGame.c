@@ -26,12 +26,19 @@ int goblin(int choice);
 
 int blackPotionEffect();
 void bluePotionWorld();
+
+int randomAscii(void);
+void fillSumArray(int* ptr, int size);
+void printSumArray(int* ptr, int size);
+
 int randGen(int topNum);
+
 
 // enemynames.txt needed to run functions
 void rm11EnemyName(char *enPtr);
 void rm11Dialog(int temp, char *enPtr, char *nmPtr);
 void rm11Battle(int *ptr, char *enPtr, char *nmPtr);
+
 
 void main(void)
 {
@@ -358,16 +365,26 @@ void main(void)
 			{
 					while(choice != 99)
 					{
+							int num;
+							int arr[5];
+							int* ptr1 = arr;
+							num = randomAscii();
+							fillSumArray(ptr1, 5);	
+
 							puts("you open the door and find ........");
 							puts("the loop monster!");
-							while(choice != 99)
+							while(choice != num)
 							{
 								puts("the loop monster will end its reign of terror if you enter");
 								puts("the magic number it seeks");
+								printf("hint: the ascii value for %c\n", num);
 								scanf("%d", &choice);
-								//if (choice == 99) break;
 							}
 							puts("the loop monster has seized to exist");
+							puts("but a new evil lurks ahead...");
+							puts("the array monster!");
+							printSumArray(ptr1, 5);
+							return;
 					}
 					break;
 			}
@@ -937,23 +954,82 @@ break;
 
 					if(choice == 1)
 					{
-						/*int cont = 0;
+						int cont = 0;
 						int c1;
 						int c2;
-						*/
-						//while(cont != 1)
-						//{
+						
+						while(cont != 1)
+						{
 							puts("The Skeleton laughs and deals each of you 2 cards");
-							/*c1 = ((1 + rand()) % 13);
-							c2 = ((1 + rand()) % 13);
-							if(c1 > 10)
+							c1 = ((1 + rand()) % 13);
+							if(c1 == 1)
 							{
-								puts
-							*/
-							printf("Before you can even look at your cards ");
-							printf("the skeleton reveals a Blackjack. ");
+								puts("Your first card is an Ace");
+							}
+							else if(c1 > 10)
+							{
+								printf("Your first card is a ");
+								if(c1 == 11)
+								{
+									puts("Jack");
+								}
+								else if(c1 == 12)
+								{
+									puts("Queen");
+								}
+								else if(c1 == 13)
+								{
+									puts("King");
+								}
+							}
+							else
+							{
+								printf("Your first card is a %d\n", c1);
+							}
+							
+							//card2
+							c2 = ((1 + rand()) % 13);
+							if(c2 == 1)
+							{
+								puts("Your second card is an Ace");
+							}
+							else if(c2 > 10)
+							{
+								printf("Your second card is a ");
+								if(c2 == 11)
+								{
+									puts("Jack");
+								}
+								else if(c2 == 12)
+								{
+									puts("Queen");
+								}
+								else if(c2 == 13)
+								{
+									puts("King");
+								}
+							}
+							else
+							{
+								printf("Your second card is a %d\n", c2);
+							}
+							
+							printf("Before you can even decide on what to do with ");
+							printf("your hand The Skeleton reveals a Blackjack. ");
 							puts("you should've known it was a cheater");
-						//}
+							printf("The Skeleton says it will give you another ");
+							puts("chance.");
+							puts("will you play again?");
+							puts("1. Yes");
+							puts("2. No");
+							scanf("%d", &choice);
+							if(choice == 2)
+							{
+								printf("You've accepted your fate and you ");
+								puts("are trapped forever.");
+								cont = 1;
+							}
+						}
 					}
 					else if(choice == 2)
 					{
@@ -1118,6 +1194,7 @@ void bluePotionWorld()
 
 
 }
+
 
 void rm11EnemyName(char *enPtr)
 {
@@ -1412,3 +1489,33 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
         }
     }
 }
+
+int randomAscii(void)
+{
+	int val;
+	val = 65 + rand()%25;
+	return val;
+}
+
+void fillSumArray(int* ptr, int size)
+{
+	int val, i;
+	for(i = 0; i < size; i++)
+	{
+		val = 1 + rand()%9;
+		*ptr = val;
+		ptr++;
+	}
+}
+
+void printSumArray(int* ptr, int size)
+{
+	int i;
+	for(i = 0; i < size; i++)
+	{
+		printf("%d\t", *ptr);
+		ptr++;
+	}
+}
+
+
