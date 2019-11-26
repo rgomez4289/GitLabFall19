@@ -33,6 +33,13 @@ void printSumArray(int* ptr, int size);
 
 int randGen(int topNum);
 
+int zom(int health,int *wepP,int wepr); //door 3
+int wiz(int health,int *wepP,int wepr); //door 3
+int kni(int health,int *wepP,int wepr); //door 3
+int dem(int health,int *wepP,int wepr); //door 3
+int ang(int health,int *wepP,int wepr); //door 3
+void dead(void);
+
 
 // enemynames.txt needed to run functions
 void rm11EnemyName(char *enPtr);
@@ -116,243 +123,434 @@ void main(void)
 			}
 			case 3:
 			{
-				 int boss[] = {0,1,0,1,1,1,1};
-   char area[9][200] ={
-     "You are in a Grave Yard surrounded by cliffs\n",
-     "You are standing on a cliff side\nBehind you is a graveyard\nIn front you see a shrine with a fading light\n",
-     "You are in a shrine.\nIn the middle you see a small bonfire.\nTo your left you see a wooden door\nForward You see a silver door.\nTo your right you see a black door\n",
-     "You are standing in what looks like an old library.\n",
-     "You are standing in what looks like an old temple. the ground looks burned from fire and an ominus glow comes from the celing.\n",
-     "You are standing on a black island. Surrounded by a lake of fire.\nThe door you came through is encased on light.\n",
-     "Black fire seems to spew from the bonfire.\n Filling the room and encompassing the shrine.\nAll Light fades.\nAre you alone?\n",
-     "From here adventurer you need to "
-   };
 
+						srand(time(NULL)); //Used for critical strike for the bow
 
+	          int boss[] = {0,0,0,0,0,0,1};
+	          int item[] = {1,1,1};
+	          char area[9][200] ={
+	            "You are in a Grave Yard surrounded by cliffs\n",
+	            "You are standing on a cliff side\nBehind you is a graveyard\nIn front you see a shrine with a fading light\n",
+	            "You are in a shrine.\nIn the middle you see a small bonfire.\nTo your left you see a wooden door\nForward You see a silver door.\nTo your right you see a black door\n\n",
+	            "You are standing in what looks like an old library.\n",
+	            "You are standing in what looks like an old temple. the ground looks burned from fire and an ominus glow comes from the celing.\n",
+	            "You are standing on a black island. Surrounded by a lake of fire.\nThe door you came through is encased on light.\n",
+	            "Black fire seems to spew from the bonfire.\n Filling the room and encompassing the shrine.\nAll Light fades.\nAre you alone?\n"
+	          };
 
+	          int loc = 0; //used for map placement
+	          int move; //used for map progression
+	          int end = 0; //Used to end game
+	          int wep; //wepon damage
+	          int *wepP; //used to enter functions
+	          wepP = &wep;
+	          int health; //player health
 
+	          int swdmg = 20; // sword - short range
+	          int bowdmg = 10; // far range - low dmg - has crit
+	          int sffdmg = 50; // sorsory - far range / high dmg but 1 move cast time
+	          int kndmg = 5; //bleed dmg but have to be close
 
+	          //wepon ranges
+	          int wepr;
+	          int swra = 10;
+	          int bowra = 30;
+	          int sffra = 50;
+	          int knra = 5;
 
-   int loc = 0; //used for map placement
-   int move; //used for map progression
-   int op; // used for in combat options
-   int end; //Used to end game
-   int wep;
-   int health;
-   int build;
+	          puts("You awake on the ground in a graveyard.\n");
+	          puts("You stand up and see 4 weponds at your feet:\n1 - Sword\n2 - Bow\n3 - Knife\n4 - Staff\n0 - to quit\nWhat do you grab");
+	          int ch;
+	          scanf("%d",&ch);
+	          //Wepon choice
+	          switch(ch)
+	          {
+	            case 1:
+	              wep = swdmg;
+	              wepr = swra;
+	              printf("Wepon damage: %d\n",wep);
+	              printf("Wepon range: %d\n",wepr);
+	              printf("So I see that you have chosen the knight class\n");
+	              puts("Knights are tough. Lets see if you are tough enough.");
+	              health = 100;
+	              printf("Health: %d\n",health);
+	              break;
+	            case 2:
+	              wep = bowdmg;
+	              wepr = bowra;
+	              printf("Wepon damage: %d\n",wep);
+	              printf("Wepon range(units): %d\n",wepr);
+	              printf("So I see that you have chosen the Ranger class\n");
+	              puts("Rangers are must have quick wits. Lets see if you can think on your feet.");
+	              health = 60;
+	              printf("Health: %d\n",health);
+	              break;
+	            case 3:
+	              wep = kndmg;
+	              wepr = knra;
+	              printf("Wepon damage: %d\n",wep);
+	              printf("Wepon range(units): %d\n",wepr);
+	              printf("So I see that you have chosen the Theif class\n");
+	              puts("Theifs rely on getting in close. Can you close the gap?\n");
+	              puts("Theifs have bleed dmg - every 4 attacks issues 4 x your base damage\n");
+	              health = 50;
+	              printf("Health: %d\n",health);
+	              break;
+	            case 4:
+	              wep = sffdmg;
+	              wepr = sffra;
+	              printf("Wepon damage: %d\n",wep);
+	              printf("Wepon range(units): %d\n",wepr);
+	              printf("So I see that you have chosen the Wizard class\n");
+	              puts("Wizards are old and wise. Do you have the mind to survive?\n");
+	              health = 60;
+	              printf("Health: %d\n",health);
+	              break;
+	            case 0:
+	              puts("I guess that will be the end of it");
+	              puts("You crawl into an empty grave and die\n");
+	              end = 2;
+	              break;
+	            default:
+	              wep = 2;
+	              wepr = 1;
+	              printf("Wepon damage: %d\n",wep);
+	              printf("Wepon range(units): %d\n",wepr);
+	              puts("Empty Handed it will be.");
+	              puts("You must be a fool....");
+	              health = 10;
+	              printf("Health: %d\n",health);
+	          }
 
-   int swdmg = 20; //
-   int bowdmg = 10; // far range - low dmg
-   int sffdmg = 50; // sorsory - far range but 1 move cast time
-   int kndmg = 5; //bleed dmg but have to be close
+	          //game
+	        while(end != 2)
+	        {
+	          end:
+	          printf("%s",area[loc]);
+	          switch(loc)
+	          {
 
-   //wepon ranges
-   int wepr;
-   int swra = 10;
-   int bowra = 30;
-   int sffra = 50;
-   int knra = 5;
+	              case 0: //Graveyard Site
+	                  puts("1 - Towards cliffs\n");
+	                  scanf("%d",&move);
+	                  if(move == 1){
+	                    loc++;
+	                  }
+	                  else
+	                    puts("You are in a canyon!\nOnly can go forward adventurer.");
+	                  break;
+	              case 1: //Cliffs (Zombie Fight)
+	              {
+	                  //Zombie fight
+	                  if(boss[loc] == 1)
+	                  {
+	                    boss[loc] = zom(health,wepP,wepr);
+	                    if(boss[loc] == 2)
+	                    {
+	                      dead();
+	                      end = 2;
+	                    }
+	                  }
+	                  else
+	                  {
+	                    move = 0;
+	                    puts("1 - Go towards Shrine\n2 - Back to GraveYard");
+	                    scanf("%d",&move);
+	                    if(move == 1)
+	                    {
+	                      loc++;
+	                    }
+	                    else if(move == 2)
+	                    {
+	                      loc--;
+	                    }
+	                    else
+	                      puts("Error input!");
+	                  }
+	                  break;
+	              }
+	              case 2: //Shrine
+	              {
+	                  if(item[0] + item[1] + item[2] == 3)
+	                  {
+	                    puts("The Bonfire is going steadily, occationally flickering\nflame....dear...flame.\n");
+	                  }
+	                  if(item[0] + item[1] + item[2] == 6)
+	                  {
+	                    puts("The Bonfire is now roaring with vigor.\nDo you know where the marshmellows are?");
+	                  }
+	                  if(item[0] + item[1] + item[2] == 9)
+	                  {
+	                    puts("The Bonfire is now enveloping the entire shrine. You stare into the flame.\nIs there something staring back at you?");
+	                    puts("Would you like to finish the game?");
+	                    puts("1 - Yes\n2 - No!");
+	                    scanf("%d",&ch);
+	                    if(ch == 1)
+	                    {
+	                      loc += 4;
+	                      goto end;
+	                    }
+	                  }
 
+	                  //Adding items to the fire
+	                    move = 0;
+	                    if(item[0] == 2)
+	                    {
+	                      ch = 0;
+	                      puts("It seems you have a tome.");
+	                      puts("Would you like to add it to the bonfire?\n1 - Yes\n2 - No");
+	                      scanf("%d",&ch);
+	                      if(ch == 1)
+	                      {
+	                        puts("To add the tome the inscription reads:\nSpeak Friend Then Add");
+	                        puts("What is the code?");
+	                        char msg[20];
+	                        char rid[] = {"mellon"};
+	                        scanf(" %s",msg);
+	                        int i;
+	                        for(i = 0; msg[i]; i++)
+	                        {
+	                            msg[i] = tolower(msg[i]); //String manipulation
+	                        }
+	                        if(strcmp(msg,rid) == 0)
+	                        {
+	                          item[0] = 3;
+	                          puts("You see the bonfire ignight with life.\n");
+	                        }
+	                        else
+	                        {
+	                          puts("Nothing happens...");
+	                        }
+	                      }
+	                      else
+	                      {
+	                          puts("You do nothing\n");
+	                      }
+	                    }
+	                    if(item[1] == 2)
+	                    {
+	                      int ch = 0;
+	                      puts("It seems you have the black sword.");
+	                      puts("Would you like to add it to the bonfire?\n1 - Yes\n2 - No");
+	                      scanf("%d",&ch);
+	                      if(ch == 1)
+	                      {
+	                        item[1] = 3;
+	                        puts("You see the bonfire ignight with a reddish flame!\n");
+	                      }
+	                      else
+	                      {
+	                          puts("You do nothing\n");
+	                      }
 
-   //Boss Healths
-   int zom = 50;
+	                    }
+	                    if(item[2] == 2)
+	                    {
+	                      int ch = 0;
+	                      puts("It seems you have the eye!");
+	                      puts("Would you like to add it to the bonfire?\n1 - Yes\n2 - No");
+	                      scanf("%d",&ch);
+	                      if(ch == 1)
+	                      {
+	                        item[2] = 3;
+	                        puts("You see the bonfire roar to life!\n");
+	                      }
+	                      else
+	                      {
+	                        puts("You do nothing\n");
+	                      }
 
+	                    }
 
-      puts("You awake on the ground in a graveyard.\n");
-      puts("You stand up and see 4 weponds at your feet:\n1 - Sword\n2 - Bow\n3 - Knife\n4 - Staff\nWhat do you grab");
-      puts("(0) to quit\n");
-      int ch;
-      scanf("%d",&ch);
-      //Wepon choice
-      switch(ch)
-      {
-          case 1:
-            wep = swdmg;
-            wepr = swra;
-            printf("Wepon damage: %d\n",wep);
-            printf("Wepon range(units): %d\n",wepr);
-            printf("So I see that you have chosen the knight class\n");
-            puts("Knights are tough. Lets see if you are tough enough.\n");
-            health = 100;
-            printf("Health: %d\n",health);
-            break;
-          case 2:
-            wep = bowdmg;
-            wepr = bowra;
-            printf("Wepon damage: %d\n",wep);
-            printf("Wepon range(units): %d\n",wepr);
-            printf("So I see that you have chosen the Ranger class\n");
-            puts("Rangers are must have quick wits. Lets see if you can think on your feet.\n");
-            health = 60;
-            printf("Health: %d\n",health);
-            break;
-          case 3:
-            wep = kndmg;
-            wepr = kndmg;
-            printf("Wepon damage: %d\n",wep);
-            printf("Wepon range(units): %d\n",wepr);
-            printf("So I see that you have chosen the Theif class\n");
-            puts("Theifs rely on getting in close. Can you close the gap?\n");
-            puts("Theifs have bleed dmg - every 4 attacks issues 4 x your base damage\n");
-            health = 40;
-            printf("Health: %d\n",health);
-            break;
-          case 4:
-            wep = sffdmg;
-            wepr = sffra;
-            printf("Wepon damage: %d\n",wep);
-            printf("Wepon range(units): %d\n",wepr);
-            printf("So I see that you have chosen the Wizard class\n");
-            puts("Wizards are old and wise. Do you have the mind to survive?\n");
-            health = 50;
-            printf("Health: %d\n",health);
-            break;
-          case 0:
-            puts("I guess that will be the end of it");
-            puts("You crawl into an empty grave and die");
-            return;
-          default:
-            wep = 2;
-            wepr = 1;
-            printf("Wepon damage: %d\n",wep);
-            printf("Wepon range(units): %d\n",wepr);
-            puts("Empty Handed it will be.");
-            puts("You must be a fool....");
-            health = 10;
-            printf("Health: %d\n",health);
-        }
+	                    move = 0;
+	                    puts("1 - Open Wooden Door\n2 - Open Silver Door\n3 - Open Black Door\n4 - Go back towards the cliffs\n");
+	                    scanf("%d",&move);
+	                    if(move == 1)
+	                    {
+	                      loc++;
+	                    }
+	                    else if(move == 2)
+	                    {
+	                      loc+=2;
+	                    }
+	                    else if(move == 3)
+	                    {
+	                      loc+=3;
+	                    }
+	                    else if(move == 4)
+	                    {
+	                      loc--;
+	                    }
+	                    else
+	                      puts("Wrong input Adventurer!\n");
 
-      while(loc != 8){
-        printf("%s",area[loc]);
-        switch(loc)
-        {
-            case 0: //Graveyard Site
-                puts("1 - Towards cliffs\n");
-                scanf("%d",&move);
-                if(move == 1){
-                  loc++;
-                }
-                else
-                  puts("You are in a canyon!\nOnly can go forward adventurer.");
-                break;
-            case 1: //Cliffs (Zombie Fight)
-                //Zombie fight
-                if(boss[loc] == 1)
-                {
-                  int zomD = 10;
-                      puts("\nYou move forward and a zombie holding a knife charges at you");
-                      puts("He is 10 units away");
-                      puts("What do you do?");
-                  while(zom > 0)
-                  {
-                      printf("Your Health: %d\n",health);
-                      printf("Zombie Health: %d\n",zom);
-                      printf("Zombie Distance: %d\n",zomD);
-                      puts("1 - Attack!\n2 - Dodge left\n3 - Dodge right\n4 - Fall back(Adds 10 units)");
-                      scanf("%d",&op);
-                      switch (op)
-                      {
-                        case 1:
-                          if(wepr > zomD)
-                          {
-                            puts("Too close!");
-                            puts("The zombie drops his shoulder and you flip over him");
-                            puts("Health - 5");
-                            health -= 5;
-                            puts("You scramble to get up");
-                            puts("The zombie turns around and runs at you");
-                            zomD = 5;
-                            break;
-                          }
-                          puts("You Attack the zombie!");
-                          //Sword Attack
-                          if(wepr == 10)
-                          {
-                            if(zom < 11){
-                              puts("You kill the zombie with one final stroke!");
-                              puts("");
-                            }
-                            puts("You slice the zombie as he tumbles over you");
-                            puts("Zombie to you - 5 (units)");
-                            zomD = 5;
-                            puts("Zombie health -10");
-                            zom -= wep;
-                          }
-                          //Knife Attack
-                          else if(wepr == 5)
-                          {
-                            puts("You stab the zombie in the head and flip over him");
-                            puts("Zombie to you - 5 (units)");
-                            puts("Zombie health -5");
-                            if(build == 4)
-                            {
-                              zom -= wep * 4;
-                              build = 0;
-                            }
-                            else
-                            {
-                                build++;
-                                zom -= wep;
-                            }
-                          }
-                          break;
-                        case 2:
-                          puts("You dodge left and the zombie stumbles over");
-                          puts("Zombie range - 10");
-                          break;
-                        case 3:
-                          puts("You dodge Right and the zombie catches you with with its Knife");
-                          puts("Health -5");
-                          health -= 5;
-                          break;
-                        case 4:
-                          puts("You fall back from the zombie! - Added 10 Units");
-                          zomD += 10;
-                          break;
-                        default:
-                          puts("you freeze and the zombie Stabs you!");
-                          health -= 20;
-                      }
+	                  break;
+	                }
+	              case 3: //wooden Door
+	              {
+	                  if(boss[loc] == 1)
+	                  {
+	                    boss[loc] = wiz(health,wepP,wepr);
+	                    if(boss[loc] == 2)
+	                    {
+	                      dead();
+	                      end = 2;
+	                    }
+	                    item[0] = 1;
+	                  }
+	                  else
+	                  {
+	                    if(item[0] == 1)
+	                    {
+	                      int ch;
+	                      puts("You see the wizards body still clutching his tome.\n");
+	                      puts("Grab it?\n1 - Yes\n2 - No\n");
+	                      scanf("%d",&ch);
+	                      if(ch == 1){
+	                        puts("You unwind the wizards fingers from his tome.");
+	                        item[0] = 2;
+	                      }
+	                      else
+	                        puts("You leave it be\n");
+	                    }
+	                    else
+	                    {
+	                        move = 0;
+	                        puts("1 - Go towards Shrine\n");
+	                        scanf("%d",&move);
+	                        if(move == 1)
+	                        {
+	                          loc = 2;
+	                        }
+	                        else if(move == 2)
+	                        {
+	                          loc--;
+	                        }
+	                        else
+	                          puts("Error input!");
+	                    }
+	                  }
+	                break;
+	              }
+	              case 4: //Silver door
+	              {
+	                if(boss[loc] == 1)
+	                {
+	                  boss[loc] = kni(health,wepP,wepr);
+	                  if(boss[loc] == 2){
+	                    dead();
+	                    end = 2;
+	                  }
+	                  else
+	                  {
+	                    item[1] = 1;
+	                  }
+	                }
+	                else
+	                {
+	                  if(item[1] == 1)
+	                  {
+	                    int ch;
+	                    puts("The Dark Knights sword stands piercing the floor.\nA dark magic bleeds from the hilt\n");
+	                    puts("Take the sword?\n1 - Yes\n2 - No\n");
+	                    scanf("%d",&ch);
+	                    if(ch == 1){
+	                      puts("You pull the sword from the ground\nA Dark energy surrounds you and the ground around you turns to black.");
+	                      item[1] = 2;
+	                    }
+	                    else
+	                      puts("You leave it be.\n");
+	                  }
+	                  else
+	                  {
+	                    move = 0;
+	                    puts("1 - Go towards Shrine\n");
+	                    scanf("%d",&move);
+	                    if(move == 1)
+	                    {
+	                      loc = 2;
+	                    }
+	                  }
+	                }
+	                break;
+	              }
+	              case 5: //black Door
+	              {
+	                if(boss[loc] == 1)
+	                {
+	                  boss[loc] = dem(health,wepP,wepr);
+	                  if(boss[loc] == 2)
+	                  {
+	                    dead();
+	                    end = 2;
+	                  }
+	                  else
+	                  {
+	                    item[2] = 1;
+	                  }
+	                }
+	                else
+	                {
+	                  if(item[2] == 1)
+	                  {
+	                    int ch;
+	                    puts("The demons body dying on the floor, its eyes shimering red.\n");
+	                    puts("Grab it?\n1 - Yes\n2 - No\n");
+	                    scanf("%d",&ch);
+	                    if(ch == 1){
+	                      puts("You take the demon's eyes from its head.");
+	                      item[2] = 2;
+	                    }
+	                    else
+	                      puts("You leave it be\n");
+	                  }
+	                  else
+	                  {
+	                    move = 0;
+	                    puts("1 - Go towards Shrine\n");
+	                    scanf("%d",&move);
+	                    if(move == 1)
+	                    {
+	                      loc = 2;
+	                    }
+	                  }
 
-                  }
+	                }
+	                break;
+	              }
+	              case 6: //Boss fight
+	              {
+	                if(boss[loc] == 1)
+	                {
+	                  boss[loc] = ang(health,wepP,wepr);
+	                  if(boss[loc] == 2)
+	                  {
+	                    dead();
+	                    end = 2;
+	                    break;
+	                  }
+	                  else
+	                  {
+	                    puts("Congratulations you have won!");
+	                    FILE *ptr;
+	                    ptr = fopen("Door 3 - cert","a+");
+	                    fprintf(ptr,"Name: %s\nDoor 3 Completion!",name); //file manipulation
+	                    puts("Restarting program!");
+	                    char z;
+	                    scanf(" %c",&z);
+	                    end = 2;
+	                  }
+	                }
+	                break;
 
-                  boss[loc] = 0;
-                }
-                else
-                {
-                  move = 0;
-                  puts("1 - Go towards Shrine\n2 - Back to GraveYard");
-                  scanf("%d",&move);
-                  if(move == 1)
-                  {
-                    loc++;
-                  }
-                  else if(move == 2)
-                  {
-                    loc--;
-                  }
-                  else
-                    puts("Error input!");
-                }
-                break;
-            case 2: //Shrine
-                if(boss[loc] == 1)
-                {
+	              }
+	              default:
+	                puts("an error has occured!");
+	                end = 1;
+	          }
 
-
-                }
-
-
-              break;
-
-
-              default:
-                puts("an error has occured!");
-                loc = 8;
-
-        }
-
-        }
+	        }
+				break;
 			}
 			case 4:
 			{
@@ -446,7 +644,7 @@ break;
                                                          puts("As you look up, you are in awe of the environment around you. You see green, grassy, plains and hills extending out to the horizon in every possibile direction you look");
                                                          puts("You begin flying, feeling the slight breeze in your face, and looking down at all of the waterfalls and lakes within all of the green hills and plains.");
 							 puts("You are taking the entire scene in, and as you look out to the horizon you see the sun shining very brightly, which temporarily distorts your vision");
-                                                         puts("Once your vision clears up, you notice that you are rapidly falling through the sky, and brace for impact as you are about to land in a lake."); 
+                                                         puts("Once your vision clears up, you notice that you are rapidly falling through the sky, and brace for impact as you are about to land in a lake.");
                                                          puts("The end");
 
                                                          break;
@@ -458,9 +656,9 @@ break;
 							 puts("You look around you, and all you see is mountains and hills completely covered in snow");
                                                          puts("You begin flying through this cold, white, mysterious terrain, then you notice that the snow is falling a lot quicker");
                                                          puts("The snow makes it so hard to see that you decide to fly all the way up but lose control of your flying and become trapped in a snowstorm");
-                                                         puts("The end");          
+                                                         puts("The end");
 
-                                                         break; 
+                                                         break;
                                                  }
 
                                                  else if(x == 3)
@@ -471,7 +669,7 @@ break;
                                                         puts("The end");
 
 
-        
+
                                                          break;
                                                  }
 				        	 else
@@ -479,7 +677,7 @@ break;
                                                          puts("Wrong choice");
                                                  }
 
-					
+
 
 
 
@@ -1260,19 +1458,19 @@ break;
 								puts("Goodluck buddy hope you make it alive");
 								break;
 							}
-								
+
 							else if (choice == 2)
 							{
 								puts("Good choice, run as fast as you can!");
 								break;
 							}
-							else 
+							else
 							{
 								puts("Look on the bright side, you can attempt a lawsuit and get paid");
 								break;
 							}
 
-							
+
 					}
 					break;
 			}
@@ -1512,12 +1710,12 @@ void rm11Dialog(int temp, char *enPtr, char *nmPtr)
 void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
 {
     int win=0, die=0;
-    
+
     char ch=0;
-    
+
     // elem 0: your health, elem 1: dwarf health, elem 2: enemy health
     printf("\nThe old dwarf and you have now entered into a battle!\n");
-    
+
     // win is 1, lose is 2
     while(win <=0 || win > 3)
     {
@@ -1527,57 +1725,57 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
         printf("------------------------------------------------------\n");
         printf("%s's health: %d\n", enPtr, *(ptr+2));
         printf("------------------------------------------------------\n\n");
-        
+
         printf("OPTIONS\n");
         printf("------------------\n");
         printf("- Sword Attack (s)\n");
         printf("- Dwarf Attack (d)\n");
         printf("Enter the letter next to the choice: ");
         scanf(" %c", &ch);
-        
+
         if(ch == 's' || ch == 'S')
         {
             die = (rand() % 6) + 1;
-            
+
             printf("\nYou thrust you sword towards the %s\n", enPtr);
-            
+
             if(die == 1)
             {
                 printf("but you are short and only scrape it!\n");
                 printf("The %s counter and hits you!\n", enPtr);
                 *(ptr+0) -= 1;
                 *(ptr+2) -= 1;
-                
+
             }
-            
+
             else if(die == 2)
-            {            
+            {
                 printf("and your sword makes solid contact with it!\n");
                 printf("The %s is slightly damaged\n", enPtr);
                 *(ptr+2) -= 2;
             }
-            
+
             else if(die == 3)
             {
                 printf("and your sword draws blood from it!\n");
                 printf("The %s has taken damage.\n", enPtr);
                 *(ptr+2) -= 3;
             }
-            
+
             else if(die == 4)
             {
                 printf("and your sword causes destructive damage!\n");
                 printf("The %s staggers from the intense blow.\n", enPtr);
                 *(ptr+2) -= 4;
             }
-            
+
             else if(die == 5)
             {
                 printf("and your sword causes critical damage!\n");
                 printf("The %s has taken critical damage!\n", enPtr);
                 *(ptr+2) -= 5;
             }
-            
+
             else
             {
                 printf("and your sword damages the beast and as \n");
@@ -1589,15 +1787,15 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
                 *(ptr+0) += 2;
                 *(ptr+2) -= 7;
             }
-                    
+
         }
-       
+
         else if(ch == 'd' || ch == 'D')
         {
             die = (rand() % 6) + 1;
-            
+
             printf("\nThe old dwarf prepares his axe!\n");
-            
+
             if(die == 1)
             {
                 printf("The old dwarf trips on a rock, hurting his hip!\n");
@@ -1605,39 +1803,39 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
                 printf("block its blow and take damage!\n");
                 *(ptr+0) -= 2;
                 *(ptr+1) -= 1;
-                
+
             }
-            
+
             else if(die == 2)
-            {            
+            {
                 printf("The dwarf feels extra manly and drops his axe!\n");
                 printf("The dwarf punches the %s!\n", enPtr);
                 printf("The %s take no damage...\n", enPtr);
                 printf("The dwarfs pride is slightly damaged.\n");
                 *(ptr+1) -= 1;
             }
-            
+
             else if(die == 3)
             {
                 printf("The dwarf hits the %s with his axe!\n", enPtr);
                 printf("The %s has taken damage.\n", enPtr);
                 *(ptr+2) -= 2;
             }
-            
+
             else if(die == 4)
             {
                 printf("The dwarf throws his axe and misses!\n");
                 printf("The dwarfs pride is slightly damaged.\n");
                 *(ptr+1) -= 1;
             }
-            
+
             else if(die == 5)
             {
                 printf("The dwarf hits the %s with his axe!\n", enPtr);
                 printf("The %s has taken damage!\n", enPtr);
                 *(ptr+2) -= 2;
             }
-            
+
             else
             {
                 printf("The dwarf hands you a malt beer and you both\n");
@@ -1651,16 +1849,16 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
                 *(ptr+2) -= 9;
             }
         }
-        
+
         else
         {
             printf("You have entered the wrong choice!\n");
             printf("In your confusion, the %s strikes you!\n", enPtr);
             *(ptr+0) -= 1;
         }
-               
+
         die = (rand() % 6) + 1;
-            
+
         printf("\nThe %s rushes towards you and the dwarf!\n", enPtr);
 
         if(die == 1)
@@ -1670,10 +1868,10 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
         }
 
         else if(die == 2)
-        {            
+        {
             printf("It attacks and slightly damages the dwarf!\n");
             *(ptr+1) -= 1;
-            
+
         }
 
         else if(die == 3)
@@ -1699,7 +1897,7 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
             printf("but at the last minute hesitates and heals itself!\n");
             *(ptr+2) += 5;
         }
-        
+
         if(*(ptr+0) <= 0)
         {
             printf("\nYou died!\n");
@@ -1713,7 +1911,7 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
 		printf("Game Over\n\n");
 
 	}
-        
+
         else if(*(ptr+2) <= 0)
         {
             printf("\nThe %s dies. You win!\n", enPtr);
@@ -1765,4 +1963,1139 @@ void rollDiceRoom17(int *arr)
 		*arr = diceRollResult;
 		arr++;
 	}
+}
+
+
+int zom(int health,int* wepP,int wepr)
+{
+
+	int att = 0; //used for wizard attack build
+	int op; //attack/roll/forward /back
+	int build = 0; //knife bleed dmg
+
+
+	//zombie health
+	int zom = 50;
+	int zomD = 10;
+	int zomA = 1; //used to find zombie attack
+
+				puts("\nYou move forward and a zombie holding a knife charges at you");
+		while(zom > 0)
+		{
+			if(health <= 0)
+			{
+				dead();
+				return 2;
+			}
+				printf("Your Health: %d\n",health);
+				printf("Your Range: %d\n",wepr);
+				printf("Zombie Health: %d\n",zom);
+				printf("Zombie Distance: %d\n",zomD);
+				puts("1 - Attack!\n2 - Dodge left\n3 - Dodge right\n4 - Fall back\n5 - Charge Forward");
+				scanf("%d",&op);
+				switch (op)
+				{
+					case 1:
+						//Sword Attack
+						if(wepr == 10)
+						{
+							if(zomD <= 5)
+							{
+								puts("Too close!");
+								puts("The zombie drops his shoulder and you flip over him");
+								health -= 5;
+								puts("You scramble to get up");
+								puts("The zombie turns around.");
+								zomA = 0;
+								zomD = 5;
+								break;
+							}
+							else if(zom < 21)
+							{
+								puts("With 1 final thrust you slice the zombie in 2\n");
+								zom -= *wepP;
+								break;
+							}
+							else
+							{
+								puts("The zombie charges at you closing the distance!");
+								puts("You slice the zombie as he tumbles over you");
+								zomD = 5;
+								zom -= *wepP;
+							}
+						}
+						//Knife Attack
+						else if(wepr == 5)
+						{
+							if(wepr < zomD)
+							{
+								puts("Too Far away!");
+								break;
+							}
+							if(zom < 6){
+								puts("You thrust your knife in the zombies skull!");
+								puts("He grouns as he falls to the floor");
+								puts("");
+								zom -= *wepP;
+							}
+							else
+							{
+								zomA = 1;
+								puts("You stab the zombie in the head and flip over him");
+								if(build == 4)
+								{
+									zom -= *wepP * 8;
+									build = 0;
+								}
+								else
+								{
+									 build++;
+									 zom -= *wepP;
+								}
+									 zomD = 1;
+							}
+						}
+						//Bow attack
+						else if(wepr == 30)
+						{
+							if(wepr < zomD)
+							{
+								puts("Too Far away!");
+								break;
+							}
+							if(zom < 11)
+							{
+								puts("You pull harder on your bow and fire 1 final arrow!\n");
+								puts("It hits the zombie in the forehead as he falls to the ground sliding to your feet.\n");
+								zom -= *wepP;
+								break;
+							}
+							int crit = rand() % 100 + 1;
+							if(crit > 79)
+							{
+								zom -= (*wepP)*2;
+								puts("You launch a tremendus amount of arrows and hit the zombie in the head!");
+							}
+							else
+							{
+								puts("You launch arrows at the zombie and hit him in the chest!");
+								zomA = 1;
+								zom -= *wepP;
+								zomD -= 10;
+							}
+
+							puts("You position yourself away from the zombie before he gets up");
+						}
+						//wiz class
+						else if(wepr == 50)
+						{
+							if(wepr < zomD)
+							{
+								puts("Too Far away!");
+								break;
+							}
+							if(att == 1)
+							{
+								if(zom < 51)
+								{
+									puts("Your staff starts to glow immensy and a fireball is expanding at the tip of your staff!\n");
+									puts("As the Zombie charges forward you thrust your staff in its direction!\n");
+									puts("The fireball is launched from your staff hitting the zombie and burning him to a crisp.\n");
+									puts("There is nothing left of the zombie except a black mark on the ground\n");
+									zom -= *wepP;
+								}
+								else
+								{
+									att = 0;
+									puts("You hurl a fireball from your staff had hit the zombie!");
+									zom -= *wepP;
+									zomD -= 10;
+								}
+							}
+							else
+							{
+								 puts("You start speaking an ancient language and your staff starts to glow!");
+								 att = 1;
+								 zomA = 1;
+								 zom -= 10;
+							}
+						}
+						break;
+					case 2:
+						puts("You dodge left and the zombie stumbles over");
+						zomA = 0;
+						break;
+					case 3:
+						puts("You dodge Right and the zombie misses you");
+						zomA = 0;
+						break;
+					case 4:
+						puts("You fall back!");
+						zomA = 0;
+						zomD += 10;
+						break;
+					case 5:
+						puts("You charge towards eachother!");
+						zomD -= 10;
+						if(zomD < 3)
+						{
+							puts("Too close!");
+							puts("The zombie drops his shoulder and you flip over him");
+							health -= 5;
+							puts("You scramble to get up");
+							puts("The zombie turns around.");
+							zomA = 0;
+							zomD = 5;
+							break;
+						}
+					default:
+						puts("you freeze and the zombie Stabs you!");
+						health -= 20;
+				}
+
+				if(zomA == 1)
+				{
+					if(zomD  > 20)
+					{
+						puts("The zombie charges towards your direction.");
+						zomD -= 19;
+					}
+					else
+					{
+						puts("The zombie charges you and catches his kife in you!");
+						health -= 10;
+					}
+				}
+
+		}
+
+		return 0;
+}
+
+int wiz(int health,int* wepP,int wepr) //fire
+{
+
+	int att = 0; //Used for wizard charged attack
+	int op;
+	int build = 0;
+	//wizard health
+	int wiz = 150;
+	int wizR = 50;
+	int wizD = 20;
+	int wizA = 0; //determines the wizards attack and charge phase
+	int cover = 0; //determines if you are in cover 0-open 1-incover
+
+				puts("\nYou hear a cackle in the center of the library.");
+				puts("\nYou see a wizard standing there talking in a foregn languege.\nHe is holding a fireball in his right hand, and an old tome in his left.\n");
+				puts("Suddenly a fire ball is hurled at you.\n");
+				puts("You barely dodge it as it scorches your hair.\n");
+		while(wiz > 0)
+		{
+			 if(health <= 0)
+			 {
+				 puts("The wizard casts a wave of fire.\nYou are consumed and burned to a crisp!\n");
+				 return 2;
+			 }
+
+				printf("Your Health: %d\n",health);
+				printf("Your Range: %d\n",wepr);
+				printf("Wizard Health: %d\n",wiz);
+				printf("Wizard Distance: %d\n",wizD);
+				puts("1 - Attack!\n2 - Dodge Left\n3 - Dodge Right\n4 - Fall Back\n5 - Move Forward\n");
+				scanf("%d",&op);
+				switch (op)
+				{
+					case 1: //Attack
+						//Sword Attack
+						if(wepr == 10)
+						{
+							//If you are too close to the wizard
+							if(wizD > 10)
+							{
+								puts("Too far away!");
+								break;
+							}
+							//If you are about to kill the wizard
+							if(wiz < 21)
+							{
+								puts("You charge the wizard sweeping your sword!");
+								puts("You catch his arm and his staff flys off. His staff is consumed by fire.");
+								puts("The fire catches your sword and encases it with fire.");
+								puts("Your sword now does more damage!");
+								wiz -= *wepP;
+								*wepP += 20;
+								break;
+							}
+							//normally hitting the wizard (takes you out of cover)
+							else
+							{
+								puts("You Charge forward and thrust your sword at the wizard.");
+								wiz -= *wepP;
+								cover = 0;
+							}
+						}
+						//Knife Attack
+						else if(wepr == 5)
+						{
+							//If you are too close to the wizard
+							if(wizD > wepr)
+							{
+								puts("Too far away!");
+								break;
+							}
+							//Final strike
+							if(wiz < 6)
+							{
+								puts("With 1 final slice you throw your knife striking the wizards chest\n");
+								puts("He shreks as he falls towards the ground");
+								puts("The fire from his staff catches your knife and encases it with fire.");
+								puts("Your knife now does more damage!");
+								wiz -= *wepP;
+								*wepP += 20;
+								break;
+							}
+							else
+							{
+								puts("You slice with your knife!");
+								cover = 0;
+								if(build == 3)
+								{
+									wiz -= (*wepP * 8);
+									build = 0;
+								}
+								else
+								{
+									 build++;
+									 wiz -= *wepP;
+									 wizD = 5;
+								 }
+							 }
+						}
+						//bow attack
+						else if(wepr == 30)
+						{
+							//If you are too close to the wizard
+							if(wizD < wepr)
+							{
+								puts("Too close!");
+								puts("The wizard throws magic tonic in your direction!");
+								health -= 5;
+								break;
+							}
+							//Killing the wizard
+							if(wiz < 11)
+							{
+								puts("You fire multiple arrows from your bow.\nThey hit the wizards staff with a couple hitting his chest.\n");
+								puts("He shrikes in pain and falls to the floor.\n You hear the horn of gondor in the distance.");
+								puts("The fire catches your quiver and encases it with fire.");
+								puts("Your arrows now does more damage!");
+								wiz -= *wepP;
+								*wepP += 20;
+								break;
+							}
+							else
+							{
+								puts("You quick lauch a swarm of arrows towards the wizard");
+								wiz -= *wepP;
+							}
+						}
+						//staff attack
+						else if(wepr == 50)
+						{
+							if(wizD < wepr)
+							{
+								puts("Too close!");
+								puts("The wizard throws magic tonic in your direction!");
+								health -= 5;
+								break;
+							}
+							//Casting phase
+							if(att == 1)
+							{
+								//Killing the wizard
+								if(wiz < 51)
+								{
+									puts("Your staff starts to glow immensy and a fireball is expanding at the tip of your staff!\n");
+									puts("The fireball is launched from your staff hitting The wizards Staff.\n");
+									puts("The staff explodes and the wizard is launched across the room.\n");
+									puts("The wizards fire catches your staff and encases it with fire.");
+									puts("Your staff now does more damage!");
+									wiz -= *wepP;
+									*wepP += 20;
+								}
+								//Hitting the wizard
+								else
+								{
+									att = 0;
+									puts("You hurl a fireball from your staff!");
+									wiz -= *wepP;
+									wizD -= 10;
+								}
+							}
+							//Charging phase
+							else
+							{
+								 puts("You start speaking an ancient language and your staff starts to glow!");
+								 att = 1;
+							}
+						}
+						break;
+					case 2:
+						puts("You Quickly scramble to the left and find the closest bookshelf for cover.");
+						cover = 1;
+						break;
+					case 3:
+						 puts("You Quickly scramble to your right and find the closest bookshelf for cover.");
+						 cover = 1;
+						 break;
+					case 4:
+						puts("You scramble to find cover away.");
+						cover = 1;
+						wizD += 10;
+						break;
+					 case 5:
+						 puts("You charge closer to the wizard keeping in cover!");
+						 cover = 1;
+						 wizD -= 5;
+						 break;
+					default:
+					 if(cover == 0)
+					 {
+						 puts("Unable to think you take the full fire ball!");
+						 health -= 40;
+					 }
+					 else
+					 {
+						puts("Unable to think your cover is consumed by fire!");
+						cover = 0;
+					}
+				}
+
+				if(wizA == 1)
+				{
+					if(cover == 0)
+					{
+						puts("The wizard catches you outside of cover and you are hit with the fireball!");
+						health -= 20;
+						wizA = 0;
+					}
+					else if(cover == 1)
+					{
+						puts("The fireball hits your cover and burns the bookshelf to ash!");
+						cover = 0;
+						wizA = 0;
+					}
+				}
+				else if(wizA == 0 && wiz > 0)
+				{
+					puts("You hear the wizard wispering into his staff as it starts to glow!");
+					wizA = 1;
+				}
+
+				if(wiz < 0)
+				{
+					puts("The wizard yells in terror before falling to the floor.");
+				}
+
+		}
+
+		return 0;
+}
+
+int kni(int health,int* wepP,int wepr) //dark
+{
+
+		 int att = 0; //Used for wizard class charged attack
+		 int op;
+		 int build = 0;
+		 int dodge = 0; //determines if the knights attack is going to hit
+		 //knight stats
+		 int kni = 250;
+		 int kniR = 20;
+		 int kniD = 40;
+		 int kniA = 0; //determines the knights attack and charge phase
+
+			 //Intro to knight
+			 puts("You see a black knight praying in the center of the temple.\n");
+			 puts("After you fully come through the door. It shuts behind you and disappears.");
+			 puts("The slaming of the door gets the knights attention and he stands up and draws his sword");
+			 while(kni > 0)
+			 {
+					if(health <= 0)
+					{
+						//When you die to the Knights
+						puts("The knight pierces your stomach and you are lifted into the air.\nHe throws you across the temple!");
+						return 2;
+					}
+
+					 printf("Your Health: %d\n",health);
+					 printf("Your Range: %d\n",wepr);
+					 printf("Knight Health: %d\n",kni);
+					 printf("Knight Distance: %d\n",kniD);
+					 puts("1 - Attack!\n2 - Dodge Left\n3 - Dodge Right\n4 - Fall Back\n5 - Move Forward\n");
+					 scanf("%d",&op);
+					 switch (op)
+					 {
+						 case 1: //Attack
+							 //Sword Attack
+							 if(wepr == 10)
+							 {
+								 //If you are too far away
+								 if(kniD > 10)
+								 {
+									 puts("Too far away!");
+									 break;
+								 }
+								 //If you are about to kill the knight
+								 if(kni < 21)
+								 {
+									 puts("You quickly slice the knights leg causing him to fall down.\nWhile he is down you bury your flaming sword in his neck");
+									 kni -= *wepP;
+									 *wepP += 20;
+									 break;
+								 }
+								 //normally hitting the knight
+								 else
+								 {
+									 puts("You quickly attack the knight!");
+									 kni -= *wepP;
+									 dodge = 0;
+								 }
+							 }
+							 //Knife Attack
+							 else if(wepr == 5)
+							 {
+								 //If you are too close to the wizard
+								 if(kniD > wepr)
+								 {
+									 puts("Too far away!");
+									 break;
+								 }
+								 //Final strike
+								 if(kni < 6)
+								 {
+									 //Killing the knight with knife
+									 puts("In quick succession you slice the knight through his armor.");
+									 puts("Your blade taking dark energy with every stroke.");
+									 puts("He finally collapses from the attacks");
+									 kni -= *wepP;
+									 *wepP += 20;
+									 break;
+								 }
+								 else
+								 {
+									 puts("You stab with your knife!");
+									 dodge = 0;
+									 if(build == 3)
+									 {
+										 kni -= (*wepP * 8);
+										 build = 0;
+									 }
+									 else
+									 {
+											build++;
+											kni -= *wepP;
+											kniD = 5;
+										}
+									}
+							 }
+							 //bow attack
+							 else if(wepr == 30)
+							 {
+								 //If you are too close to the wizard
+								 if(kniD < wepr)
+								 {
+									 puts("Too close!");
+									 puts("The knight kicks you away!");
+									 health -= 5;
+									 kniD += 5;
+									 break;
+								 }
+								 //Killing the knight
+								 if(kni < 11)
+								 {
+									 puts("With rapid succession you are able to launch flaming arrows from your bow.");
+									 puts("Landing in the chest of the knight.");
+									 puts("Dark energy starts to envelop the floor as the knight falls");
+									 puts("Once the dark energy falls to the floor it quickly jumps onto you.");
+									 puts("surrounding you until it finally stops in your quiver.");
+									 puts("\nYour Arrows are now combined with dark energy!");
+									 kni -= *wepP;
+									 *wepP += 20;
+									 break;
+								 }
+								 //Normal attack
+								 else
+								 {
+									 puts("You quick lauch a swarm of arrows towards the knight");
+									 kni -= *wepP;
+									 dodge = 0;
+								 }
+							 }
+							 //staff attack
+							 else if(wepr == 50)
+							 {
+								 if(kniD < wepr)
+								 {
+									 puts("Too close!");
+									 puts("The Knight Kicks you away!");
+									 health -= 5;
+									 kniD += 5;
+									 break;
+								 }
+								 //Casting phase
+								 if(att == 1)
+								 {
+									 //Killing the knight
+									 if(kni < 51)
+									 {
+										 //kill dialog
+										 puts("You cast a wave of fire from your staff.");
+										 puts("The knight is soon entomed in fire.");
+										 puts("The knights armor drops to the floor, as there is no body inside.");
+										 kni -= *wepP;
+										 *wepP += 20;
+									 }
+									 //Hitting the knight
+									 else
+									 {
+										 att = 0;
+										 puts("You hurl a fireball from your staff!");
+										 kni -= *wepP;
+										 kniD -= 10;
+										 dodge = 0;
+									 }
+								 }
+								 //Charging phase
+								 else
+								 {
+										puts("You start speaking an ancient language and your staff starts to glow!");
+										att = 1;
+								 }
+							 }
+							 break;
+						 case 2:
+							 puts("You roll to the left!");
+							 dodge = 1;
+							 break;
+						 case 3:
+								puts("You roll to the right!");
+								dodge = 1;
+								break;
+						 case 4:
+							 puts("You fall back!");
+							 kniD += 10;
+							 break;
+							case 5:
+								puts("You move closer to the knight!");
+								kniD -= 5;
+								break;
+						 default:
+							if(dodge == 0)
+							{
+								puts("The knight barely scathes your clothes.");
+								kniA = 0;
+							}
+							else
+							{
+							 puts("The Knight Drops his sword on you!");
+							 health -= 40;
+							 kniA = 0;
+						 }
+					 } //End of switch statement
+
+					 if(kniA == 1)
+					 {
+						 if(dodge == 0)
+						 {
+							 puts("The Knight moves in and slashes you with his sword!");
+							 health -= 20;
+							 kniA = 0;
+						 }
+						 else if(dodge == 1)
+						 {
+							 puts("The knights attack missed!");
+							 dodge = 0;
+							 kniA = 0;
+						 }
+					 }
+					 else if(kniA == 0 && kni > 0)
+					 {
+						 puts("The Knight gets into position to attack!");
+						 kniA = 1;
+					 }
+
+					 if(kni <= 0)
+					 {
+						 puts("You see the knights Sword standing from the ground");
+					 }
+
+			 }
+
+			 return 0;
+}
+
+int dem(int health,int* wepP,int wepr) //blood
+{
+
+				int att = 0; //Used for wizard class charged attack
+				int op;
+				int build = 0;
+				int dodge = 0; //determines if the demons attack is going to hit
+				//Demon stats
+				int dem = 250;
+				int demR = 20;
+				int demD = 40;
+				int demA = 0; //determines the knights attack and charge phase
+
+					//Intro to demon
+					puts("You walk though the black door. Surrounding you is a lake of fire");
+					puts("From the fire a monsterus demon emerges. He is double your height appoximatly.");
+					puts("With a fit of rage he thrusts his hand out as a teather of blood runs from his hand and is launched in your direction");
+					while(dem > 0)
+					{
+						 if(health <= 0)
+						 {
+							 //When you die to the Demon
+							 puts("The Demon picks you up and swallows you whole!");
+							 return 2;
+						 }
+
+							printf("Your Health: %d\n",health);
+							printf("Your Range: %d\n",wepr);
+							printf("Demon Health: %d\n",dem);
+							printf("Demon Distance: %d\n",demD);
+							puts("1 - Attack!\n2 - Dodge Left\n3 - Dodge Right\n4 - Fall Back\n5 - Move Forward\n");
+							scanf("%d",&op);
+							switch (op)
+							{
+								case 1: //Attack
+									//Sword Attack
+									if(wepr == 10)
+									{
+										//If you are too far away
+										if(demD > 10)
+										{
+											puts("Too far away!");
+											break;
+										}
+										//If you are about to kill the knight
+										if(dem < 21)
+										{
+											puts("You make 1 final thrust at the Demon.\nYour swords fire and darkness envelop the Demon and his chest burts open!");
+											dem -= *wepP;
+											*wepP += 20;
+											break;
+										}
+										//normally hitting the knight
+										else
+										{
+											puts("You quickly attack the demon!");
+											dem -= *wepP;
+											dodge = 0;
+										}
+									}
+									//Knife Attack
+									else if(wepr == 5)
+									{
+										//If you are too close to the wizard
+										if(demD > wepr)
+										{
+											puts("Too far away!");
+											break;
+										}
+										//Final strike
+										if(dem < 6)
+										{
+											//Killing the demon with knife
+											puts("You dodge the demons attack and finally jump onto his back!");
+											puts("As the demon yells out in anger you make one last slash through the back of his neck.");
+											puts("The demon falls to the floor!");
+											dem -= *wepP;
+											*wepP += 20;
+											break;
+										}
+										else
+										{
+											puts("You stab with your knife!");
+											dodge = 0;
+											if(build == 3)
+											{
+												dem -= (*wepP * 8);
+												build = 0;
+											}
+											else
+											{
+												 build++;
+												 dem -= *wepP;
+												 demD = 5;
+											 }
+										 }
+									}
+									//bow attack
+									else if(wepr == 30)
+									{
+										//If you are too close to the demon
+										if(demD < wepr)
+										{
+											puts("Too close!");
+											puts("The Demon picks you up and throws you across the room!");
+											health -= 15;
+											demD += 5;
+											break;
+										}
+										//Killing the demon
+										if(dem < 11)
+										{
+											puts("You sweep around the demon and cut flaming arrows in his back.");
+											puts("From your arrows the darkness surrounds the demon holding him down.");
+											puts("You bury as meny arrows into it as fast as possible.The demon falls to the floor.");
+											dem -= *wepP;
+											*wepP += 20;
+											break;
+										}
+										//Normal attack
+										else
+										{
+											puts("You quick lauch a swarm of arrows towards the Demon");
+											dem -= *wepP;
+											dodge = 0;
+										}
+									}
+									//staff attack
+									else if(wepr == 50)
+									{
+										if(demD < wepr)
+										{
+											puts("Too close!");
+											puts("The Demon picks you up and throws you across the room!");
+											health -= 15;
+											demD += 15;
+											break;
+										}
+										//Casting phase
+										if(att == 1)
+										{
+											//Killing the demon
+											if(dem < 51)
+											{
+												//kill dialog
+												puts("You cast a black fireball from your staff");
+												puts("You launch the fireball from your and it consumes the demon");
+												puts("The demon falls to the floor at your feet. Darkness bleeding from the demon.");
+												dem -= *wepP;
+												*wepP += 20;
+											}
+											//Hitting the demon
+											else
+											{
+												att = 0;
+												puts("You hurl a fireball from your staff!");
+												dem -= *wepP;
+												demD -= 10;
+												dodge = 0;
+											}
+										}
+										//Charging phase
+										else
+										{
+											 puts("You start speaking an ancient language and your staff starts to glow!");
+											 att = 1;
+										}
+									}
+									break;
+								case 2:
+									puts("You roll to the left!");
+									dodge = 1;
+									break;
+								case 3:
+									 puts("You roll to the right!");
+									 dodge = 1;
+									 break;
+								case 4:
+									puts("You fall back!");
+									demD += 10;
+									break;
+								 case 5:
+									 puts("You move closer!");
+									 demD -= 5;
+									 break;
+								default:
+								 if(dodge == 0)
+								 {
+									 puts("The Demon Slams his fists into the ground narrowly missing you");
+									 demA = 0;
+								 }
+								 else
+								 {
+									puts("The Demon Slams his fists down crushing you!");
+									health -= 40;
+									demA = 0;
+								}
+							} //End of switch statement
+
+							if(demA == 1)
+							{
+								if(dodge == 0)
+								{
+									puts("The Demon swipes his hand at you and throws you across the room");
+									health -= 20;
+									demA = 0;
+								}
+								else if(dodge == 1)
+								{
+									puts("The demons attack missed!");
+									dodge = 0;
+									demA = 0;
+								}
+							}
+							else if(demA == 0 && dem > 0)
+							{
+								puts("The Demon gets ready to attack!");
+								demA = 1;
+							}
+
+							if(dem <= 0)
+							{
+								puts("The demons eyes glow a deep red");
+							}
+
+					}
+
+					return 0;
+
+}
+
+int ang(int health,int* wepP,int wepr) // lightning
+{
+
+					 int att = 0; //Used for angel class charged attack
+					 int op;
+					 int build = 0;
+					 int dodge = 0; //determines if the angel attack is going to hit
+					 //Angel stats
+					 int ang = 300;
+					 int angR = 20;
+					 int angD = 40;
+					 int angA = 0; //determines the angel attack and charge phase
+
+						 //Intro to angel
+						 puts("Then the blackness of the shrine is explodes into light.");
+						 puts("An armored angel shoots down from the ceiling and lands infront of you");
+						 puts("He holds his sword of light and prepares to attack you");
+						 while(ang > 0)
+						 {
+								if(health <= 0)
+								{
+									//When you die to the Angel
+									puts("The Angel hits you with his sword and you explode in a ball of light!");
+									return 2;
+								}
+
+								 printf("Your Health: %d\n",health);
+								 printf("Your Range: %d\n",wepr);
+								 printf("Angel Health: %d\n",ang);
+								 printf("Angel Distance: %d\n",angD);
+								 puts("1 - Attack!\n2 - Dodge Left\n3 - Dodge Right\n4 - Fall Back\n5 - Move Forward\n");
+								 scanf("%d",&op);
+								 switch (op)
+								 {
+									 case 1: //Attack
+										 //Sword Attack
+										 if(wepr == 10)
+										 {
+											 //If you are too far away
+											 if(angD > 10)
+											 {
+												 puts("Too far away!");
+												 break;
+											 }
+											 //If you are about to kill the knight
+											 if(ang < 21)
+											 {
+												 puts("You swing your sword striking the angel.");
+												 puts("Their body burst opens the in a ball of light.");
+												 puts("The shrine then swings back to normal.");
+												 puts("The Bonfire is then put out.");
+												 ang -= *wepP;
+												 break;
+											 }
+											 //normally hitting the knight
+											 else
+											 {
+												 puts("You quickly attack the angel!");
+												 ang -= *wepP;
+												 dodge = 0;
+											 }
+										 }
+										 //Knife Attack
+										 else if(wepr == 5)
+										 {
+											 //If you are too close to the wizard
+											 if(angD > wepr)
+											 {
+												 puts("Too far away!");
+												 break;
+											 }
+											 //Final strike
+											 if(ang < 6)
+											 {
+												 //Killing the demon with knife
+												 puts("You throw your knife at the angel piercing his chest.");
+												 puts("His chest explodes full of light!");
+												 break;
+											 }
+											 else
+											 {
+												 puts("You stab with your knife!");
+												 dodge = 0;
+												 if(build == 3)
+												 {
+													 ang -= (*wepP * 8);
+													 build = 0;
+												 }
+												 else
+												 {
+														build++;
+														ang -= *wepP;
+														angD = 5;
+													}
+												}
+										 }
+										 //bow attack
+										 else if(wepr == 30)
+										 {
+											 //If you are too close to the angel
+											 if(angD < wepr)
+											 {
+												 puts("Too close!");
+												 puts("The angel lifts you and throws you down");
+												 health -= 15;
+												 angD += 5;
+												 break;
+											 }
+											 //Killing the angel
+											 if(ang < 11)
+											 {
+												 puts("You relase your last arrow and it pierces the angels armor.");
+												 puts("Light bleeds from your arrow as the angel falls to the floor");
+												 ang -= *wepP;
+												 *wepP += 20;
+												 break;
+											 }
+											 //Normal attack
+											 else
+											 {
+												 puts("You quick lauch a swarm of arrows towards the Angel");
+												 ang -= *wepP;
+												 dodge = 0;
+											 }
+										 }
+										 //staff attack
+										 else if(wepr == 50)
+										 {
+											 if(angD < wepr)
+											 {
+												 puts("Too close!");
+												 puts("The angel lifts you and throws you down");
+												 health -= 15;
+												 angD += 15;
+												 break;
+											 }
+											 //Casting phase
+											 if(att == 1)
+											 {
+												 //Killing the demon
+												 if(ang < 51)
+												 {
+													 //kill dialog
+													 puts("You call upon stream of fire.");
+													 puts("It flows from your staff and fires threw the angel!");
+													 puts("The angel falls to the ground");
+													 ang -= *wepP;
+												 }
+												 //Hitting the angel
+												 else
+												 {
+													 att = 0;
+													 puts("You hurl a fireball from your staff!");
+													 ang -= *wepP;
+													 angD -= 10;
+													 dodge = 0;
+												 }
+											 }
+											 //Charging phase
+											 else
+											 {
+													puts("You start speaking an ancient language and your staff starts to glow!");
+													att = 1;
+											 }
+										 }
+										 break;
+									 case 2:
+										 puts("You roll to the left!");
+										 dodge = 1;
+										 break;
+									 case 3:
+											puts("You roll to the right!");
+											dodge = 1;
+											break;
+									 case 4:
+										 puts("You fall back!");
+										 angD += 10;
+										 break;
+										case 5:
+											puts("You move closer!");
+											angD -= 5;
+											break;
+									 default:
+										if(dodge == 0)
+										{
+											//Miss
+											puts("");
+											angA = 0;
+										}
+										else
+										{
+											//Hit
+										 puts("");
+										 health -= 40;
+										 angA = 0;
+									 }
+								 } //End of switch statement
+
+								 if(angA == 1)
+								 {
+									 if(dodge == 0)
+									 {
+										 puts("The angel catches you with its sword");
+										 health -= 20;
+										 angA = 0;
+									 }
+									 else if(dodge == 1)
+									 {
+										 puts("The angel strikes at you barely missing you");
+										 dodge = 0;
+										 angA = 0;
+									 }
+								 }
+								 else if(angA == 0 && ang > 0)
+								 {
+									 puts("The Angel gets ready to attack!");
+									 angA = 1;
+								 }
+
+								 if(ang <= 0)
+								 {
+									 puts("The angel slowly fades....");
+								 }
+
+						 }
+
+		return 0;
+}
+
+void dead(void)
+{
+ puts("YOU DIED");
 }
