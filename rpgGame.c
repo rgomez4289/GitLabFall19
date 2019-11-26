@@ -22,6 +22,9 @@
 #include <stdio.h>
 #include<math.h>
 
+void randomFillGob(int *ptr);
+void printerGoblin(int *ptr);
+void sorterGoblin(int *ptr);
 int goblin(int choice);
 
 int blackPotionEffect();
@@ -739,35 +742,165 @@ break;
 			{
 					while(choice != 99)
 					{
+						FILE *wptr;
+						FILE *writer;
+						
+						int a[5]={1223,1323,1219,1292,1238};
+						int b[5]={2321,2101,2290,2303,2239};
 
-							puts("you open the door and find a unicorn eating gold bars");
-							printf("Save the gold bars? Enter 1 for yes. 2 for no.");
-							scanf("%d",&choice);
+						char day[5];
+						int dayNumber;
+						int dayNum[5];
+						char textG[1000];
+						int counter=0;
+						int i;
+					
 
+						int arry[5]={0};
+						int *ptr = arry;
 
+						int SIZE=20;
+						char gobarray[SIZE];
+
+						puts("\n\nYou open the door and find a unicorn eating gold bars. And is protected by a goblin");
+						printf("Save the gold bars? Enter 1 for yes. 2 for no.");
+						scanf("%d",&choice);
+							
+							
 							if(choice==1)
 							{
-								puts("As you try to pick up the gold bar a goblin comes out and attacks you");
-								puts("You pull out your sword.");
+								puts("As you try to pick up the gold bar a goblin comes out and tries to attack you");
+								
+								
 								printf("Try to attack or run away? Enter 1 to fight. 2 to run ");
+								
 								scanf("%d",&choice);
-								goblin(choice);
-							//	printf("%d\n",choice);
-								choice=99;
+								if(choice==1)
+								{
+																	
+									choice=goblin(choice);
+	
+									printf("You are left with %d health after that short battle.\n",choice);
+									puts("You pick up the gold bar and as you hold it in your hand it begins to shine");
+									puts("You get teleported to another room, all there is a bed, desk, and a door behind you");
+									puts("You decide to walk to the desk and notice a book, a quill and ink.");
+									puts("You first decide to open and write into the book.");
 
+									writer = fopen("goblinJ.txt","w");
+									fprintf(writer,"Day 5 I just slayed a goblin and think I may be in his room after being teleported. I have a strange feeling about today\n");
+									if(writer==NULL)
+									{
+										puts("Error reading file. file may not exist.");
+									}	
+									wptr = fopen("goblinJ.txt","r");
+
+							
+									while(!feof(wptr))
+									{
+										fscanf(wptr,"%s",textG);
+										if(feof(wptr))break;
+										dayNum[counter]=dayNumber;
+										counter++;
+										
+									}
+									for(i=0; i<counter;i++)
+									{
+										printf("%s",textG);
+									}
+									fclose(wptr);
+									fclose(writer);
+									
+									
+									puts("You realize that maybe this journal belongs to the goblin you just slayed.");	
+									puts("You continue to explore the room and open drawers at the desk, and find mail");
+									puts("As you begin to open the mail it sucks you in and leaves no trace of you ever being there...");
+									puts("YOU DIED..");
+									puts("Open goblinJ.txt to check what your character wrote.");
+
+
+
+
+
+								
+								choice=99;
+								
+								}
+								else
+								{
+									printf("You didn't take out your sword and the goblin attacks. You Died.\n");
+									choice=99;
+
+								}
+						
 							}
 							else
 							{
-								printf("You decided not to pick up the gold. You leave and the goblin goes back into hiding\n");
-								printf("You decide to walk past the unicorn and come to a pathway labled 'Pathway A' and 'Pathway B'\n");
+								printf("\n\nYou decided not to pick up the gold. You leave and the goblin goes back into hiding\n");
+								
+								printf("You decide to walk past the unicorn and come to a pathway labled 'Pathway A'\n");
+								puts("\nAs you walk closer to the pathway, a door appears");
+								puts("\nOn the face of the door it says: 'Arrange these number in numerical order to enter!'\n");
 
-								//goblin(choice);
-								choice=99;
+
+								randomFillGob(ptr);
+								printerGoblin(ptr);
+
+								puts("\nAfter some time of sorting numbers...");
+								sorterGoblin(ptr);
+								puts("...");
+								puts("...");
+								puts("...");
+								printerGoblin(ptr);
+								puts("\nThe door speaks: 'Good job now enter the puzzle room'");
+								puts("In the middle of the room there is a crystal ball. You walk up to the crystal ball..");
+								printf("\nThe crystal ball speaks..'Hello there %s'\n",name);
+
+								printf("\n%s please swap these to get a wish granted.\n",name);
+
+								printf("\nIn front of you are two books full of dates in them\n");
+
+							
+								for(i=0; i<5; i++)
+								{
+									printf("First book: %d\n",a[i]);
+									printf("Second book: %d\n",b[i]);
+
+
+								}
+								printf("\nOnce again after some swapping...\n");
+							
+								puts("...");
+								puts("...");
+								puts("...");
+
+								for(i=0;i<5;i++)
+								{
+									int swp = a[i];
+									a[i]=b[i];
+									b[i]= swp;
+								}
+								for(i=0; i<5; i++)
+								{
+									printf("First book: %d\n",a[i]);
+									printf("Second book: %d\n",b[i]);
+
+
+								}
+
+								printf("\nFinally done..You show the Crystal Ball the two books.\n");
+								printf("\nShe grants you one wish..and you wish for this all to be over.\n");
+								printf("\nA bright Flash that blinds you appears and..\n\n");
+								break;
+								
+
+
+								
+								//choice=99;
 							}
 					}
 					break;
 			}
-			case 11:
+		case 11:
 			{
 					while(choice != 99)
 					{
@@ -1502,19 +1635,179 @@ break;
 	}
     }
 
+
+void printerGoblin(int *ptr)
+{
+	int i;
+	for(i=0;i<10;i++)
+	{
+		printf("Numbers are : %d\n",*(ptr+i));
+	}
+}
+void randomFillGob(int *ptr)
+{
+	int i;
+	srand(time(0));
+	for(i=0;i<10;i++)
+	{
+
+		*(ptr+i)=55+(rand() % (205-55));
+
+	}
+
+}
+void sorterGoblin(int *ptr)
+{
+	int i,j,tmp;
+	for(i=0;i<10;i++)
+	{
+		for(j=0;j<10;j++)
+		{
+			if(*(ptr+i)<*(ptr+j))
+			{
+				tmp=*(ptr+i);
+				*(ptr+i)=*(ptr+j);
+				*(ptr+j)=tmp;
+			}
+		}
+	}
+}
+
 int goblin(int choice)
 {
+	int y;
+	int health=100;
+	int ghealth=50;
+	srand(time(NULL));
+	int damage = 0;
+	int gdamage =0;
 	if(choice==1)
 	{
-		printf("'So you have chosen to fight me'\n");
+		printf("\n'So you have chosen to fight me'\n");
+		printf("The goblin has 50 Health\n");
+		printf("\nChoose your Weapon: \n");
+		printf("1. Dagger: 'Fast but close combat.' (+10 Attack, +10 in speed)\n");
+		printf("2. Longsword: 'Slow but hits hard.' (+30 Attack, -10 in speed)\n");
+		printf("3. Broadsword and shield: 'Average sword but comes with shield that will slow you down.'(+20 Attack, -20 Speed, +20 Defense)\n");
+		printf("4. Two Handed Sword: 'Very Very Slow but hard hitting.'(+50 Attack, -50 Speed) \n");
+		printf("5. Bow and Arrows: 'Works well with enemies that are far away'(+15 Ranged, +10 attack)\n");
+		printf("Choose wisely...\n");	
+		scanf("%d",&y);
+		switch(y)
+		{
+			case 1:
 
-	}
-	else
-	{
-		printf("Oh no, the goblin has stabbed you!\n");
+				printf("You chose the dagger\n");
+				while(ghealth>0)
+				{
+					gdamage = 1+(rand()%10);
+					printf("You hit the Goblin and deal %d damage\n",gdamage);
+					ghealth = ghealth - gdamage;
+					printf("The goblin is left with %d health\n",ghealth);
+					damage = 1+(rand()%10);
+					printf("The goblin hits you back and deal %d damage\n",damage);
+					health = health - damage;
+									
+					if(ghealth<0)
+					{
+						printf("The goblin is dead\n");
+						
+					}
 
+				}
+				break;
+			case 2:
+				printf("You chose the Longsword\n");
+				while(ghealth>0)
+				{
+					gdamage = 1+(rand()%30);
+					printf("You hit the Goblin and deal %d damage\n",gdamage);
+					ghealth = ghealth - gdamage;
+					printf("The goblin is left with %d health\n",ghealth);
+					damage = 1+(rand()%10);
+					printf("The goblin hits you back and deal %d damage\n",damage);
+					health = health - damage;
+				
+					
+					if(ghealth<0)
+					{
+						printf("The goblin is dead\n");
+						
+					}
+
+				}
+				break;
+
+
+			case 3:
+				printf("You chose the Broadsword and shield\n");
+				while(ghealth>0)
+				{
+					gdamage = 1+(rand()%20);
+					printf("You hit the Goblin and deal %d damage\n",gdamage);
+					ghealth = ghealth - gdamage;
+					printf("The goblin is left with %d health\n",ghealth);
+					damage = 1+(rand()%10);
+					printf("The goblin hits you back and deal %d damage\n",damage);
+					health = health - damage;
+									
+					if(ghealth<0)
+					{
+						printf("The goblin is dead\n");
+						
+					}
+
+				}
+				break;
+
+				
+			case 4:
+				printf("You chose the Two Handed Sword\n");
+				while(ghealth>0)
+				{
+					gdamage = 1+(rand()%50);
+					printf("You hit the Goblin and deal %d damage\n",gdamage);
+					ghealth = ghealth - gdamage;
+					printf("The goblin is left with %d health\n",ghealth);
+					damage = 1+(rand()%10);
+					printf("The goblin hits you back and deal %d damage\n",damage);
+					health = health - damage;
+									
+					if(ghealth<0)
+					{
+						printf("The goblin is dead\n");
+						
+					}
+
+				}
+				break;
+
+				
+			case 5:
+				printf("You chose Bow and Arrows\n");
+				while(ghealth>0)
+				{
+					gdamage = 1+(rand()%15);
+					printf("You hit the Goblin and deal %d damage\n",gdamage);
+					ghealth = ghealth - gdamage;
+					printf("The goblin is left with %d health\n",ghealth);
+					damage = 1+(rand()%10);
+					printf("The goblin hits you back and deal %d damage\n",damage);
+					health = health - damage;
+									
+					if(ghealth<0)
+					{
+						printf("The goblin is dead\n");
+						
+					}
+
+				}
+				break;
+
+					
+		}
 	}
-	return choice;
+	return health;
 }
 
 
