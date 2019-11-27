@@ -13,7 +13,11 @@
 // Mir Hassan Talpur #17
 // Amado Rodriguez III #21
 // Ivan Khaffaji Room #15
+
 //Mary Shrestha Room#19
+
+// Steve Yoon Room #14
+
 
 
 #include <stdlib.h>
@@ -22,8 +26,17 @@
 #include <time.h>
 #include <stdio.h>
 #include<math.h>
+
 #define MAXGUESSES 5
 #define WORDSIZE 25
+
+
+void castaway(void); //room 14
+void wordScramble(int *gameScore); //room 14
+void fightSystem(int *hp, int *machetePower); //room14
+
+
+
 void randomFillGob(int *ptr);
 void printerGoblin(int *ptr);
 void sorterGoblin(int *ptr);
@@ -1095,63 +1108,126 @@ break;
 			}
 			case 14:
 			{
-				int i, x, y, z;
+					int x, y, userSelect, hp = 100, machetePower = 0;
+					int gameScore;
+					
+					FILE *writer;
+					srand(time(NULL));
+					int choice;
+
 					while(choice != 99)
 					{
-						puts("you open the door and find 3 boxes, select 1, 2, or 3\n");
-						scanf("%d", &choice);
-						if(choice == 1)
+						printf("%s!!, You've been abandoned on an island and must find your way to the extraction point to get home. Lets go!\n", name);
+						puts("You're starting off with 100 hp and must navigate your way through obstacles and make the correct choices along the way.");
+						Menu:
+						
+						puts("You have 3 options... where would you like to go?(Extraction point is through the river but to get a perfect score, you must go to the mountain first)");
+						puts("1. Beach\n2. Mountain\n3. River");
+						scanf(" %d", &userSelect);
+						writer = fopen("room14.txt", "w");
+						if (userSelect == 1) //Beach
 						{
-							srand(time(NULL));
-							puts("You have chosen box 1, inside you find 2 six sided dice.");
-							puts("If you roll a 7, you lose. Lets roll...");
-							x = 1 + (rand()%6);
-							y = 1 + (rand()%6);
-							z = x + y;
-							printf("Die 1: %d\n", x);
-							printf("Die 2: %d\n", y);
-							printf("You rolled a %d\n", z);
-							if(z > 7)
+							if(machetePower > 0)
 							{
-								puts("You lose, goodbye!\n");
+								goto BeachMenu;
 								break;
-
 							}
-							else
-							{
-								puts("Live to roll again.\n");
-
-
-							}
-						}
-						if(choice == 2)
-						{
-							puts("You have chosen box 2, inside you find a basketball and a hoop.\n");
-							puts("Lets shoot!\n");
-							srand(time(NULL));
+							puts("This isn't the way to the extraction point but there is a backpack here.\n");
+							puts("Inside you find a machete and a hundred sided die.\n");
+							puts("The power of the machete is not set and you will roll the magic die to set it's power.\n");
 							x = 1 + (rand()%100);
-							if(x > 40)
+							printf("You roll and get a... %d\n", x);
+							machetePower = x;
+							printf("Machete Power: %d\n", x);
+
+							BeachMenu:
+							puts("There is nothing else on the beach.");
+							puts("Pick a number\n1. Go back\n2. Chill");
+							scanf(" %d", &userSelect);
+							if(userSelect == 1)
 							{
-								printf("Shot percentage: %d\n", x);
-								printf("You made the shot, nice\n");
+								goto Menu;
+							}
+							else if(userSelect == 2)
+							{
+								puts("You kick your feet up, this is your life now. Welcome to CASTAWAY!!!\n");
+								castaway();
+							}
+						}
+						else if(userSelect == 2)
+						{
+				            if(hp < 100)
+				            {
+				                puts("You've done all you can here, back you go\n");
+				                goto Menu;
+				            }
+							puts("You head towards the mountains with your machete");
+							puts("You encounter a momma bear who loves math and can talk.");
+							puts("I eat 2 wild boars every week. If I've eaten 32 boars, how many weeks has gone by?: ");
+							scanf(" %d", &x);
+							if(x!= 16)
+							{
+								puts("I don't think so, we fight now!\n");
+								fightSystem(&hp, &machetePower);
+								if(hp > 0)
+								{
+									puts("You've defeated the bear!\n");
+									gameScore += 25;
+				                    puts("1. Extraction point\n2. Back where you came from?");
+				                    scanf(" %d", &userSelect);
+				                    if(userSelect == 1)
+				                    {
+				                        goto End;
+				                    }
+				                    else if(userSelect == 2)
+				                    {
+				                        goto Menu;
+				                    }
+				                    break;
+								}
+								else
+								{
+									puts("You lose");
+									choice = 99;
+									break;
+								}
 							}
 							else
 							{
-								printf("Shot percentage: %d\n", x);
-								puts("Miss\n");
-								break;
+								gameScore += 10;
+								puts("Amazing, back you go");
+								goto Menu;
 							}
+							break;
 
 
 						}
-						if(choice == 3)
+
+						else if(userSelect == 3)
 						{
 
+							puts("You decide to go towards the river and discover a troll.");
+							puts("You must unscramble 5 words in order to cross.");
+							puts("1. Lets Play\n2. I'm good");
+							scanf(" %d", &x);
+								
+							if(x == 1)
+							{
+								wordScramble(&gameScore);
+							}
+							else
+							{
+								goto Menu;
+							}
+							break;
 						}
-
-
-
 					}
+
+				    End:
+					fprintf(writer, "User HP: %d\n", hp);
+					fprintf(writer, "GameScore: %d\n", gameScore);
+					puts("Check file room14.txt for your score");
+					fclose(writer);
 					break;
 			}
 			case 15:
@@ -3433,6 +3509,7 @@ void dead(void)
  puts("YOU DIED");
 }
 
+
 void GameRules()
 {
                  printf("You enter a room and you found a huge screens which surround the four walls of the room. The room was dark and cold. Suddenly, you start to hear noises. You looked at the screen and you saw bunch of crows coming out of the screen. You tried to open the door but it's locked and there's no way out. \n\n");
@@ -3528,5 +3605,149 @@ void PlayOneGame(char solution[],char secretword[])
         scanf("%s",guess);
         LowerCaseWord(guess);
         DidYouWin(solution,guess);
+}
+
+
+void wordScramble(int *gameScore)
+{
+	FILE *reader;
+	FILE *writer;
+	char scrambled[10], unscrambled[10], guess[10];
+
+	if((reader = fopen("room14input.txt", "r")) == NULL)
+	{
+		puts("File not found");
+	}
+	else
+	{
+		fscanf(reader, "%s%s", scrambled, unscrambled);
+		while(!feof(reader))
+		{
+			printf("1st Word: %s\n", scrambled);
+			printf("Your guess?: ");
+			scanf(" %s", guess);
+			
+			if(strcmp(guess, unscrambled) == 0)
+			{
+				puts("Correct!");
+				*gameScore += 25;
+				fscanf(reader, "%s%s", scrambled, unscrambled);
+				printf("2nd Word: %s\n", scrambled);
+				printf("Your guess?: ");
+				scanf(" %s", guess);
+
+				if(strcmp(guess, unscrambled) == 0)
+				{
+					printf("Correct!\n");
+					*gameScore += 25;
+					fscanf(reader, "%s%s", scrambled, unscrambled);
+					printf("3rd Word: %s\n", scrambled);
+					printf("Your guess?: ");
+					scanf(" %s", guess);
+					if(strcmp(guess, unscrambled) == 0)
+					{
+						*gameScore += 25;
+						puts("you win and you see the extraction point ahead!");
+						break;						
+					}
+				}
+				else
+				{
+					puts("You lose, back to the island you go");
+				}
+			}
+			else
+			{
+				puts("You lose, back to the island you go");
+			}
+			break;
+		}
+	}
+	fclose(reader);
+}
+
+
+void fightSystem(int *hp, int *machetePower)
+{
+	int bearHP = 100;
+	int bearPower = 80;
+	int choice;
+	printf("bearHP: %d\nbearPower: %d\nmachetePower: %d\n", bearHP, bearPower, *machetePower);
+
+	Menu:
+	puts("Choose from the following options.\n");
+	puts("1. Attack\n2. Run Away");
+	scanf("%d", &choice);
+
+	switch(choice)
+	{
+		case 1:
+			printf("Machete Power: %d\n", *machetePower);
+			puts("You've chosen to attack.");
+			bearHP -= *machetePower;
+			printf("Bear HP: %d\n", bearHP);
+			printf("User HP: %d\n", *hp);
+
+			if(bearHP <= 0)
+			{
+				puts("You actually killed the bear\n");
+				break;
+			}
+
+			if(*hp > 0)
+			{
+				puts("The bear attacks back!\n");
+				*hp -= bearPower;
+				if(*hp > 0)
+				{
+					puts("You survived the attack");
+					printf("Your HP: %d\n", *hp);
+					printf("Bear HP: %d\n", bearHP);
+					goto Menu;
+				}
+				else
+				{
+					puts("Bear wins");
+					break;
+				}
+				break;
+			}
+
+		case 2:
+			puts("Ruuuuuuuuun!");
+			break;
+
+		default:
+			break;
+	}
+
+}
+
+void castaway(void)
+{
+    char phrase1[20], phrase2[20], phrase3[20];
+    int i, x;
+    double a, b, correct, guess;
+    puts("This is your life now, we got nothing but time...");
+    puts("You have 3 chances to get this right! if you don't....nothing really happens");
+    for(i = 0; i < 3; i++)
+    {
+        puts("Enter 2 numbers: ");
+        scanf(" %lf %lf", &a, &b);
+        printf("a = %.2lf\nb = %.2lf\n", a, b);
+        puts("Square the sum of those two numbers, add 3, then square that number, what do you get?");
+        correct = pow((pow(a,b)+3),2);
+        puts("Your guess?: ");
+        scanf(" %lf", &guess);
+        if(correct == guess)
+        {
+            puts("correct!");
+        }
+        else
+        {
+            puts("WRONG");
+            break;
+        }
+    }
 }
 
