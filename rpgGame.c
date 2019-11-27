@@ -2239,7 +2239,7 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
 	{
 		printf("\nThe dwarf died!\n");
 		printf("Game Over\n\n");
-
+		win = 2;
 	}
 
         else if(*(ptr+2) <= 0)
