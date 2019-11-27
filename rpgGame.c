@@ -13,6 +13,7 @@
 // Mir Hassan Talpur #17
 // Amado Rodriguez III #21
 // Ivan Khaffaji Room #15
+//Andres Llarena room #1
 
 
 #include <stdlib.h>
@@ -21,6 +22,11 @@
 #include <time.h>
 #include <stdio.h>
 #include<math.h>
+
+//riddle.txt needed to read/write file
+int combo(void);
+int countDown(void);
+int displayRiddle(void);
 
 void randomFillGob(int *ptr);
 void printerGoblin(int *ptr);
@@ -81,14 +87,137 @@ void main(void)
 		{
 			case 1:
 			{
+				char answer;
+				int num, com;
+				int result = 1;
+				char riddle1[30], riddle2[30], riddle3[30];
+				char riddleOne[] = "What is a DOUGHNUT?";
+				char riddleTwo[] = "What is NOTHING?";
+				char riddleThree[] = "What is a WATERMELON?";
+				puts("You open the door then, close it behind you.");
+				puts("You start freaking out because the water is starting to rise.");
+				puts("You notice that there is a table with 3 boxes and an envelope.");
+				puts("One box has the key to freedom it in.\n");
+				puts("Open the envelope, read the question and select the right answer from the choices given.\n");
+
 				while(choice != 99)
 				{
+					puts("You have 10 seconds to read the question.");
+					puts("Wait for the prompt to enter your answer.\n");
+					puts("1. Which of the following is the correct format to compile a c program?\n");
+					puts("A. gcc o rpgGame rpgGame.c\n");
+					puts("B. gcc -o rpgGame.c rpgGame.c\n");
+					puts("C. gcc -o rpgGame rpgGame.c\n");
+					countDown();
+					printf("\nEnter a letter (A, B, or C) corresponding to your answer or enter Q to Quit): ");
 
+					scanf("%s", &answer);
+
+					if(answer == 'A' || answer == 'a')
+					{
+						com = combo();
+						printf("You need this number combination to open Box A : %d", com);
+						printf("\nYou have 10 seconds to memorize the given combination.");
+						puts(" Enter the combination after the prompt.");
+						countDown();
+						printf("\nEnter the given combination to unlock the box now: ");
+						scanf("%d", &num);
+						while (num != com)
+					{
+						puts("Enter the correct combination before Cookie Monster grabs you! \n");
+
+						scanf("%d", &num);
 				}
-				break;
+					puts("You entered the correct combination and the box is unlocked.\n");
+					puts("Open the box, put your hands inside, and grab what is inside.");
+					puts("Ouch! You just got bitten by a snake. Try again before the poison takes effect.\n");
+					}
+					else if(answer == 'B' || answer == 'b')
+					{
+						com = combo();
+						printf("You need this number combination to open Box B : %d", com);
+						printf("\nYou have 10 seconds to memorize the given combination.");
+						puts(" Enter the combination after the prompt.");
+						countDown();
+						printf("\nEnter the given combination to unlock the box now: ");
+						scanf("%d", &num);
+				while (num !=com)
+				{
+						puts("Enter the correct combination before King Kong crushess you!\n");
+
+						scanf("%d", &num);
+				}
+				puts("You entered the correct combination and the box is unlocked.\n");
+				puts("Put your hand in box 2 and grab what is inside.");
+				puts("Oh no! Your hand caught in a funnel-web spider's nest. Make another choice before you become paralyzed.\n");
+
+					}
+					else if(answer == 'C' || answer == 'c')
+					{
+						displayRiddle();
+						puts("\nRemember to enter your answer in the form of question (e.g.What is a COCONUT?)");
+
+					do
+					{
+						printf("\nEnter your question for Riddle #1: ");
+						fgets(riddle1, sizeof(riddleOne), stdin);
+						result = strcmp(riddleOne, riddle1);
+				
+					} while (result !=0);
+				
+						printf("Your question is: %s\n", riddle1);
+						printf("The correct question is: %s\n", riddleOne);
+						printf("Sweet heavens! You are a brilliant person, %s\n", name);
+					do
+
+					{
+						printf("\nEnter your question for Riddle #2: ");
+						fgets(riddle2, sizeof(riddleTwo), stdin);
+						result = strcmp(riddleTwo, riddle2);
+		
+					} while (result !=0);
+
+						printf("Your question is: %s\n", riddle2);
+						printf("The correct question is: %s\n", riddleTwo);
+						printf("That is divine! You are a mental giant, %s\n", name);
+					do
+					{
+						printf("\nEnter your question for Riddle #3: ");
+						fgets(riddle3, sizeof(riddleThree), stdin);
+						result = strcmp(riddleThree, riddle3);
+
+					} while (result !=0);
+						printf("Your question is: %s\n", riddle3);
+						printf("The correct question is: %s\n", riddleThree);
+						printf("Brainiac! You got a real Einstein brain, wizard, %s\n", name);
+						com = combo();
+						printf("You need this number combination to open Box C : %d", com);
+						printf("\nYou have 10 seconds to memorize the given combination.");
+						puts(" Enter the combination after the prompt.");
+						countDown();
+						printf("\nEnter the given combination to unlock the box now: ");
+						scanf("%d", &num);
+
+					while (num !=com)
+					{
+						puts("Enter the correct combination before Godzilla swallows you!\n");
+
+						scanf("%d", &num);
+					}
+						puts("\nPut your hand in box 3 and grab what is inside");
+						puts("You have chosen wisely! Take the key and escape to freedom.");
+						puts("Choose another room on your way out.\n");
+					break;
+				}
+				else
+				{
+					return 1;
+				}
 			}
-			case 2:
-			{
+			break;
+		}			
+		case 2:
+		{
 
 					while(choice != 99)
 					{
@@ -1633,8 +1762,55 @@ break;
 			}
 		}
 	}
-    }
+   }
 
+//case 1 functions
+
+int combo()
+{
+	int n;
+	srand(time(NULL));
+	//return n = rand() % 100 + 3;
+	return n = (rand() % (1000 - 0 + 1)) + 0;
+}
+
+int countDown()
+{
+	int c, d;
+	for (c = 1; c <= 32767; c++)
+	for (d = 1; d <= 32767; d++)
+	{
+
+	}
+	printf("\nTime's out!\n");
+	return 1;
+}
+
+int displayRiddle()
+{
+	FILE *fptr;
+	char filename[100], c;
+	// Open file
+	fptr = fopen("riddle.txt", "r");
+
+	if (fptr == NULL)
+	{
+		printf("Cannot open file \n");
+		exit(0);
+	}
+
+	// Read contents from file
+	
+	c = fgetc(fptr);
+	while (c != EOF)
+	{
+		printf ("%c", c);
+		c = fgetc(fptr);
+	}
+	
+	fclose(fptr);
+	return 0;
+}
 
 void printerGoblin(int *ptr)
 {
