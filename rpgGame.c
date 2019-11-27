@@ -42,6 +42,7 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr);
 void rollDiceRoom17(int *arr); //allocates array with random numbers using a pointer to array (room 17)
 
 
+
 void main(void)
 {
 	int x,y,z,i,h,g,k,choice=0;
@@ -359,7 +360,156 @@ void main(void)
 					while(choice != 99)
 					{
 							puts("you open the door and find ........");
+							puts("a witch doctor with a wooden mask");
+							puts("in each hand, he has a potion\n");
+							puts("choice (1): you grow gills that allow you to breath underwater\n");
+							puts("choice (2): allows health regeneration\n");
+							puts("your choice of potion will affect what you encounter\n");
 							scanf("%d",&choice);
+							if(choice==1)
+							{	
+								char str1[15];
+								char str2[15];
+								int ret;
+								strcpy(str1,"green");
+								int portal=0;
+								char attack; 
+								srand(time(0));
+
+								puts("you have chosen a defense potion");
+								puts("you start feeling a burning sensation around your neck\n");
+								puts("you now have gills and notice the witch doctor disappears.\n");
+								puts("soon after, the floor opens and you fall into a pit of water, which leads to a tunnel covered in algea\n");
+								puts("you uncovered the tunnel and see a crystal lock. You cant break it but guess the color to unlock it\n");
+							     	puts("the lock has writing on i. it reads: I am the color of life\n");
+								puts("what is the color?");
+								scanf("%s", &str2);
+
+									ret=strcmp(str1,str2);
+
+									if(ret>0)
+									{	printf("the color of life is not %s!\n", str2); 
+									}
+									else if(ret<0)
+									{	
+										printf("wrong color. Perhaps try one with less letters?");
+									}
+									else
+									{	
+										printf("correct! the tunnel opens and leads to a chamber. quickly, the tunnel seals and the water drains.");
+										puts("as the water drains, two portals appear\n");
+										puts("portal (1): seems to reflect a green landscape. And exploring gear beside it\n");
+										puts("portal (2); reflects an icy environment and weather-proof gear beside it\n");
+										puts("what portal do you want to explore?\n");
+										scanf("%d",&portal);
+										if(portal==1)
+										{
+											puts("you find yourself in a jungle. A wild warthug charges at you");
+											puts("luckly, you have your bow and arrow\n");
+											puts("you aim but you lack practice\n");
+											puts("you fire!\n");
+											puts("it is completely RANDOM where it hits\n");
+											attack = rand() %4+1;
+											switch(attack)	
+											{	
+												case 1:
+													printf("Boom! straight to the dome. He drags onto your feet\n");
+													break;
+												case 2:	
+													printf("the arrrow misses!\n");
+													printf("it tackles you and you slip down a river and hit bottom. the current takes you against your will\n");
+													break;
+												case 3:
+													printf("the arrow strikes its eye but continues charging at you\n");
+													puts("you run and you feel it so close you cant feel its breath on your legs\n");
+													break;
+												case 4:
+													printf("the arrow strikes its mouth but does nothing and infuriates it even more. you drop it and climb the nearest tree\n");
+													break;
+												default:
+													puts("try again");	
+											}
+																		
+											puts("the story continues, but you have other rooms to explore!!!\n");	
+
+										}
+										else if(portal==2)
+										{
+											puts("you see snow everywhere. Mountains covered in snow\n");
+											puts("you analyze what youre wearing.\n");
+											puts("snow guerrila warfare gear, your shoes have spikes for better grip. you have a laser machine gun on your back\n");
+											puts("from a cave, you see a bon fire. you then see a Yeti staring back at you. Growling, watching your every move.");
+											puts("you step back.");
+											puts("It charges at you, ready to destroy you and eat you.");
+											puts("quickly! you reach for your machine gun and start firing");
+											for(int i=0;i<15;i++)
+											{	
+												puts("BANG! BANG! BANG!");
+												i++;
+											}
+											puts("the bullets hit the yeti, leaving scorching hot holes everywhere in its body");
+											puts("suddenly, you are transported back to reality and start where the story began...\n");
+
+										}
+										else
+										{	
+											puts("try again");
+										}
+									}
+																				
+							break;	
+							}
+							else if(choice==2)
+							{
+								char arrFour[10];
+								char *p=arrFour;
+								char fiend[10];
+								
+								FILE* rPtr;		
+								FILE* wPtr; 
+															
+								puts("you have chosen	 a combat potion\n");
+								puts("what better way than to challenge you right now?\n");
+								puts ("*the witch summons a sword and a shield*\n");
+								puts("the witch proceeds to tell you it is up to you to decide who you fight: \n");
+								puts("type your fiend of choice\n");
+								
+								rPtr = fopen("fourthEnemies.txt","r");
+								wPtr = fopen("outputFourthEnemies.txt","w");
+
+								while(!feof(rPtr))
+								{	
+									for(int i=0;i<=10;i++)
+									{
+										fscanf(rPtr,"%s",&fiend);
+									 	fprintf(wPtr,"[%d] %s\n",i,fiend);
+										printf("[%d] %s\n",i,fiend);
+									}
+								}
+
+								
+								fclose(rPtr);
+								
+
+								scanf("%s", &arrFour);
+
+								fprintf(wPtr,"you chose to battle: %s ", arrFour);
+								fclose(wPtr);
+
+								printf("suddenly the %s ",p);
+							       printf("appears, ready to pounce on you\n");
+							       printf("but to no avail it attack you, leaving behind wounds on your flesh, bleeding\n");
+							       printf("but youre healing too. The potion works!\n");
+							       printf("you gather the courage and attack until you cant anymore\n");
+							       printf("the simulation ends and you're back where you started\n");						
+								
+								break;
+							}
+							else							
+							{
+								("do you not read?");
+							}
+
 					}
 					break;
 			}

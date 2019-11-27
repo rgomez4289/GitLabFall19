@@ -1,0 +1,10 @@
+wraith
+shadow
+troll
+wolf
+succubus
+toad
+ghoul
+drowner
+rotfiend
+
