@@ -1,0 +1,12 @@
+[0] wraith
+[1] shadow
+[2] troll
+[3] wolf
+[4] succubus
+[5] toad
+[6] ghoul
+[7] drowner
+[8] rotfiend
+[9] rotfiend
+[10] rotfiend
+you chose to battle: rotfiend 
