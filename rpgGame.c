@@ -42,8 +42,10 @@ void printerGoblin(int *ptr);
 void sorterGoblin(int *ptr);
 int goblin(int choice);
 
-int blackPotionEffect();
-void bluePotionWorld();
+int blackPotionEffect(void); //door 2
+void bluePotionWorld(void); //door 2
+void liabilityWaiver(void); //door 2
+void signLiability(void); //door 2
 
 int randGen(int topNum);
 
@@ -116,11 +118,17 @@ void main(void)
 
 					while(choice != 99)
 					{
+							int sick;
 							char drinkChoice[10];
 							puts("You open the door and see a table, on top are three potions.");
 							puts("You hear the door lock behind you.");
 							puts("The first is a blue potion, the second is a cloudy green,");
-							puts("the third is as black as the night sky");
+							puts("the third is as dark as the night sky");
+							puts("A curious goblin walks out from the shadows...");
+							puts("\"Before you drink a potion please take this liability waiver...\"");
+							liabilityWaiver();
+							puts("\"I hope you read that now please stamp your name onto it as well\"");
+							signLiability();
 							puts("Which potion would you like to drink? (blue / green / black)");
 							scanf("%s", &drinkChoice);
 							if(strcmp(drinkChoice, "blue") == 0)
@@ -135,6 +143,12 @@ void main(void)
 							{
 								puts("You notice it tasted like rancid milk");
 								puts("You begin to feel nauseous....");
+								puts("You can't help but vomit!");
+								for(sick = 0; sick < 5; sick++)
+								{
+									puts("~~~~~~~~~");
+								}
+								puts("You begin to drown in your vomit...");
 								puts("You have died.");
 								exit(0);
 								break;
@@ -2212,6 +2226,27 @@ void bluePotionWorld()
 
 }
 
+void liabilityWaiver(void)
+{
+	FILE *lptr = fopen("liabilitywaiver.txt", "w");
+	fprintf(lptr, "================================================\n");
+	fprintf(lptr, "I drink this potion knowing I will probably die.\n");
+	fprintf(lptr, "I waive any right to be upset or mad.\n");
+	fprintf(lptr, "Also I will not sue.\n");
+	fprintf(lptr, "================================================\n");
+	fclose(lptr);
+
+}
+
+void signLiability(void)
+{
+	FILE *lptr = fopen("liabilitywaiver.txt", "a+");
+	char signature[20];
+	printf("What name would you like to sign? (Hopefully your own!)\n");
+	scanf("%s", signature);
+	fprintf(lptr, "Signed, %s\n", signature);
+	fclose(lptr);
+}
 
 void rm11EnemyName(char *enPtr)
 {
