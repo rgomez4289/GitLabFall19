@@ -15,7 +15,7 @@
 // Ivan Khaffaji Room #15
 
 //Mary Shrestha Room#19
-
+//diana ramirez room 12
 // Steve Yoon Room #14
 
 
@@ -1225,12 +1225,13 @@ break;
 								puts("easy game no problem!");
 								printMan(0, gameType);
 								findWord(ptr, gameType);
-								while (gameGuess!= "4"){
+								while (gameGuess != '4'){
 									puts("enter your first guess:");
 									scanf("%s", &gameGuess);
 									char *guessPtr = gameGuess;
-									checkCharacter(ptr, gameGuess);
-									printf("testing");
+									//checkCharacter(ptr, guessPtr);
+									//printf("testing");
+									gameGuess=4;
 								}
 
 
@@ -1257,7 +1258,6 @@ break;
 							}
 
 						}
-					}
 					break;
 			}
 			case 13: // this is mine
