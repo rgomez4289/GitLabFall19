@@ -113,9 +113,10 @@ void ReplaceDash(char solution[], char secretword[], char letter);              
 
 void main(void)
 {
-	int x,y,z,i,h,g,k,choice=0;
+	int x,y,z,i,h,g,k,outc,choice=0;
 	char name[256];
 	int boxNum=0;
+	char inpute;
 	srand(time(NULL));
 
 	printf("Please enter your name: "); //Input any number of array inputs
@@ -1052,7 +1053,48 @@ case 6:
 		else if (choice ==3)
 		{
 		puts("You respond with 'General Kenobi'. He stares at you and says 'how do you know that name?' He takes out a broomstick and is ready to attack, when you are able to dodge his attack and run towards a wall. There is a large metal door, you run in and slam it shut behind you and it locks, keeping you safe... for now.");
-			break;
+					puts("You find an old oil drum and find a pair of golden dice on top. You see a small note pinned under them and read it. 'These dice are an ancient artifact called the Dice of Destiny. If you are reading this note, you have the choice to either try your luck and recieve riches such as gold, knowledge of the future, or imortality, or if you lose, you will be cursed by it and perish. Getting the total to an even number will bless you with its riches, getting a total of an odd number will curse you. Choose wisely.\n");
+					puts ("input 'y' to try your luck or 'n' to avoid the gamble.\n"); 
+					scanf(" %c",&inpute);	
+		}
+						if(inpute == 'y')
+						{	
+							puts("Very well. remeber, evens give unearthly gifts while odds curse you\n");
+							puts("You grab the dice, and roll them, your heart is pumping at wheather you can become the next Thanos, or will simply wither away and become another explorer lost to the ancients.\n");
+							outc = rollingdice1();
+							if (outc == 1,3,5,9,11)
+							{
+								puts("'What will the outcome be?' You think to yourself.");
+								puts("'Congradualations. You have passed.' A deep voice says from the darkenss\n");
+								puts ("'Unfortunately, I cant allow you to use that power. You dont understand the severe concequences that kind of power will give to a mortal human like you.'");
+								puts("All of a sudden a large creature emerges from the cave and tries to stomp on you. You run away and duck into a small cave but drop the dice while running.");
+								puts("'I woke up just wanting to take a walk and now all this crazy stuff is happening. I dont understand.'");
+								puts("I should write this down in my journal");
+								puts("You take out a small journal and start writing whatever comes to mind);
+								fptr = fopen("journal.txt", "w");
+								   if(fptr == NULL)
+								   {
+									  printf("Error!");
+									  exit(1);
+								   }
+								   printf("Enter a whatever you'd like:\n");
+								   gets(sentence);
+								   fprintf(fptr,"%s", sentence);
+								   fclose(fptr);		   
+								}
+							else if (outc == 2,4,6,8,10,12)
+								{
+								puts("What will the outcome be?\n");
+								puts("oh no. You look at the dice, they total up to an odd number\n");
+								puts("The ground begins to shake. The walls and ceiling begin to crumble. Unfortunately, you've lost. How exactly does on escape a supernatural curse?");
+								}
+							}
+						else if (inpute == 'n')
+						{
+							puts("You chose to forfeit the chance of unearthly riches to avoid the risk of death and torment.\n");
+							puts("A wise choice, the dice can either be sold off for money or used as a bartering chip to get you out of this hellish limbo\n");
+						}	
+						}
 		}
 		else
 		{
@@ -4950,4 +4992,13 @@ void checkCharacter(char *ptr1, char *ptr2)
 	}
 	//this method wils return index of character if found and update the array of characters that have been guessed
 }
-
+int rollingdice1(void)
+{
+    int totals;
+    int i;
+    for (i=0;i<=2;i++)
+{
+ (rand() % 6)+ 1; 
+}
+return 0;
+}
