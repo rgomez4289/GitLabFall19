@@ -2422,7 +2422,7 @@ break;
 	}
 
    }
-
+}
 //case 1 functions
 
 int combo()
