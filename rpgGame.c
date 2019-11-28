@@ -9,7 +9,7 @@
 
 
 //Mjkli - room number #3
-//Masashi Terayama #8
+
 // Mir Hassan Talpur #17
 // Amado Rodriguez III #21
 // Ivan Khaffaji Room #15
@@ -1110,120 +1110,12 @@ break;
 			}
 			case 8:
 			{
-					while (choice != 99)
-				{
-					srand(time(NULL));
-					int action8=0;
-					int action8a=0;
-					int a;
-					char ans8[5] = { 0 };
-					char c;
-					puts("You open the door and find yourself in a long room,.\n");
-					puts("almost like a hallway but you can't see any doors, other than the one you just came though.\n");
-					puts("You can't even see the other end of the room.\n");
-					puts("Hanging on the walls are torches, spaced out every 20 or so feet.\n");
-					puts("There's some writing above the door that you came through.\n");
-					puts("\"Only Forward\"\n");
-					puts("With no other choice, you take the nearest torch and start walking.\n");
-					puts("...\n");
-					puts("After walking for what feels like an eternity, the room hasn't changed;\n");
-					puts("In the distance, you see a shadowy figure moving in the middle of the walkway.");
-					puts("Select an action: \n1) Turn back and return to the previous room you were in.\n");
-					puts("2) Call out to the figure.\n3) Continue walking and try to sneak past the figure.");
-					scanf(" %d", &action8);
-					switch(action8)
+					while(choice != 99)
 					{
-						case 1:
-							puts("You stop walking and quickly turn around.\n");
-							puts("\"thud\"\n");
-							puts("You hit your face on a wall.\n");
-							puts("Above your eyeline on the wall, it's written:\n");
-							puts("\"Only Forward\"\n");
-							puts("You turn around and figure is now looking right at you.\n");
-						case 2:
-							puts("\"Hey there...\", you say, acknowledging its presence.\n");
-							puts("\"mn mmnm nnnmn\", it mumbles, barely audible as you walk towards it.\n");
-							puts("\"Where is this, how do I get home?\" you ask, ignoring its incoherent mumbling.\n");
-							while (action8a != 2)
-							{
-								puts("\"Don't go anywhere, go nowhere\"\n");
-								puts("Select an action:\n");
-								puts("1) \"What do you mean?\"\n");
-								puts("2) That means nothing to you, continue down the hall.\n");
-								scanf(" %d", &action8a);
-							}
-							puts("You are a little spooked by those words, but they were not useful to you in anyway.\n");
-							puts("You continue down the hall for a while\n");
-							puts("...\n");
-							puts("You see it! There it is! The end of this room!\n");
-							break;
-						case 3:
-							puts("You walk cautiously as to not draw its attention in anyway.\n");
-							puts("As you walk past it, it mutters:\n");
-							puts("\"You don't know where...\"\n");
-							puts("Bothered, you turn to ask what it means, but it is gone...\n");
-							puts("You continue walking and come upon the end of the room\n.");
-							break;
-						defualt:
-							puts("A trap door opens beneath your feet!\n");
-							puts("You fall into a room large room and the trap door closes above you1\n");
-							puts("Water starts rushing into the room, but there are no doors!");
-							puts("Goodnight\n");
-							choice = 99;
-							break;
-
-
+							puts("you open the door and find ........");
+							scanf("%d",&choice);
 					}
-					puts("There are 3 doors, each labeled. Select an action:\n");
-					puts("1) Enter the door \"Anywhere\"\n");
-					puts("2) Enter the door \"Nowhere\"\n");
-					puts("3) Enter the door \"Home\"\n");
-					scanf(" %d", &action8);
-					switch (action8)
-					{
-						case 1:
-							puts("You wake up in a cold sweat. You are in your bed. At home.\n");
-							puts("Relieved, you close and eyes and fall back to sleep.");
-							puts("As you fall asleep, you hear a whisper.\n");
-							puts("\"Don't go anywhere, go nowhere\"\n");
-							choice = (rand() % 25) + 1;
-							break;
-						case 2:
-							puts("You wake up in a cold sweat. You are in your bed. At home.\n");
-							puts("Relieved, you close and eyes and fall back to sleep.");
-							puts("Would you like to dream of another adventure?\n");
-							puts("yes or no?\n");
-							scanf(" %s", ans8);
-							for (a = 0; a < 5; a++)
-							{
-								c = ans8[a];
-								if (isupper(c))
-								{
-									ans8[a] = tolower(c);
-								}
-							}
-							if (strcmp(ans8, "yes") == 0)
-							{
-								puts("You awake in a room with 25 doors. Select one of them.\n");
-								scanf("%d", &choice);
-							}
-							else
-							{
-								choice = 99;
-							}
-							break;
-						case 3:
-						default:
-							puts("You open the door and enter the new room. Hmm, the floor is slippery.\n");
-							puts("You look around, there are a lot of doors. Wait, this rooms looks familiar!\n");
-							puts("As suspected, water starts rushing into the room!\n");
-							puts("Choose a room again!\n");
-							scanf("%d", &choice);
-							break;
-					}
-				}
-				break;
-
+					break;
 			}
 			case 9:
 			{
@@ -4706,4 +4598,6 @@ void castaway(void)
         }
     }
 }
+
+
 
