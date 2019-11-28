@@ -45,10 +45,6 @@ int goblin(int choice);
 int blackPotionEffect();
 void bluePotionWorld();
 
-int randomAscii(void);
-void fillSumArray(int* ptr, int size);
-void printSumArray(int* ptr, int size);
-
 int randGen(int topNum);
 
 
@@ -70,6 +66,10 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr);
 
 void rollDiceRoom17(int *arr); //allocates array with random numbers using a pointer to array (room 17)
 
+int randomAscii(void);
+void fillSumArray(int* ptr, int size);
+void printSumArray(int* ptr, int size);
+int sumRandomArray(int* ptr, int size);
 
 //inputWord.txt needed to run functions
 void GameRules();
@@ -594,29 +594,118 @@ void main(void)
 			case 5:
 			{
 					while(choice != 99)
-					{
-							int num;
-							int arr[5];
-							int* ptr1 = arr;
-							num = randomAscii();
-							fillSumArray(ptr1, 5);
+                                        {
+                                                        int num, sum, i;
+                                                        int arr[5];
+                                                        int* ptr1 = arr;
+                                                        FILE* wptr;
+                                                        char cArr1[6] = "linux";
+                                                        char cArr2[6];
+                                                        char cArr3[70] = "At Last all The monsTERS hAve BEen Defeated. You are safe, for now";
+                                                        char* ptr2 = cArr3;
 
-							puts("you open the door and find ........");
-							puts("the loop monster!");
-							while(choice != num)
-							{
-								puts("the loop monster will end its reign of terror if you enter");
-								puts("the magic number it seeks");
-								printf("hint: the ascii value for %c\n", num);
-								scanf("%d", &choice);
-							}
-							puts("the loop monster has seized to exist");
-							puts("but a new evil lurks ahead...");
-							puts("the array monster!");
-							printSumArray(ptr1, 5);
-							return;
-					}
-					break;
+                                                        wptr = fopen("filewritemonster.dat", "w");
+                                                        fprintf(wptr, "%s\n", cArr1);
+                                                        num = randomAscii();
+                                                        fillSumArray(ptr1, 5);
+
+                                                        puts("you open the door and find ........");
+                                                        puts("the loop monster!");
+                                                        while(choice != num)
+                                                        {
+                                                                puts("the loop monster will end its reign of terror if you enter");
+                                                                puts("the magic number it seeks");
+                                                                printf("hint: the ascii value for %c\n", num);
+                                                                scanf("%d", &choice);
+                                                                if(choice != num)
+                                                                {
+                                                                        puts("wrong answer! please try again");
+                                                                }
+                                                        }
+                                                        puts("the loop monster has seized to exist");
+                                                        puts("but a new evil lurks ahead...");
+                                                        puts("the array monster!");
+                                                        printSumArray(ptr1, 5);
+                                                        puts("the array monster will let you go free should you enter the sum of the values above");
+                                                        scanf("%d", &choice);
+                                                        sum = sumRandomArray(ptr1, 5);
+                                                        while(choice != sum)
+                                                        {
+                                                                puts("incorrect answer, please try again");
+                                                                scanf("%d", &choice);
+                                                        }
+                                                        puts("the array monster's reign of terror has ended");
+                                                        puts("but your still not safe...");
+                                                        puts("the file write monster awaits you!");
+							puts("the file write monster wrote a file that contains the magic word to get past him");
+                                                        puts("the file is called filewritemonster.dat");
+                                                        scanf("%s", cArr2);
+                                                        while(strcmp(cArr1, cArr2) != 0)
+                                                        {
+                                                                puts("incorrect answer! please try again");
+                                                                scanf("%s", cArr2);
+                                                        }
+                                                        puts("the mighty file write monster has been defeated");
+                                                        puts("but now we have reach a room with three mysterious doors");
+                                                        puts("only one leads to safety, and the others to monsters");
+                                                        puts("no hints, choose a door and accept your fate");
+                                                        scanf("%d", &choice);
+                                                        switch(choice)
+                                                        {
+                                                                case 1:
+                                                                        puts("the ghost of the loop monster! he wants another magic number...");
+                                                                        num = randomAscii();
+                                                                        printf("hint: the ascii value for %c\n", num);
+                                                                        scanf("%d", &choice);
+                                                                        while(choice != num)
+                                                                        {
+                                                                                puts("wrong answer, please try again");
+                                                                                scanf("%d", &choice);
+                                                                        }
+                                                                        break;
+                                                                case 2:
+                                                                        puts("the ghost of the array monster! time for another addition problem");
+                                                                        fillSumArray(ptr1, 5);
+                                                                        printSumArray(ptr1, 5);
+                                                                        sum = sumRandomArray(ptr1, 5);
+                                                                        puts("please enter the sum of the numbers above");
+                                                                        scanf("%d", &choice);
+                                                                        while(choice != sum)
+                                                                        {
+                                                                                puts("incorrect answer! please try again");
+                                                                                scanf("%d", &choice);
+                                                                        }
+                                                                        break;
+                                                                case 3:
+                                                                        puts("no monsters behind this door... all clear to move forward");
+                                                                        break;
+                                                                default:
+                                                                        puts("invalid input, please enter a valid number");
+                                                        }
+							puts("another close call...");
+                                                        for(i = 0; i < 71; i++)
+                                                        {
+                                                                if(islower(*ptr2))
+                                                                {
+                                                                        putchar(toupper(*ptr2));
+                                                                }
+                                                                else if(isupper(*ptr2))
+                                                                {
+                                                                        putchar(tolower(*ptr2));
+                                                                }
+                                                                else if(*ptr2 == ' ')
+                                                                {
+                                                                        printf(" ");
+                                                                }
+                                                                ptr2++;
+                                                        }
+                                                        puts("");
+
+                                                        fclose(wptr);
+
+                                                        return;
+                                        }
+                                        break;
 			}
 
 case 6:
@@ -2275,34 +2364,6 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
     }
 }
 
-int randomAscii(void)
-{
-	int val;
-	val = 65 + rand()%25;
-	return val;
-}
-
-void fillSumArray(int* ptr, int size)
-{
-	int val, i;
-	for(i = 0; i < size; i++)
-	{
-		val = 1 + rand()%9;
-		*ptr = val;
-		ptr++;
-	}
-}
-
-void printSumArray(int* ptr, int size)
-{
-	int i;
-	for(i = 0; i < size; i++)
-	{
-		printf("%d\t", *ptr);
-		ptr++;
-	}
-}
-
 void blackJack(int *cards)
 {
 	puts("The Skeleton laughs and deals each of you 2 cards");
@@ -3510,6 +3571,48 @@ void dead(void)
 }
 
 
+int randomAscii(void)
+{
+        int val;
+        val = 65 + rand()%25;
+        return val;
+}
+
+void fillSumArray(int* ptr, int size)
+{
+        int val, i;
+        for(i = 0; i < size; i++)
+        {
+                val = 1 + rand()%9;
+                *ptr = val;
+                ptr++;
+        }
+}
+
+void printSumArray(int* ptr, int size)
+{
+        int i;
+        for(i = 0; i < size; i++)
+        {
+                printf("%d\t", *ptr);
+                ptr++;
+        }
+        puts("");
+}
+
+int sumRandomArray(int* ptr, int size)
+{
+        int sum = 0;
+        int i;
+        for(i = 0; i < size; i++)
+        {
+                sum += *ptr;
+                ptr++;
+        }
+        return sum;
+}
+
+
 void GameRules()
 {
                  printf("You enter a room and you found a huge screens which surround the four walls of the room. The room was dark and cold. Suddenly, you start to hear noises. You looked at the screen and you saw bunch of crows coming out of the screen. You tried to open the door but it's locked and there's no way out. \n\n");
@@ -3750,4 +3853,5 @@ void castaway(void)
         }
     }
 }
+
 
