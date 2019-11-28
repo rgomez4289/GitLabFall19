@@ -16,7 +16,7 @@
 //Andres Llarena room #1
 
 //Mary Shrestha Room#19
-
+//diana ramirez room 12
 // Steve Yoon Room #14
 
 
@@ -27,12 +27,18 @@
 #include <time.h>
 #include <stdio.h>
 #include<math.h>
+#include <time.h>
+#include <stdbool.h>
+
+
+#define MAX_STRING_SIZE 15
 
 
 //riddle.txt needed to read/write file
 int combo(void);
 int countDown(void);
 int displayRiddle(void);
+
 
 #define MAXGUESSES 5
 #define WORDSIZE 25
@@ -42,7 +48,10 @@ void castaway(void); //room 14
 void wordScramble(int *gameScore); //room 14
 void fightSystem(int *hp, int *machetePower); //room14
 
-
+// room 12
+void printMan(int numWrong, char gameType);
+void findWord(char *pointer, char gameType);
+void checkCharacter(char *ptr1, char *ptr2);
 
 
 void randomFillGob(int *ptr);
@@ -66,6 +75,8 @@ int kni(int health,int *wepP,int wepr); //door 3
 int dem(int health,int *wepP,int wepr); //door 3
 int ang(int health,int *wepP,int wepr); //door 3
 void dead(void);
+
+
 
 
 
@@ -750,13 +761,13 @@ void main(void)
 							puts("your choice of potion will affect what you encounter\n");
 							scanf("%d",&choice);
 							if(choice==1)
-							{	
+							{
 								char str1[15];
 								char str2[15];
 								int ret;
 								strcpy(str1,"green");
 								int portal=0;
-								char attack; 
+								char attack;
 								srand(time(0));
 
 								puts("you have chosen a defense potion");
@@ -771,14 +782,14 @@ void main(void)
 									ret=strcmp(str1,str2);
 
 									if(ret>0)
-									{	printf("the color of life is not %s!\n", str2); 
+									{	printf("the color of life is not %s!\n", str2);
 									}
 									else if(ret<0)
-									{	
+									{
 										printf("wrong color. Perhaps try one with less letters?");
 									}
 									else
-									{	
+									{
 										printf("correct! the tunnel opens and leads to a chamber. quickly, the tunnel seals and the water drains.");
 										puts("as the water drains, two portals appear\n");
 										puts("portal (1): seems to reflect a green landscape. And exploring gear beside it\n");
@@ -793,12 +804,12 @@ void main(void)
 											puts("you fire!\n");
 											puts("it is completely RANDOM where it hits\n");
 											attack = rand() %4+1;
-											switch(attack)	
-											{	
+											switch(attack)
+											{
 												case 1:
 													printf("Boom! straight to the dome. He drags onto your feet\n");
 													break;
-												case 2:	
+												case 2:
 													printf("the arrrow misses!\n");
 													printf("it tackles you and you slip down a river and hit bottom. the current takes you against your will\n");
 													break;
@@ -810,10 +821,10 @@ void main(void)
 													printf("the arrow strikes its mouth but does nothing and infuriates it even more. you drop it and climb the nearest tree\n");
 													break;
 												default:
-													puts("try again");	
+													puts("try again");
 											}
-																		
-											puts("the story continues, but you have other rooms to explore!!!\n");	
+
+											puts("the story continues, but you have other rooms to explore!!!\n");
 
 										}
 										else if(portal==2)
@@ -826,7 +837,7 @@ void main(void)
 											puts("It charges at you, ready to destroy you and eat you.");
 											puts("quickly! you reach for your machine gun and start firing");
 											for(int i=0;i<15;i++)
-											{	
+											{
 												puts("BANG! BANG! BANG!");
 												i++;
 											}
@@ -835,33 +846,33 @@ void main(void)
 
 										}
 										else
-										{	
+										{
 											puts("try again");
 										}
 									}
-																				
-							break;	
+
+							break;
 							}
 							else if(choice==2)
 							{
 								char arrFour[10];
 								char *p=arrFour;
 								char fiend[10];
-								
-								FILE* rPtr;		
-								FILE* wPtr; 
-															
+
+								FILE* rPtr;
+								FILE* wPtr;
+
 								puts("you have chosen	 a combat potion\n");
 								puts("what better way than to challenge you right now?\n");
 								puts ("*the witch summons a sword and a shield*\n");
 								puts("the witch proceeds to tell you it is up to you to decide who you fight: \n");
 								puts("type your fiend of choice\n");
-								
+
 								rPtr = fopen("fourthEnemies.txt","r");
 								wPtr = fopen("outputFourthEnemies.txt","w");
 
 								while(!feof(rPtr))
-								{	
+								{
 									for(int i=0;i<=10;i++)
 									{
 										fscanf(rPtr,"%s",&fiend);
@@ -870,9 +881,9 @@ void main(void)
 									}
 								}
 
-								
+
 								fclose(rPtr);
-								
+
 
 								scanf("%s", &arrFour);
 
@@ -884,11 +895,11 @@ void main(void)
 							       printf("but to no avail it attack you, leaving behind wounds on your flesh, bleeding\n");
 							       printf("but youre healing too. The potion works!\n");
 							       printf("you gather the courage and attack until you cant anymore\n");
-							       printf("the simulation ends and you're back where you started\n");						
-								
+							       printf("the simulation ends and you're back where you started\n");
+
 								break;
 							}
-							else							
+							else
 							{
 								("do you not read?");
 							}
@@ -1269,7 +1280,7 @@ break;
 					{
 						FILE *wptr;
 						FILE *writer;
-						
+
 						int a[5]={1223,1323,1219,1292,1238};
 						int b[5]={2321,2101,2290,2303,2239};
 
@@ -1279,7 +1290,7 @@ break;
 						char textG[1000];
 						int counter=0;
 						int i;
-					
+
 
 						int arry[5]={0};
 						int *ptr = arry;
@@ -1290,21 +1301,21 @@ break;
 						puts("\n\nYou open the door and find a unicorn eating gold bars. And is protected by a goblin");
 						printf("Save the gold bars? Enter 1 for yes. 2 for no.");
 						scanf("%d",&choice);
-							
-							
+
+
 							if(choice==1)
 							{
 								puts("As you try to pick up the gold bar a goblin comes out and tries to attack you");
-								
-								
+
+
 								printf("Try to attack or run away? Enter 1 to fight. 2 to run ");
-								
+
 								scanf("%d",&choice);
 								if(choice==1)
 								{
-																	
+
 									choice=goblin(choice);
-	
+
 									printf("You are left with %d health after that short battle.\n",choice);
 									puts("You pick up the gold bar and as you hold it in your hand it begins to shine");
 									puts("You get teleported to another room, all there is a bed, desk, and a door behind you");
@@ -1316,17 +1327,17 @@ break;
 									if(writer==NULL)
 									{
 										puts("Error reading file. file may not exist.");
-									}	
+									}
 									wptr = fopen("goblinJ.txt","r");
 
-							
+
 									while(!feof(wptr))
 									{
 										fscanf(wptr,"%s",textG);
 										if(feof(wptr))break;
 										dayNum[counter]=dayNumber;
 										counter++;
-										
+
 									}
 									for(i=0; i<counter;i++)
 									{
@@ -1334,9 +1345,9 @@ break;
 									}
 									fclose(wptr);
 									fclose(writer);
-									
-									
-									puts("You realize that maybe this journal belongs to the goblin you just slayed.");	
+
+
+									puts("You realize that maybe this journal belongs to the goblin you just slayed.");
 									puts("You continue to explore the room and open drawers at the desk, and find mail");
 									puts("As you begin to open the mail it sucks you in and leaves no trace of you ever being there...");
 									puts("YOU DIED..");
@@ -1346,9 +1357,9 @@ break;
 
 
 
-								
+
 								choice=99;
-								
+
 								}
 								else
 								{
@@ -1356,12 +1367,12 @@ break;
 									choice=99;
 
 								}
-						
+
 							}
 							else
 							{
 								printf("\n\nYou decided not to pick up the gold. You leave and the goblin goes back into hiding\n");
-								
+
 								printf("You decide to walk past the unicorn and come to a pathway labled 'Pathway A'\n");
 								puts("\nAs you walk closer to the pathway, a door appears");
 								puts("\nOn the face of the door it says: 'Arrange these number in numerical order to enter!'\n");
@@ -1384,7 +1395,7 @@ break;
 
 								printf("\nIn front of you are two books full of dates in them\n");
 
-							
+
 								for(i=0; i<5; i++)
 								{
 									printf("First book: %d\n",a[i]);
@@ -1393,7 +1404,7 @@ break;
 
 								}
 								printf("\nOnce again after some swapping...\n");
-							
+
 								puts("...");
 								puts("...");
 								puts("...");
@@ -1416,10 +1427,10 @@ break;
 								printf("\nShe grants you one wish..and you wish for this all to be over.\n");
 								printf("\nA bright Flash that blinds you appears and..\n\n");
 								break;
-								
 
 
-								
+
+
 								//choice=99;
 							}
 					}
@@ -1459,7 +1470,60 @@ break;
 			{
 					while(choice != 99)
 					{
-					}
+						int levelChoice =0;
+						char gameWord[MAX_STRING_SIZE];  //this array holds the word to guess during gameplay
+						char *ptr;
+						bool userWins = false;
+						ptr=gameWord; //pointer for char array
+						char gameType;
+						char gameGuess="x";
+						while (levelChoice != 4)
+						{
+							puts("Welcome to the HANGMAN room, choose your option:");
+							puts("1. Begin easy game");
+							puts("2. Begin medium game");
+							puts("3. Begin hard game");
+							puts("4. Exit back to main menu");
+							scanf("%d", &levelChoice);
+							if (levelChoice==1)
+							{
+								gameType='e';
+								puts("easy game no problem!");
+								printMan(0, gameType);
+								findWord(ptr, gameType);
+								while (gameGuess != '4'){
+									puts("enter your first guess:");
+									scanf("%s", &gameGuess);
+									char *guessPtr = gameGuess;
+									//checkCharacter(ptr, guessPtr);
+									//printf("testing");
+									gameGuess=4;
+								}
+
+
+
+							} else if(levelChoice==2)
+							{
+								gameType='m';
+								puts("medium game no problem!");
+								printMan(0, gameType);
+
+
+							} else if (levelChoice==3)
+							{
+								gameType='h';
+								puts("hard game, here we go!");
+								printMan(0, gameType);
+
+
+							} else if (levelChoice==4)
+							{
+								break;
+							} else {
+								puts("choose a valid option from the menu please");
+							}
+
+						}
 					break;
 			}
 			case 13: // this is mine
@@ -1612,7 +1676,7 @@ break;
 			{
 					int x, y, userSelect, hp = 100, machetePower = 0;
 					int gameScore;
-					
+
 					FILE *writer;
 					srand(time(NULL));
 					int choice;
@@ -1622,7 +1686,7 @@ break;
 						printf("%s!!, You've been abandoned on an island and must find your way to the extraction point to get home. Lets go!\n", name);
 						puts("You're starting off with 100 hp and must navigate your way through obstacles and make the correct choices along the way.");
 						Menu:
-						
+
 						puts("You have 3 options... where would you like to go?(Extraction point is through the river but to get a perfect score, you must go to the mountain first)");
 						puts("1. Beach\n2. Mountain\n3. River");
 						scanf(" %d", &userSelect);
@@ -1712,7 +1776,7 @@ break;
 							puts("You must unscramble 5 words in order to cross.");
 							puts("1. Lets Play\n2. I'm good");
 							scanf(" %d", &x);
-								
+
 							if(x == 1)
 							{
 								wordScramble(&gameScore);
@@ -2014,7 +2078,7 @@ break;
                                           }
                                           while(againPtr!=0);
                                           }
-					
+
 					break;
 			}
 			case 20:
@@ -2218,14 +2282,14 @@ break;
 					{
 						int cont = 0;
             int cards[2] = {};
-						
+
 						while(cont != 1)
 						{
 							cards[0] = (1 + (rand() % 13));
 							int *ptr = cards;
 							blackJack(ptr);
 							timesPlayed++;
-							
+
 							printf("Before you can even decide on what to do with ");
 							printf("your hand, The Skeleton reveals a Blackjack. ");
 							puts("you should've known it was a cheater");
@@ -2463,7 +2527,7 @@ int goblin(int choice)
 		printf("3. Broadsword and shield: 'Average sword but comes with shield that will slow you down.'(+20 Attack, -20 Speed, +20 Defense)\n");
 		printf("4. Two Handed Sword: 'Very Very Slow but hard hitting.'(+50 Attack, -50 Speed) \n");
 		printf("5. Bow and Arrows: 'Works well with enemies that are far away'(+15 Ranged, +10 attack)\n");
-		printf("Choose wisely...\n");	
+		printf("Choose wisely...\n");
 		scanf("%d",&y);
 		switch(y)
 		{
@@ -2479,11 +2543,11 @@ int goblin(int choice)
 					damage = 1+(rand()%10);
 					printf("The goblin hits you back and deal %d damage\n",damage);
 					health = health - damage;
-									
+
 					if(ghealth<0)
 					{
 						printf("The goblin is dead\n");
-						
+
 					}
 
 				}
@@ -2499,12 +2563,12 @@ int goblin(int choice)
 					damage = 1+(rand()%10);
 					printf("The goblin hits you back and deal %d damage\n",damage);
 					health = health - damage;
-				
-					
+
+
 					if(ghealth<0)
 					{
 						printf("The goblin is dead\n");
-						
+
 					}
 
 				}
@@ -2522,17 +2586,17 @@ int goblin(int choice)
 					damage = 1+(rand()%10);
 					printf("The goblin hits you back and deal %d damage\n",damage);
 					health = health - damage;
-									
+
 					if(ghealth<0)
 					{
 						printf("The goblin is dead\n");
-						
+
 					}
 
 				}
 				break;
 
-				
+
 			case 4:
 				printf("You chose the Two Handed Sword\n");
 				while(ghealth>0)
@@ -2544,17 +2608,17 @@ int goblin(int choice)
 					damage = 1+(rand()%10);
 					printf("The goblin hits you back and deal %d damage\n",damage);
 					health = health - damage;
-									
+
 					if(ghealth<0)
 					{
 						printf("The goblin is dead\n");
-						
+
 					}
 
 				}
 				break;
 
-				
+
 			case 5:
 				printf("You chose Bow and Arrows\n");
 				while(ghealth>0)
@@ -2566,17 +2630,17 @@ int goblin(int choice)
 					damage = 1+(rand()%10);
 					printf("The goblin hits you back and deal %d damage\n",damage);
 					health = health - damage;
-									
+
 					if(ghealth<0)
 					{
 						printf("The goblin is dead\n");
-						
+
 					}
 
 				}
 				break;
 
-					
+
 		}
 	}
 	return health;
@@ -3003,7 +3067,7 @@ void blackJack(int *cards)
 	{
 		printf("Your first card is a %d\n", *cards);
 	}
-	
+
 	//card2
 	*(cards+1) = (1 + (rand() % 13));
 	if(*(cards+1) == 1)
@@ -4582,7 +4646,7 @@ void wordScramble(int *gameScore)
 			printf("1st Word: %s\n", scrambled);
 			printf("Your guess?: ");
 			scanf(" %s", guess);
-			
+
 			if(strcmp(guess, unscrambled) == 0)
 			{
 				puts("Correct!");
@@ -4604,7 +4668,7 @@ void wordScramble(int *gameScore)
 					{
 						*gameScore += 25;
 						puts("you win and you see the extraction point ahead!");
-						break;						
+						break;
 					}
 				}
 				else
@@ -4705,5 +4769,185 @@ void castaway(void)
             break;
         }
     }
+}
+
+
+void printMan(int numWrong, char gameType)
+{
+	if(numWrong==0)
+	{
+		puts("\nRemember you can exit at any time by entering the character '4'\n");
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if(numWrong==1)
+	{
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==2 && (gameType=='e' || gameType=='m'))
+	{
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==2&& gameType=='h')
+	{
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==3 && (gameType=='e' || gameType=='m'))
+	{
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==3 && gameType=='h')
+	{
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |			|");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==4 && (gameType=='e' || gameType=='m'))
+	{
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==4 && gameType == 'h')
+	{
+		puts("       ______");      //game over for hard mode
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |      |");
+		puts("      |     / \\");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==5 && gameType=='e')
+	{
+		puts("       ______");
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |      |");
+		puts("      |     /");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==5 && gameType=='m')
+	{
+		puts("       ______");   //game over for medium
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |      |");
+		puts("      |     /\\");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==6 && gameType=='e')
+	{
+		puts("       ______");   //game over for easy
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |     \\|/");
+		puts("      |      |");
+		puts("      |     /\\");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	}
+}
+
+void findWord(char *pointer, char gameType)
+{
+	char easyWords[5][MAX_STRING_SIZE] =
+	{ "happiness",
+  	"videogames",
+  	"elephant",
+  	"dedication",
+		"revelation"
+	};
+	char medWords[5][MAX_STRING_SIZE] =
+	{ "calculus",
+  	"scientist",
+  	"naughty",
+  	"mexico",
+		"agent"
+	};
+	char hardWords[5][MAX_STRING_SIZE] =
+	{ "jazz",
+  	"funny",
+  	"honey",
+  	"moss",
+		"father"
+	};
+	int x;
+	srand(time(0));
+	x=(rand()%5);  //gets random word from string arrays
+	if (gameType=='e')
+	{
+		pointer=easyWords[x];
+		printf("'%s'", easyWords[x]);  //prints answer
+	} else if (gameType=='m')
+	{
+		pointer=medWords[x];
+		printf("'%s'", medWords[x]); //prints answer
+	} else if (gameType=='h')
+	{
+		pointer=hardWords[x];
+		printf("'%s'", hardWords[x]); //prints answer
+	}
+}
+
+void checkCharacter(char *ptr1, char *ptr2)
+{
+	int returnNum =99;
+	char *letterPtr = (strstr(ptr1, ptr2));
+	if(letterPtr !=NULL)
+	{
+		printf("lp = %s", letterPtr);
+	}
+	//this method wils return index of character if found and update the array of characters that have been guessed
 }
 
