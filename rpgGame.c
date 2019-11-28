@@ -9,10 +9,11 @@
 
 
 //Mjkli - room number #3
-
+//Masashi Terayama #8
 // Mir Hassan Talpur #17
 // Amado Rodriguez III #21
 // Ivan Khaffaji Room #15
+//Andres Llarena room #1
 
 
 #include <stdlib.h>
@@ -22,13 +23,34 @@
 #include <stdio.h>
 #include<math.h>
 
+
+
+//riddle.txt needed to read/write file
+int combo(void);
+int countDown(void);
+int displayRiddle(void);
+
+#define MAXGUESSES 5
+#define WORDSIZE 25
+
+
+void castaway(void); //room 14
+void wordScramble(int *gameScore); //room 14
+void fightSystem(int *hp, int *machetePower); //room14
+
+
+
+
+
 void randomFillGob(int *ptr);
 void printerGoblin(int *ptr);
 void sorterGoblin(int *ptr);
 int goblin(int choice);
 
-int blackPotionEffect();
-void bluePotionWorld();
+int blackPotionEffect(void); //door 2
+void bluePotionWorld(void); //door 2
+void liabilityWaiver(void); //door 2
+void signLiability(void); //door 2
 
 int randomAscii(void);
 void fillSumArray(int* ptr, int size);
@@ -59,6 +81,31 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr);
 void rollDiceRoom17(int *arr); //allocates array with random numbers using a pointer to array (room 17)
 
 
+
+//Room 20 functions
+void arrayRanFill (int *pnt);
+void arrayPrint(int *pnt);
+int arrayCheck(int *pnt);
+int KeyPad(int num1, int num2, int num3, int num4, int num5, int num6);
+int KeyPadCheck(int num1, int num2, int num3, int num4, int num5, int num6);
+void StringCheckLast( char *pnt);
+
+int randomAscii(void);
+void fillSumArray(int* ptr, int size);
+void printSumArray(int* ptr, int size);
+int sumRandomArray(int* ptr, int size);
+
+//inputWord.txt needed to run functions
+void GameRules();
+void LowerCaseWord(char word[]);
+void PlayAgain(int *againPtr);                                                                                          void PlayOneGame(char solution[], char secretword[]);
+void CreateSecretWord(char solution[], char secretword[]);
+void GetTheLetterGuess(char letterGussed[], char *letterPtr, int *numPtr);
+void ReplaceDash(char solution[], char secretword[], char letter);                                                    void DidYouWin(char solution[], char guess[]);
+
+
+
+
 void main(void)
 {
 	int x,y,z,i,h,g,k,choice=0;
@@ -84,22 +131,151 @@ void main(void)
 		{
 			case 1:
 			{
+				char answer;
+				int num, com;
+				int result = 1;
+				char riddle1[30], riddle2[30], riddle3[30];
+				char riddleOne[] = "What is a DOUGHNUT?";
+				char riddleTwo[] = "What is NOTHING?";
+				char riddleThree[] = "What is a WATERMELON?";
+				puts("You open the door then, close it behind you.");
+				puts("You start freaking out because the water is starting to rise.");
+				puts("You notice that there is a table with 3 boxes and an envelope.");
+				puts("One box has the key to freedom it in.\n");
+				puts("Open the envelope, read the question and select the right answer from the choices given.\n");
+
 				while(choice != 99)
 				{
+					puts("You have 10 seconds to read the question.");
+					puts("Wait for the prompt to enter your answer.\n");
+					puts("1. Which of the following is the correct format to compile a c program?\n");
+					puts("A. gcc o rpgGame rpgGame.c\n");
+					puts("B. gcc -o rpgGame.c rpgGame.c\n");
+					puts("C. gcc -o rpgGame rpgGame.c\n");
+					countDown();
+					printf("\nEnter a letter (A, B, or C) corresponding to your answer or enter Q to Quit): ");
 
+					scanf("%s", &answer);
+
+					if(answer == 'A' || answer == 'a')
+					{
+						com = combo();
+						printf("You need this number combination to open Box A : %d", com);
+						printf("\nYou have 10 seconds to memorize the given combination.");
+						puts(" Enter the combination after the prompt.");
+						countDown();
+						printf("\nEnter the given combination to unlock the box now: ");
+						scanf("%d", &num);
+						while (num != com)
+					{
+						puts("Enter the correct combination before Cookie Monster grabs you! \n");
+
+						scanf("%d", &num);
 				}
-				break;
+					puts("You entered the correct combination and the box is unlocked.\n");
+					puts("Open the box, put your hands inside, and grab what is inside.");
+					puts("Ouch! You just got bitten by a snake. Try again before the poison takes effect.\n");
+					}
+					else if(answer == 'B' || answer == 'b')
+					{
+						com = combo();
+						printf("You need this number combination to open Box B : %d", com);
+						printf("\nYou have 10 seconds to memorize the given combination.");
+						puts(" Enter the combination after the prompt.");
+						countDown();
+						printf("\nEnter the given combination to unlock the box now: ");
+						scanf("%d", &num);
+				while (num !=com)
+				{
+						puts("Enter the correct combination before King Kong crushess you!\n");
+
+						scanf("%d", &num);
+				}
+				puts("You entered the correct combination and the box is unlocked.\n");
+				puts("Put your hand in box 2 and grab what is inside.");
+				puts("Oh no! Your hand caught in a funnel-web spider's nest. Make another choice before you become paralyzed.\n");
+
+					}
+					else if(answer == 'C' || answer == 'c')
+					{
+						displayRiddle();
+						puts("\nRemember to enter your answer in the form of question (e.g.What is a COCONUT?)");
+
+					do
+					{
+						printf("\nEnter your question for Riddle #1: ");
+						fgets(riddle1, sizeof(riddleOne), stdin);
+						result = strcmp(riddleOne, riddle1);
+				
+					} while (result !=0);
+				
+						printf("Your question is: %s\n", riddle1);
+						printf("The correct question is: %s\n", riddleOne);
+						printf("Sweet heavens! You are a brilliant person, %s\n", name);
+					do
+
+					{
+						printf("\nEnter your question for Riddle #2: ");
+						fgets(riddle2, sizeof(riddleTwo), stdin);
+						result = strcmp(riddleTwo, riddle2);
+		
+					} while (result !=0);
+
+						printf("Your question is: %s\n", riddle2);
+						printf("The correct question is: %s\n", riddleTwo);
+						printf("That is divine! You are a mental giant, %s\n", name);
+					do
+					{
+						printf("\nEnter your question for Riddle #3: ");
+						fgets(riddle3, sizeof(riddleThree), stdin);
+						result = strcmp(riddleThree, riddle3);
+
+					} while (result !=0);
+						printf("Your question is: %s\n", riddle3);
+						printf("The correct question is: %s\n", riddleThree);
+						printf("Brainiac! You got a real Einstein brain, wizard, %s\n", name);
+						com = combo();
+						printf("You need this number combination to open Box C : %d", com);
+						printf("\nYou have 10 seconds to memorize the given combination.");
+						puts(" Enter the combination after the prompt.");
+						countDown();
+						printf("\nEnter the given combination to unlock the box now: ");
+						scanf("%d", &num);
+
+					while (num !=com)
+					{
+						puts("Enter the correct combination before Godzilla swallows you!\n");
+
+						scanf("%d", &num);
+					}
+						puts("\nPut your hand in box 3 and grab what is inside");
+						puts("You have chosen wisely! Take the key and escape to freedom.");
+						puts("Choose another room on your way out.\n");
+					break;
+				}
+				else
+				{
+					return 1;
+				}
 			}
-			case 2:
-			{
+			break;
+		}			
+		case 2:
+		{
 
 					while(choice != 99)
 					{
+							int sick;
 							char drinkChoice[10];
 							puts("You open the door and see a table, on top are three potions.");
 							puts("You hear the door lock behind you.");
 							puts("The first is a blue potion, the second is a cloudy green,");
-							puts("the third is as black as the night sky");
+							puts("the third is as dark as the night sky");
+							puts("A curious goblin walks out from the shadows...");
+							puts("\"Before you drink a potion please take this liability waiver...\"");
+							liabilityWaiver();
+							puts("\"I hope you read that now please stamp your name onto it as well\"");
+							signLiability();
 							puts("Which potion would you like to drink? (blue / green / black)");
 							scanf("%s", &drinkChoice);
 							if(strcmp(drinkChoice, "blue") == 0)
@@ -114,6 +290,12 @@ void main(void)
 							{
 								puts("You notice it tasted like rancid milk");
 								puts("You begin to feel nauseous....");
+								puts("You can't help but vomit!");
+								for(sick = 0; sick < 5; sick++)
+								{
+									puts("~~~~~~~~~");
+								}
+								puts("You begin to drown in your vomit...");
 								puts("You have died.");
 								exit(0);
 								break;
@@ -696,12 +878,120 @@ break;
 			}
 			case 8:
 			{
-					while(choice != 99)
+					while (choice != 99)
+				{
+					srand(time(NULL));
+					int action8=0;
+					int action8a=0;
+					int a;
+					char ans8[5] = { 0 };
+					char c;
+					puts("You open the door and find yourself in a long room,.\n");
+					puts("almost like a hallway but you can't see any doors, other than the one you just came though.\n");
+					puts("You can't even see the other end of the room.\n");
+					puts("Hanging on the walls are torches, spaced out every 20 or so feet.\n");
+					puts("There's some writing above the door that you came through.\n");
+					puts("\"Only Forward\"\n");
+					puts("With no other choice, you take the nearest torch and start walking.\n");
+					puts("...\n");
+					puts("After walking for what feels like an eternity, the room hasn't changed;\n");
+					puts("In the distance, you see a shadowy figure moving in the middle of the walkway.");
+					puts("Select an action: \n1) Turn back and return to the previous room you were in.\n");
+					puts("2) Call out to the figure.\n3) Continue walking and try to sneak past the figure.");
+					scanf(" %d", &action8);
+					switch(action8)
 					{
-							puts("you open the door and find ........");
-							scanf("%d",&choice);
+						case 1:
+							puts("You stop walking and quickly turn around.\n");
+							puts("\"thud\"\n");
+							puts("You hit your face on a wall.\n");
+							puts("Above your eyeline on the wall, it's written:\n");
+							puts("\"Only Forward\"\n");
+							puts("You turn around and figure is now looking right at you.\n");
+						case 2:
+							puts("\"Hey there...\", you say, acknowledging its presence.\n");
+							puts("\"mn mmnm nnnmn\", it mumbles, barely audible as you walk towards it.\n");
+							puts("\"Where is this, how do I get home?\" you ask, ignoring its incoherent mumbling.\n");
+							while (action8a != 2)
+							{
+								puts("\"Don't go anywhere, go nowhere\"\n");
+								puts("Select an action:\n");
+								puts("1) \"What do you mean?\"\n");
+								puts("2) That means nothing to you, continue down the hall.\n");
+								scanf(" %d", &action8a);
+							}
+							puts("You are a little spooked by those words, but they were not useful to you in anyway.\n");
+							puts("You continue down the hall for a while\n");
+							puts("...\n");
+							puts("You see it! There it is! The end of this room!\n");
+							break;
+						case 3:
+							puts("You walk cautiously as to not draw its attention in anyway.\n");
+							puts("As you walk past it, it mutters:\n");
+							puts("\"You don't know where...\"\n");
+							puts("Bothered, you turn to ask what it means, but it is gone...\n");
+							puts("You continue walking and come upon the end of the room\n.");
+							break;
+						defualt:
+							puts("A trap door opens beneath your feet!\n");
+							puts("You fall into a room large room and the trap door closes above you1\n");
+							puts("Water starts rushing into the room, but there are no doors!");
+							puts("Goodnight\n");
+							choice = 99;
+							break;
+
+
 					}
-					break;
+					puts("There are 3 doors, each labeled. Select an action:\n");
+					puts("1) Enter the door \"Anywhere\"\n");
+					puts("2) Enter the door \"Nowhere\"\n");
+					puts("3) Enter the door \"Home\"\n");
+					scanf(" %d", &action8);
+					switch (action8)
+					{
+						case 1:
+							puts("You wake up in a cold sweat. You are in your bed. At home.\n");
+							puts("Relieved, you close and eyes and fall back to sleep.");
+							puts("As you fall asleep, you hear a whisper.\n");
+							puts("\"Don't go anywhere, go nowhere\"\n");
+							choice = (rand() % 25) + 1;
+							break;
+						case 2:
+							puts("You wake up in a cold sweat. You are in your bed. At home.\n");
+							puts("Relieved, you close and eyes and fall back to sleep.");
+							puts("Would you like to dream of another adventure?\n");
+							puts("yes or no?\n");
+							scanf(" %s", ans8);
+							for (a = 0; a < 5; a++)
+							{
+								c = ans8[a];
+								if (isupper(c))
+								{
+									ans8[a] = tolower(c);
+								}
+							}
+							if (strcmp(ans8, "yes") == 0)
+							{
+								puts("You awake in a room with 25 doors. Select one of them.\n");
+								scanf("%d", &choice);
+							}
+							else
+							{
+								choice = 99;
+							}
+							break;
+						case 3:
+						default:
+							puts("You open the door and enter the new room. Hmm, the floor is slippery.\n");
+							puts("You look around, there are a lot of doors. Wait, this rooms looks familiar!\n");
+							puts("As suspected, water starts rushing into the room!\n");
+							puts("Choose a room again!\n");
+							scanf("%d", &choice);
+							break;
+					}
+				}
+				break;
+
 			}
 			case 9:
 			{
@@ -1479,56 +1769,185 @@ break;
 			{
 					while(choice != 99)
 					{
-
-							FILE *wRiter;
-                                                        FILE *reAder;
-                                                        puts("you open the door and find a rather normal room which has bed wiht blue covers and a broken down wardrobe");
-                                                        puts("Around the room there is also a strange substance dripping from the ceiling");
-                                                        puts("Do you \n(1)walk towards the bed \n(2)Examine the wardrobe \n(3)walkback out");
-                                                        scanf("%d",&choice);
-                                                        if (choice ==1)
-                                                        {
-                                                                puts("Its a rather plain bed with nothing there");
-                                                                puts("It looks rather comfortable so you decide to take a nap");
-                                                                puts("zzzzzz");
-                                                                puts("zzzzzz");puts("zzzzzz");
-                                                                puts("zzzzzz");puts("zzzzzz");
-                                                                puts("zzzzzz");puts("zzzzzz");
-                                                                puts("zzzzzz");puts("zzzzzz");
-                                                                puts("zzzzzz");puts("zzzzzz");
-                                                                puts("zzzzzz");puts("zzzzzz");
-                                                                puts("You awaken and notice somthing in your pocket");
-                                                                wRiter = fopen("Looking_for_help.txt","w");
-                                                                fprintf(wRiter, "Dear %s,\n",name);
-                                                                fprintf(wRiter,"My name is Abetha Winson I'm soory im bit shy so decided to write you this letter,\n The problem is that I have been stuck whitin this room.\n");
-                                                                fprintf(wRiter,"I saw you sleeping on the bed and I was wondering if you may lend me a hand.\n");
-                                                                fprintf(wRiter,"It seems as though I have become invisable but that is not important right now.\n");
-                                                                fprintf(wRiter,"What I want is number to one be seen again and number two is to escape this retched room.\n");
-                                                                fprintf(wRiter,"So what do you say will you help?\n");
-                                                                choice =99;
-                                                        }
-                                                        else if(choice == 2)
-                                                        {
-                                                               puts("There seems to be somthing odd about this wardrobe");
-                                                               puts("you step inside and...");
-                                                               puts("...\n...\n...\n...\n...\n...");
-                                                               puts("find nothing but an empty wardrobe");
-                                                               choice =99;
-							}
-							else if(choice ==3)
+						FILE *wRiter;
+                        			FILE *reAder;
+						char user[200];
+						char phold;
+						int Lnums[6]={0};
+						int *pim;
+						int userd;
+						x=0;
+						y=0;
+						z=0;
+						i=0;
+						h=0;
+						g=0;
+						pim =Lnums;
+                       				puts("you open the door and find a rather normal room which has bed wiht blue covers and a broken down wardrobe");
+                       				puts("Around the room there is also a strange substance dripping from the ceiling");
+                        			puts("Do you \n(1)walk towards the bed \n(2)Examine the wardrobe \n(3)walkback out");
+                        			scanf("%d",&choice);
+                        			if (choice ==1)
+                        			{
+                            				puts("Its a rather plain bed with nothing there");
+                            				puts("It looks rather comfortable so you decide to take a nap");
+                            				puts("zzzzzz");
+                            				puts("zzzzzz");puts("zzzzzz");  
+                            				puts("zzzzzz");puts("zzzzzz");  
+                            				puts("zzzzzz");puts("zzzzzz");  
+                            				puts("zzzzzz");puts("zzzzzz");  
+                            				puts("zzzzzz");puts("zzzzzz");  
+                            				puts("zzzzzz");puts("zzzzzz");
+                            				puts("You awaken and notice somthing in your pocket");
+                            				wRiter = fopen("Looking_for_help.txt","w");
+                            				for(i=0;i<256;i++)
+                            				{
+                                				phold= name[i];
+                                				if(isupper(phold)|| isspace(phold))
+                                				{
+                                    					phold=tolower(phold);
+                                    					name[i]=phold;
+                                				}
+                            				}
+                            				fprintf(wRiter, "Dear %s,\n",name);
+                            				fprintf(wRiter,"My name is Abetha Winson I'm sorry I'm a bit shy, so decided to write you this letter,\n");
+							fprintf(wRiter,"The problem is that I have been stuck whitin this room.\n");
+                            				fprintf(wRiter,"I saw you sleeping on the bed and I was wondering if you may lend me a hand.\n");
+                            				fprintf(wRiter,"It seems as though I have become invisable but that is not important right now.\n");
+                            				fprintf(wRiter,"What I want is one to be seen again and two is to escape this retched room.\n");
+                            				fprintf(wRiter,"So what do you say will you help?(1.yes, 2.no)\n");
+							scanf("%d",&userd);
+							switch(userd)
 							{
-								puts("You go to open the door but find that at the other side of the door has been walled off");
-								choice =99;
+								case 1:
+									printf("\n\n\nAbetha: Thank you so much for your help I belive there is something in the wardrobe please input 3 to go there\n");
+									scanf("%d",&userd);
+									switch(userd)
+									{
+										case 3:
+											puts("You walk towards the wardrobe afraid of what you may find");
+											puts("\nYou notice that there is nothing but determined to find answers you start moving everything around");
+											puts("\nLuckly there was a strange cube underneath the floorboard of the wardrobe\n");
+											puts("\nThe note seems to have a new message");
+											printf("Abetha: Yes you found the sacred cube now hopefully one of the faces is a 2 please input 4 to see the faces\n");
+											scanf("%d",&userd);
+											switch (userd)
+											{
+												case 4:
+													arrayRanFill(pim);
+													arrayPrint(pim);
+													userd=arrayCheck(pim);
+													switch(userd)
+													{
+													    case 2:
+													        puts("You head towards the door and discover there is slot for the cube."); 
+														puts("So you put the cube inside the slot with the two facing towrds you.");
+													        puts("you hear a loud crashing sound coming from the other side you begin to open the door..");
+													        printf("Abetha:Wait don't leave me!! \n");
+														printf("Abetha:I'm still invisable and there is only one way to solve it\n");
+													        puts("choose: 1. Walk out anyway\n        2. stay and help");
+													        scanf("%d",&userd);
+													        if(userd==1)
+													        {
+													            puts("You walk out feeling no remorse because you finaly get to go home and rest");
+													            puts("Besides someone else will help her.");
+													        }
+													        else if(userd==2)
+													        {
+													            printf("Abetha: Thank you so much for healping me.");
+														    printf(" okay what I need is for you to go under the bed.\n");
+													            printf("Abetha: Once you are there I need you to get the key pad that is under there\n");
+													            printf("Abetha: Then I need you to input these numbers two 1's three 4's and six fives");
+														    printf(" once you are done entering the numbers hit 0\n");
+													            printf("Abetha: finaly I need you to go the directory that this game is in");
+														    printf(" and create a note titled Free_At_Last.txt\n");
+													            printf("Abetha: in the note I need you to write: Free\n");
+													            puts("Are you ready to start: \n1.Yes \n2.no");
+													            scanf("%d",&userd);
+													            if(userd==1)
+													            {
+													                puts("you head to get the keypad which has only numbers from 0-6");
+													                i=0;
+													                k=KeyPad(x,y,z,i,h,g);
+													                if(k==2)
+													                {
+													                    reAder = fopen("Free_At_Last.txt","r");
+													                    if((reAder= fopen("Free_At_Last.txt","r"))==NULL)
+													                    {
+													                        printf("Abetha:Where is note did you not make it? Now I'm stuck here forever\n");
+													                    }
+													                    else 
+													                    {
+													                        while(!feof(reAder))
+													                        {
+													                            fscanf(reAder,"%s",user);
+													                        }
+													                        char *Frpnt;
+						                                                    				Frpnt = user;
+						                                                    				StringCheckLast(Frpnt);
+													                    }
+													                }
+													            }
+													            else
+													            {
+													                puts("You decide this is to much and walk out.");
+													                puts("You walk out feeling no remorse because you finaly get home and rest");
+															puts("besides someone else will help her.");
+													            }
+													        }
+													        else
+													        {
+													            puts("You say and do nothing");
+													            printf("Abetha: Are you okay?\n");
+													            puts("You stare blankly at her as you yourslef start to fade away");
+													            puts("The End?");
+													        }
+													        break;
+													    default:
+													        puts("\nGame Over");
+													        break;
+													}
+												    break;
+												default:
+													puts("\nGame Over");
+													break;
+											}
+											break;
+										default:
+											puts("You failed and now you do not exist. Better follow directions next time");
+											break;
+									}	
+									break;
+								case 2:
+									puts("You hear sobbing and you slowly feel yourself fade from exisitance");
+									break;
+								default:
+									puts("You wait aimlessy wondring if you missed somthing maybe checking your files will help.");
+									break;
 							}
-							else
-							{
-								puts("You continue standing at the entrance contemplating life");
-								choice =99;
-							}
-
+                            				choice =99;     
+                        			}
+                        			else if(choice == 2)
+                        			{	   
+                            				puts("There seems to be somthing odd about this wardrobe");
+                            				puts("you step inside and...");
+                            				puts("...\n...\n...\n...\n...\n...");
+                            				puts("find nothing but an empty wardrobe");
+                            				choice =99;      
+						}
+						else if(choice ==3)
+						{
+							puts("You go to open the door but find that the other side of the door has been walled off");
+							choice =99;	
+						}
+						else 
+						{
+							puts("You continue standing at the entrance contemplating life");
+							choice =99;	
+						}	
 					}
-					break;
-			}
+				break;
+                       	}
 			case 21:
 			{
 					puts("you open the door and find a skeleton in a suit.");
@@ -1685,8 +2104,59 @@ break;
 			}
 		}
 	}
-    }
 
+
+   }
+
+//case 1 functions
+
+int combo()
+{
+	int n;
+	srand(time(NULL));
+	//return n = rand() % 100 + 3;
+	return n = (rand() % (1000 - 0 + 1)) + 0;
+
+}
+
+int countDown()
+{
+	int c, d;
+	for (c = 1; c <= 32767; c++)
+	for (d = 1; d <= 32767; d++)
+	{
+
+	}
+	printf("\nTime's out!\n");
+	return 1;
+}
+
+
+int displayRiddle()
+{
+	FILE *fptr;
+	char filename[100], c;
+	// Open file
+	fptr = fopen("riddle.txt", "r");
+
+	if (fptr == NULL)
+	{
+		printf("Cannot open file \n");
+		exit(0);
+	}
+
+	// Read contents from file
+	
+	c = fgetc(fptr);
+	while (c != EOF)
+	{
+		printf ("%c", c);
+		c = fgetc(fptr);
+	}
+	
+	fclose(fptr);
+	return 0;
+}
 
 void printerGoblin(int *ptr)
 {
@@ -1933,6 +2403,27 @@ void bluePotionWorld()
 
 }
 
+void liabilityWaiver(void)
+{
+	FILE *lptr = fopen("liabilitywaiver.txt", "w");
+	fprintf(lptr, "================================================\n");
+	fprintf(lptr, "I drink this potion knowing I will probably die.\n");
+	fprintf(lptr, "I waive any right to be upset or mad.\n");
+	fprintf(lptr, "Also I will not sue.\n");
+	fprintf(lptr, "================================================\n");
+	fclose(lptr);
+
+}
+
+void signLiability(void)
+{
+	FILE *lptr = fopen("liabilitywaiver.txt", "a+");
+	char signature[20];
+	printf("What name would you like to sign? (Hopefully your own!)\n");
+	scanf("%s", signature);
+	fprintf(lptr, "Signed, %s\n", signature);
+	fclose(lptr);
+}
 
 void rm11EnemyName(char *enPtr)
 {
@@ -2222,7 +2713,7 @@ void rm11Battle(int *ptr, char *enPtr, char *nmPtr)
 	{
 		printf("\nThe dwarf died!\n");
 		printf("Game Over\n\n");
-
+		win = 2;
 	}
 
         else if(*(ptr+2) <= 0)
@@ -3469,7 +3960,253 @@ void dead(void)
  puts("YOU DIED");
 }
 
+
 void printerRoom15(int arr1[16], int *pointer)
+
+void arrayRanFill (int *pnt)
+
+{
+
+	int i=0;
+
+	for(i=0;i<6;i++)
+
+	{
+
+		*pnt=1+(rand()%6);
+
+		pnt++;
+
+	}
+
+}
+
+void arrayPrint(int *pnt)
+
+{
+
+	int i;
+
+	for(i=0;i<6;i++)
+
+	{
+
+		printf("side %d = %d\n",(i+1),*pnt);
+
+		pnt++;
+
+	}
+
+	puts(" ");
+
+}
+
+int arrayCheck(int *pnt)
+
+{
+
+    int i, x;
+
+    x=0;
+
+    for (i=0;i<6;i++)
+
+    {
+
+        if(*pnt==2)
+
+        {
+
+            
+
+            x=2;
+
+        }
+
+        pnt++;
+
+    }
+
+    if(x==2)
+
+    {
+
+        printf("Abetha: Yes you have one two now please head back to the door.\n");
+
+    }
+
+    else
+
+    {
+
+        x=3;
+
+        printf("Abetha: Well looks like we are stuck in here forever\n");
+
+    }
+
+    return x;
+
+}
+
+int KeyPad(int num1, int num2, int num3, int num4, int num5, int num6)
+
+{
+
+    int x,y;
+
+    puts("You have the keypad in your hands now to input the numbers");
+
+    while(x !=0)
+
+    {
+
+        scanf("%d",&x);
+
+        switch(x)
+
+        {
+
+         case 1:
+
+            num1++;
+
+            break;
+
+         case 2:
+
+            num2++;
+
+            break;
+
+         case 3:
+
+            num3++;
+
+            break;
+
+         case 4:
+
+            num4++;
+
+            break;
+
+         case 5:
+
+            num5++;
+
+            break;
+
+         case 6:
+
+            num6++;
+
+            break;
+
+        case 0:
+
+            break;
+
+         default:
+
+            puts("The Number you tried to press was not on the keypad");
+
+            break;
+
+        }
+
+    }
+
+    y=KeyPadCheck(num1,num2,num3,num4, num5, num6);
+
+    return y;
+
+}
+
+int KeyPadCheck(int num1, int num2, int num3, int num4, int num5, int num6)
+
+{
+
+    int x=0;
+
+    if( num1==2 && num4==3 && num5==6 && num2==0 && num3 ==0 && num6==0)
+
+    {
+
+        puts("You see a bright flash appear in the room");
+
+        printf("Abetha: Yes its working only one more step to go.\n");
+
+        x=2;
+
+    }
+
+    else
+
+    {
+
+        printf("Abetha: Well you messed that up Thanks a lot.\n");
+
+        puts("You leave the room feeling sad for letting Abetha down.");
+
+    }
+
+    return x;
+
+}
+
+void StringCheckLast( char *pnt)
+
+{
+
+    char last[200]="Free";
+
+    const char *point;
+
+    point = last;
+
+    if(strcmp(pnt,point)==0)
+
+    {
+
+        printf("Abetha: Yes I can see myself again\n");
+
+        puts("You look up and see Abetha as a young girl around the age of 7");
+
+        printf("Abetha: You're probably wondering who I am.\n");
+
+        printf("Abetha: I am the lost daughter of Llywelyn ap Iorwerth who decided to sacrifice him so that his rule may prospare.\n");
+
+        printf("Abetha: See I have been stuck here for far to long and when you came in I saw an oppertunity to escape.\n");
+
+        printf("Abetha: I know this room is one of many you could have chosen and maybe things would have played out diffrently had you gone into another room.\n");
+
+        printf("Abetha: I am glad you chose this one as you have allowed my spirit to be free I wish you well on your future journeys to come\n");
+
+        puts("You feel a sense of peace and relief now that it is all over you turn and walk out the door.");
+
+        puts("you return back to your regular life.");
+
+        
+
+    }
+
+    else
+
+    {
+
+        printf("Abetha: Damn it I was so close to being free you just had to mess it up\n");
+
+        puts("You feel ashamed for letting her down and decdide too leave the room full of regret");
+
+    }
+
+}
+
+
+
+int randomAscii(void)
+
 {
 	int i =0;
 	int count = 0;
@@ -3619,3 +4356,32 @@ int numVowelsRoom15(char *array)
 
 	return count;
 }
+
+void castaway(void)
+{
+    char phrase1[20], phrase2[20], phrase3[20];
+    int i, x;
+    double a, b, correct, guess;
+    puts("This is your life now, we got nothing but time...");
+    puts("You have 3 chances to get this right! if you don't....nothing really happens");
+    for(i = 0; i < 3; i++)
+    {
+        puts("Enter 2 numbers: ");
+        scanf(" %lf %lf", &a, &b);
+        printf("a = %.2lf\nb = %.2lf\n", a, b);
+        puts("Square the sum of those two numbers, add 3, then square that number, what do you get?");
+        correct = pow((pow(a,b)+3),2);
+        puts("Your guess?: ");
+        scanf(" %lf", &guess);
+        if(correct == guess)
+        {
+            puts("correct!");
+        }
+        else
+        {
+            puts("WRONG");
+            break;
+        }
+    }
+}
+
