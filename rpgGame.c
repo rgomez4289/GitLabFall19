@@ -268,7 +268,7 @@ void main(void)
 				}
 				else
 				{
-					return 1;
+					return;
 				}
 			}
 			break;
@@ -1514,7 +1514,7 @@ break;
 						bool userWins = false;
 						ptr=gameWord; //pointer for char array
 						char gameType;
-						char gameGuess="x";
+						char gameGuess='x';
 						while (levelChoice != 4)
 						{
 							puts("Welcome to the HANGMAN room, choose your option:");
@@ -1532,7 +1532,7 @@ break;
 								while (gameGuess != '4'){
 									puts("enter your first guess:");
 									scanf("%s", &gameGuess);
-									char *guessPtr = gameGuess;
+									//char *guessPtr = gameGuess;
 									//checkCharacter(ptr, guessPtr);
 									//printf("testing");
 									gameGuess=4;
