@@ -1069,7 +1069,9 @@ case 6:
 								puts ("'Unfortunately, I cant allow you to use that power. You dont understand the severe concequences that kind of power will give to a mortal human like you.'");
 								puts("All of a sudden a large creature emerges from the cave and tries to stomp on you. You run away and duck into a small cave but drop the dice while running.");
 								puts("You get knocked out and wake up in your bed.");
-								puts("You mean to tell me that was all a dream");		   
+								puts("'You mean to tell me that was all a dream'");
+puts("You look up to see a red-eyed General Kenobi hanging from your cieling, lightsaber drawn. He looks you in the eye, and then...");
+puts("To Be Continued...");		   
 								}
 							else if (outc == 2,4,6,8,10,12)
 								{
