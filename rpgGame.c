@@ -48,14 +48,6 @@ void castaway(void); //room 14
 void wordScramble(int *gameScore); //room 14
 void fightSystem(int *hp, int *machetePower); //room14
 
-int randGenRoom15(int topNum); //Door 15
-void sortArrayRoom15(int *pointer, int arraySize); //Door 15
-void randomFillRoom15(int array[16], int *pntr); //Door 15
-void printerRoom15(int array[16], int *pntr); //Door15
-void printLowerRoom15(char *array); //Door 15
-void printUpperRoom15(char *array); //Door 15
-int numVowelsRoom15(char *array); //Door 15
-
 // room 12
 void printMan(int numWrong, char gameType);
 void findWord(char *pointer, char gameType);
@@ -85,7 +77,13 @@ int ang(int health,int *wepP,int wepr); //door 3
 void dead(void);
 
 
-
+int randGenRoom15(int topNum); //Door 15
+void sortArrayRoom15(int *pointer, int arraySize); //Door 15
+void randomFillRoom15(int array[16], int *pntr); //Door 15
+void printerRoom15(int array[16], int *pntr); //Door15
+void printLowerRoom15(char *array); //Door 15
+void printUpperRoom15(char *array); //Door 15
+int numVowelsRoom15(char *array); //Door 15
 
 
 // enemynames.txt needed to run functions
@@ -112,12 +110,10 @@ int sumRandomArray(int* ptr, int size);
 //inputWord.txt needed to run functions
 void GameRules();
 void LowerCaseWord(char word[]);
-void PlayAgain(int *againPtr);                                                                                          
-void PlayOneGame(char solution[], char secretword[]);
+void PlayAgain(int *againPtr);                                                                                          void PlayOneGame(char solution[], char secretword[]);
 void CreateSecretWord(char solution[], char secretword[]);
 void GetTheLetterGuess(char letterGussed[], char *letterPtr, int *numPtr);
-void ReplaceDash(char solution[], char secretword[], char letter);                                                    
-void DidYouWin(char solution[], char guess[]);
+void ReplaceDash(char solution[], char secretword[], char letter);                                                    void DidYouWin(char solution[], char guess[]);
 
 
 
@@ -5168,4 +5164,5 @@ int numVowelsRoom15(char *array)
 
 	return count;
 }
+
 
