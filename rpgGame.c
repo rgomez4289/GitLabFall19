@@ -323,8 +323,8 @@ void main(void)
 
 						srand(time(NULL)); //Used for critical strike for the bow
 
-	          int boss[] = {0,0,0,0,0,0,1};
-	          int item[] = {1,1,1};
+	          int boss[] = {0,1,0,1,1,1,1};
+	          int item[] = {0,0,0};
 	          char area[9][200] ={
 	            "You are in a Grave Yard surrounded by cliffs\n",
 	            "You are standing on a cliff side\nBehind you is a graveyard\nIn front you see a shrine with a fading light\n",
