@@ -77,7 +77,13 @@ int ang(int health,int *wepP,int wepr); //door 3
 void dead(void);
 
 
-
+int randGenRoom15(int topNum); //Door 15
+void sortArrayRoom15(int *pointer, int arraySize); //Door 15
+void randomFillRoom15(int array[16], int *pntr); //Door 15
+void printerRoom15(int array[16], int *pntr); //Door15
+void printLowerRoom15(char *array); //Door 15
+void printUpperRoom15(char *array); //Door 15
+int numVowelsRoom15(char *array); //Door 15
 
 
 // enemynames.txt needed to run functions
@@ -108,6 +114,7 @@ void PlayAgain(int *againPtr);                                                  
 void CreateSecretWord(char solution[], char secretword[]);
 void GetTheLetterGuess(char letterGussed[], char *letterPtr, int *numPtr);
 void ReplaceDash(char solution[], char secretword[], char letter);                                                    void DidYouWin(char solution[], char guess[]);
+
 
 int rollingdice1(void); //room 6 function
 
@@ -4993,3 +5000,4 @@ int rollingdice1(void)
 }
 return 0;
 }
+
