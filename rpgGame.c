@@ -110,10 +110,12 @@ int sumRandomArray(int* ptr, int size);
 //inputWord.txt needed to run functions
 void GameRules();
 void LowerCaseWord(char word[]);
-void PlayAgain(int *againPtr);                                                                                          void PlayOneGame(char solution[], char secretword[]);
+void PlayAgain(int *againPtr);                                                                                          
+void PlayOneGame(char solution[], char secretword[]);
 void CreateSecretWord(char solution[], char secretword[]);
 void GetTheLetterGuess(char letterGussed[], char *letterPtr, int *numPtr);
-void ReplaceDash(char solution[], char secretword[], char letter);                                                    void DidYouWin(char solution[], char guess[]);
+void ReplaceDash(char solution[], char secretword[], char letter);                                                    
+void DidYouWin(char solution[], char guess[]);
 
 
 int rollingdice1(void); //room 6 function
@@ -1835,7 +1837,7 @@ break;
 					break;
 			}
 			case 15:
-			{
+{
 					while(choice != 99)
 					{
 						char userOption[256];
@@ -1844,6 +1846,9 @@ break;
 						char yellow[7]={"yellow"};
 						char stay[5]={"stay"};
 						char yes[4]={"yes"};
+						int array[30]={0};
+						int *pntr;
+						pntr = array;
 						srand(time(NULL));
 
 						puts("You open the door and find 3 pills sitting on a tray. A man wearing all black asks you to take one. There is a red pill, a blue pill, and a yellow pill. Which one do you choose?");
@@ -1860,7 +1865,29 @@ break;
 								scanf(" %s",&userOption);
 								if(strcmp(userOption,yes)==0)
 								{
-									printf("Fine. You're no fun. Game over, %s.\n",name);
+									puts("Fine. You're no fun. In that case, I have another game for you.");
+									char userString[256]={};
+									char outputString[256]={};
+									int amtNum = 0;
+									char *array= userString;
+									FILE *outputptr;
+									outputptr = fopen("output.txt","w");
+									puts("Enter a string less than 256 characters with no spaces. All user strings entered will be logged in \"output.txt\".");
+									scanf(" %s",&userString);
+									fprintf(outputptr, "User entered: %s\n", userString);
+
+									puts("");
+									printLowerRoom15(array);
+
+									puts("");
+									printUpperRoom15(array);
+
+									puts("");
+									puts("Number of vowels in string:");
+									int vowels = numVowelsRoom15(array);
+									printf("%d\n", vowels);
+									puts("Thanks for playing!");
+									fclose(outputptr);
 									choice = 99;
 									break;
 								}
@@ -1871,7 +1898,7 @@ break;
 									scanf(" %s",&userOption);
 									int i,j;
 									i = atoi(userOption);
-									j = randGen(10);
+									j = randGenRoom15(10);
 									if(i==j)
 										printf("You guessed right! The number was %d!\n",j);
 									else
@@ -1888,7 +1915,7 @@ break;
 								scanf(" %s",&userOption);
 								int i,j;
 								i = atoi(userOption);
-								j = randGen(10);
+								j = randGenRoom15(10);
 								if(i==j)
 								{
 									printf("You guessed right! The number was %d!\n",j);
@@ -1912,9 +1939,33 @@ break;
 						}
 						if(strcmp(userOption,yellow) == 0)
 						{
+							char yellowOption[256];
 							puts("You chose the yellow pill!");
-							puts("WHOA! What on Earth is going on? All of a sudden, you are transported to a random room!");
-							choice  = randGen(25);
+							puts("The man takes you to a room with a table. On the table, there are 16 cups, arranged in a 4x4 grid.");
+							puts("All of the cups have a number written on them, from 1 through 99.");
+							puts("");
+							puts("The format of the cups:");
+							puts("Cup1    Cup2    Cup3    Cup4");
+							puts("Cup5    Cup6    Cup7    Cup8");
+							puts("Cup9    Cup10   Cup11   Cup12");
+							puts("Cup13   Cup14   Cup15   Cup16");
+							puts("");
+							puts("The order that the cups are arranged in:"); 
+							randomFillRoom15(array,pntr);
+							printerRoom15(array,pntr);
+							puts("Do you want to put the cups in order from lowest number to highest? (Enter \"yes\" or \"no\")");
+							scanf(" %s",&yellowOption);
+							if(strcmp(yellowOption,yes)==0)
+							{
+								sortArrayRoom15(pntr,16);
+								printerRoom15(array,pntr);
+								printf("Thanks for playing, %s!\n",name);
+								choice = 99;
+								break;
+							}
+							else
+								choice = 99;
+							printf("Oh man! Maybe next time, then! Game over, %s.\n",name);
 							break;
 						}
 						if(strcmp(userOption,"99") == 0)
@@ -4999,5 +5050,164 @@ int rollingdice1(void)
  (rand() % 6)+ 1; 
 }
 return 0;
+}
+
+int randGenRoom15(int topNum)
+{
+	int x=0;
+	int maxNum = topNum;
+	x = 1 + (rand() % maxNum);
+	return x;
+}
+
+void printerRoom15(int arr1[16], int *pointer)
+{
+	int i =0;
+	int count = 0;
+	for(i=0; i<16; i++)
+	{
+		if(*pointer < 10)
+			printf("%d       ",*pointer);
+		else
+			printf("%d      ",*pointer);
+		count++;
+		pointer++;
+		if(count == 4)
+		{
+			puts("");
+			count = 0;
+		}	
+	}
+
+	puts("");
+}
+
+void randomFillRoom15(int arr1[16], int *pointer)
+{
+	int i=0;
+
+	for(i=0; i<16; i++)
+	{
+		*pointer = rand() % (99) + 1;
+		pointer++;	
+	}
+}
+
+void sortArrayRoom15(int *pointer, int arraySize)
+{
+	int i,j,temp;
+	for(i=0; i<arraySize; i++)
+	{
+		for(j=0; j<(arraySize - 1 - i); j++)
+		{
+			if(*(pointer+j) > *(pointer + (j+1)))
+			{
+				temp = *(pointer+j);
+				*(pointer+j)= *(pointer+(j+1));
+				*(pointer+(j+1)) = temp;
+			}
+		}
+	}
+}
+
+void printLowerRoom15(char *array)
+{
+	int i;
+	char ch;
+	puts("Lowercase letters:");
+
+	for(i=0; i<256; i++)
+	{
+		ch = *array;
+		
+		if(islower(ch)>0)
+		{
+			printf("%c",ch);
+		}
+
+		if(ch==32)
+		{
+			printf(" ");
+		}
+
+		*array++;
+	}
+
+	puts("");
+}
+
+void printUpperRoom15(char *array)
+{
+	int i;
+	char ch;
+	puts("Uppercase letters:");
+
+	for(i=0; i<256; i++)
+	{
+		ch = *array;
+
+		if(isupper(ch)!=0)
+		{
+			printf("%c", ch);
+		}
+
+		if(ch==32)
+		{
+			printf(" ");
+		}
+
+		*array++;
+	}
+
+	puts("");
+}
+
+int numVowelsRoom15(char *array)
+{	
+	int i;
+	char ch;
+	int count = 0;
+
+	for(i=0; i<256; i++)
+	{
+		ch = *array;
+		switch(ch)
+		{
+			case 'a':
+				count++;
+				break;
+			case 'A':
+				count++;
+				break;
+			case 'e':
+				count++;
+				break;	
+			case 'E':
+				count++;
+				break;
+			case 'i':
+				count++;
+				break;
+			case 'I':
+				count++;
+				break;
+			case 'o':
+				count++;
+				break;
+			case 'O':
+				count++;
+				break;
+			case 'u':
+				count++;
+				break;
+			case 'U':
+				count++;
+				break;
+		}
+
+		*array++;
+	}
+
+	return count;
 }
 
