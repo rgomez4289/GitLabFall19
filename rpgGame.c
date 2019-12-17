@@ -40,6 +40,12 @@ int countDown(void);
 int displayRiddle(void);
 
 
+#define ARRSIZE 20 //room 7 - Robert Gomez
+#define NUMARRSIZE 100//room 7
+
+void arrayFill(double *aPnt, int size);//room 7
+
+
 #define MAXGUESSES 5
 #define WORDSIZE 25
 
@@ -1102,54 +1108,178 @@ break;
 			{
 					while(choice != 99)
 					{
-						puts("You open the door and close it behind you");
-                                                puts("You appear to be standing on a small patch of land in the middle of a small lake.");
-                                                puts("Then, your body feels light, and you slowly begin floating in mid air");
-                                                puts("You then notice that you are beginning to float upwards, and you feel as if you should be afraid, but are instead curious as you see three sources of light above you");
-                                                puts("The three sources of light appear to be gateways to alternate dimensions, so you must wade through the air to put yourself in a position to enter the dimension of your choosing");
-                                                puts("The three choices are 1) light 2) grey 3) dark");
-                                                scanf("%d", &x);
+						FILE *rPnt;
+        					FILE *wPnt;
+        					if((wPnt = fopen("secretcode.txt", "w")) == NULL)
+       						{
+                					printf("File could not be opened.\n");
+                					exit(1);
+        					}
 
-                                                if(x == 1)
-                                                 {
-                                                         puts("You make it through the light portal and land face first in a field of grass.");
-                                                         puts("As you look up, you are in awe of the environment around you. You see green, grassy, plains and hills extending out to the horizon in every possibile direction you look");
-                                                         puts("You begin flying, feeling the slight breeze in your face, and looking down at all of the waterfalls and lakes within all of the green hills and plains.");
-							 puts("You are taking the entire scene in, and as you look out to the horizon you see the sun shining very brightly, which temporarily distorts your vision");
-                                                         puts("Once your vision clears up, you notice that you are rapidly falling through the sky, and brace for impact as you are about to land in a lake.");
-                                                         puts("The end");
+        					if((rPnt = fopen("room7names.txt", "r")) == NULL)
+        					{       
+                					printf("File could not be opened.\n");
+        					}
+        					else
+        					{
+                					int selection;
+                					double arr[NUMARRSIZE] = {0};
+                					double *aPnt;
+                					aPnt = arr;
+                					arrayFill(aPnt,NUMARRSIZE);
+                					char word[ARRSIZE] = {0};
+                					printf("Enter a LOWERCASE word. This will help you achieve your goal.\n\n");
+                					fgets(word, ARRSIZE, stdin);
+                					int q, p;
+                					for(p = 0; p < 50; p++)
+                					{
+                        					for(q = 0; q < NUMARRSIZE; q++)
+                        					{
+                                					fprintf(wPnt, "%.1lf ", pow(arr[q], 2));
+                        					}
+                                					fputc('\n', wPnt);       
+                					}
+                					printf("\nYou open the door and close it behind you. You appear to be standing on a small patch of land in the middle of a small lake.\n");
+                					printf("Then, your body feels light, and you slowly begin floating in mid air\n");
+                					printf("You then notice that you are beginning to float upwards, and you feel as if you should be afraid,\n");
+		 					printf("but are instead curious as you see three sources of light above you.\n");
+                					printf("The three sources of light appear to be gateways to alternate dimensions, so you must\n");
+                					printf("wade through the air to put yourself in a position to enter the dimension of your choosing\n\n");
+                					printf("The choices are "); 
+                					printf("1) light   2) grey   3) dark   4)Welcome back from your other wordly experience, enter the secret code   5) quit\n\n");
+                					scanf("%d", &selection);
+                					while(selection != 5)
+                					{
+                        					char name[ARRSIZE] = {0};
+                        					fscanf(rPnt, "%s", name);
+                        					switch(selection)
+                        					{
+                                					case 1:
+                                      						printf("You make it through the light portal and land face first in a field of grass\n");
+                                      						printf("As you look up, you are in awe of the environment around you. You see green, grassy, plains and hills");      
+                                      						printf(" extending out to the horizon in every possible direction you look\n");
+                                      						printf("You begin flying, feeling the slight breeze in your face, and looking down at ");
+                                      						printf("all of the waterfalls and lakes within all of the green hills and plains.\n");
+                                      						printf("You are taking the entire scene in, and as you look out to the horizon you see the sun shining very brightly \n");
+                                      						printf("which temporarily distorts your vision\n");
+                                      						printf("Once your vision clears up, you notice that you are rapidly falling through the sky,");
+                                      						printf(" and brace for impact as you are about to land in a lake.\n");
+                                      						printf("You find yourself in a room with lots of numbers on the walls,\n");
+                                      						printf("and make your way down searching for a code......(check secretcode.txt)\n\n");
+				      						while(!feof(rPnt))
+                                      						{
+                                                					int i;
+                                                					for(i = 0; i < ARRSIZE; i++)
+                                                					{
+                                                        					if(isalpha(name[i]))
+                                                        					{
+                                                                					fputc(toupper(name[i]), wPnt);
+                                                        					}
+                                                        					else if(isspace(name[i]))
+                                                        					{
+                                                                					fputc(toupper(name[i]), wPnt);
+                                                        					}
+                                                        					fscanf(rPnt, "%s", name);
+                                                        					char code[] = "secretcode";
+                                                        					fprintf(wPnt, "%s", code);
+                                                        					fprintf(wPnt, "%s", word);   
 
-                                                         break;
-                                                 }
-
-                                                 else if(x == 2)
-                                                 {
-                                                         puts("You make it through the grey portal and immediately feel the cold weather.");
-							 puts("You look around you, and all you see is mountains and hills completely covered in snow");
-                                                         puts("You begin flying through this cold, white, mysterious terrain, then you notice that the snow is falling a lot quicker");
-                                                         puts("The snow makes it so hard to see that you decide to fly all the way up but lose control of your flying and become trapped in a snowstorm");
-                                                         puts("The end");
-
-                                                         break;
-                                                 }
-
-                                                 else if(x == 3)
-                                                 {
-							puts("You make it through the dark portal and fall face first into a field of white grass");
-                                                        puts("You look up and notice the sunset, and white, grassy, plains and hills that extend out to the horizon in every direction you look");
-                                                        puts("You begin flying, taking in the scenery, and feeling the rain in your face, when suddenly you see a black void destroy everything behind you.");
-                                                        puts("The end");
+                                                					}
+                                        					}
+                                       						 break;
 
 
+                               						case 2:
+				      						printf("You make it through the grey portal and immediately feel the cold weather.\n");
+                                      						printf("You look around you, and all you see is mountains and hills completely covered in snow\n");
+                                      						printf("You begin flying through this cold, white, mysterious terrain,\n");
+                                      						printf("then you notice that the snow is falling a lot quicker");
+                                      						printf("The snow makes it so hard to see that you decide to fly all the way up, ");
+                                      						printf("but lose control of your flying and become trapped in a snowstorm.\n");
+                                      						printf("You find yourself in a room with lots of numbers on the walls,\n");
+                                      						printf("and make your way down searching for a code......(check secretcode.txt)\n");
+                                      						while(!feof(rPnt))
+                                      						{
+                                                					int i;
+                                                					for(i = 0; i < ARRSIZE; i++)
+                                                					{
+                                                        					if(isalpha(name[i]))
+                                                        					{
+                                                                					fputc(toupper(name[i]), wPnt);
+                                                        					}
+                                                        					else if(isspace(name[i]))
+                                                        					{
+                                                                					fputc(toupper(name[i]), wPnt);
+                                                        					}
+                                                					}
+											fscanf(rPnt, "%s", name);
+                                                					char code[] = "secretcode";
+                                                					fprintf(wPnt, "%s", code);
+                                                					fprintf(wPnt, "%s", word);
+                                     						}
+                                    					 	break;
 
-                                                         break;
-                                                 }
-				        	 else
-                                                 {
-                                                         puts("Wrong choice");
-                                                 }
+
+                               						case 3:
+
+                                     						printf("You make it through the dark portal and fall face first into a field of white grass\n");
+                                     						printf("You look up and notice the sunset, and white, grassy, plains and hills\n");
+                                     						printf("that extend out to the horizon in every direction you look\n");
+                                     						printf("You begin flying, taking in the scenery, and feeling the rain in your face,\n ");
+                                     						printf("when suddenly you see a black void destroy everything behind you.\n");
+                                     						printf("You find yourself in a room with lots of numbers on the walls,\n");
+                                     						printf("and make your way down searching for a code......(check secretcode.txt)\n");
+                                     						while(!feof(rPnt))
+                                     						{
+                                                						int i;
+                                                						for(i = 0; i < ARRSIZE; i++)
+                                                						{
+                                                        						if(isalpha(name[i]))
+                                                        						{
+								   						fputc(toupper(name[i]), wPnt);
+                                                        						}
+                                                       						 	else if(isspace(name[i]))
+                                                        						{
+                                                                						fputc(toupper(name[i]), wPnt);
+                                                        						}
+                                                						}
+                                                						fscanf(rPnt, "%s", name);
+                                                						char code[] = "secretcode";
+                                                						fprintf(wPnt, "%s", code);   
+                                                						fprintf(wPnt, "%s", word);
+                                      						}
+                                      						break;
+
+                               						case 4:
+                                        					puts("");
+                                        					char input[ARRSIZE] = {0};
+                                        					char thecode[] = "secretcode";
+                                        					printf("Enter the secret code.\n");
+                                        					scanf("%s", input);
+                                        					if(strcmp(input, thecode) == 0)
+                                        					{
+                                                					printf("Congratulations, you have found the meaning of life.\n");
+                                        					}
+                                        					else
+										{
+                                                					printf("You do not have the code.\n");
+                                        					}
+                                        					break;
+                        					}
+                        					rewind(rPnt);
+                        					printf("Choose another path.\n\n");
+                        					printf("1) light 2) grey 3) dark 4)Welcome back from your other wordly experience, enter the secret code 5) quit\n");
+                        					scanf("%d", &selection);         
+
+                					}
+                					char code[] = "secretcode";
+                					fprintf(wPnt, "%s", code);      
 
 
+         					}
+					
+
+					
 
 
 
@@ -2641,6 +2771,30 @@ break;
 	}
 
 }
+
+
+
+//door 7
+void arrayFill(double *aPnt, int size)
+{
+        srand(time(NULL));
+        int i, y;
+        for(i = 0; i < size; i++)
+        {
+                y = (1 + rand() % 9);
+                *(aPnt + i) = y;
+        }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 //case 1 functions
