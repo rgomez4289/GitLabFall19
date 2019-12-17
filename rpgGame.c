@@ -50,9 +50,6 @@ void fightSystem(int *hp, int *machetePower); //room14
 
 // room 12
 void printMan(int numWrong, char gameType);
-void findWord(char *pointer, char gameType);
-void checkCharacter(char *ptr1, char *ptr2);
-
 
 void randomFillGob(int *ptr);
 void printerGoblin(int *ptr);
@@ -110,11 +107,11 @@ int sumRandomArray(int* ptr, int size);
 //inputWord.txt needed to run functions
 void GameRules();
 void LowerCaseWord(char word[]);
-void PlayAgain(int *againPtr);                                                                                          
+void PlayAgain(int *againPtr);
 void PlayOneGame(char solution[], char secretword[]);
 void CreateSecretWord(char solution[], char secretword[]);
 void GetTheLetterGuess(char letterGussed[], char *letterPtr, int *numPtr);
-void ReplaceDash(char solution[], char secretword[], char letter);                                                    
+void ReplaceDash(char solution[], char secretword[], char letter);
 void DidYouWin(char solution[], char guess[]);
 
 
@@ -123,7 +120,7 @@ int rollingdice1(void); //room 6 function
 void main(void)
 {
 	int x,y,z,i,h,g,k,outc, choice=0;
-	char inpute; 
+	char inpute;
 	char name[256];
 	int boxNum=0;
 	srand(time(NULL));
@@ -221,9 +218,9 @@ void main(void)
 						printf("\nEnter your question for Riddle #1: ");
 						fgets(riddle1, sizeof(riddleOne), stdin);
 						result = strcmp(riddleOne, riddle1);
-				
+
 					} while (result !=0);
-				
+
 						printf("Your question is: %s\n", riddle1);
 						printf("The correct question is: %s\n", riddleOne);
 						printf("Sweet heavens! You are a brilliant person, %s\n", name);
@@ -233,7 +230,7 @@ void main(void)
 						printf("\nEnter your question for Riddle #2: ");
 						fgets(riddle2, sizeof(riddleTwo), stdin);
 						result = strcmp(riddleTwo, riddle2);
-		
+
 					} while (result !=0);
 
 						printf("Your question is: %s\n", riddle2);
@@ -274,7 +271,7 @@ void main(void)
 				}
 			}
 			break;
-		}			
+		}
 		case 2:
 		{
 
@@ -1063,11 +1060,11 @@ case 6:
 		{
 		puts("You respond with 'General Kenobi'. He stares at you and says 'how do you know that name?' He takes out a broomstick and is ready to attack, when you are able to dodge his attack and run towards a wall. There is a large metal door, you run in and slam it shut behind you and it locks, keeping you safe... for now.");
 					puts("You find an old oil drum and find a pair of golden dice on top. You see a small note pinned under them and read it. 'These dice are an ancient artifact called the Dice of Destiny. If you are reading this note, you have the choice to either try your luck and recieve riches such as gold, knowledge of the future, or imortality, or if you lose, you will be cursed by it and perish. Getting the total to an even number will bless you with its riches, getting a total of an odd number will curse you. Choose wisely.\n");
-					puts ("input 'y' to try your luck or 'n' to avoid the gamble.\n"); 
-					scanf(" %c",&inpute);	
+					puts ("input 'y' to try your luck or 'n' to avoid the gamble.\n");
+					scanf(" %c",&inpute);
 		}
 						if(inpute == 'y')
-						{	
+						{
 							puts("Very well. remeber, evens give unearthly gifts while odds curse you\n");
 							puts("You grab the dice, and roll them, your heart is pumping at wheather you can become the next Thanos, or will simply wither away and become another explorer lost to the ancients.\n");
 							outc = rollingdice1();
@@ -1080,7 +1077,7 @@ case 6:
 								puts("You get knocked out and wake up in your bed.");
 								puts("'You mean to tell me that was all a dream'");
 puts("You look up to see a red-eyed General Kenobi hanging from your cieling, lightsaber drawn. He looks you in the eye, and then...");
-puts("To Be Continued...");		   
+puts("To Be Continued...");
 								}
 							else if (outc == 2,4,6,8,10,12)
 								{
@@ -1093,7 +1090,7 @@ puts("To Be Continued...");
 						{
 							puts("You chose to forfeit the chance of unearthly riches to avoid the risk of death and torment.\n");
 							puts("A wise choice, the dice can either be sold off for money or used as a bartering chip to get you out of this hellish limbo\n");
-						}	
+						}
 		else
 		{
 		puts("You have choices, this isn't one of them.");
@@ -1510,60 +1507,193 @@ break;
 			{
 					while(choice != 99)
 					{
-						int levelChoice =0;
-						char gameWord[MAX_STRING_SIZE];  //this array holds the word to guess during gameplay
-						char *ptr;
-						bool userWins = false;
-						ptr=gameWord; //pointer for char array
-						char gameType;
-						char gameGuess='x';
-						while (levelChoice != 4)
-						{
-							puts("Welcome to the HANGMAN room, choose your option:");
-							puts("1. Begin easy game");
-							puts("2. Begin medium game");
-							puts("3. Begin hard game");
-							puts("4. Exit back to main menu");
-							scanf("%d", &levelChoice);
-							if (levelChoice==1)
+
+							int levelChoice =0, stringLength;
+							char gameWord[MAX_STRING_SIZE];  //this array holds the word to guess during gameplay
+							char *ptr, *urGuess;
+							bool userWins = false;
+							int wrongChoice = 0;
+							int numCorrect = 0;
+							char gameType;
+							char gameGuess[MAX_STRING_SIZE];  //guess will be collected at a string
+							while (levelChoice != 3)
 							{
-								gameType='e';
-								puts("easy game no problem!");
-								printMan(0, gameType);
-								findWord(ptr, gameType);
-								while (gameGuess != '4'){
-									puts("enter your first guess:");
-									scanf("%s", &gameGuess);
-									//char *guessPtr = gameGuess;
-									//checkCharacter(ptr, guessPtr);
-									//printf("testing");
-									gameGuess=4;
+								puts("Welcome to the HANGMAN room, choose your option:");
+								puts("1. Begin game");
+								puts("2. Begin hard game");
+								puts("3. Exit back to main menu");
+								scanf("%d", &levelChoice);
+								if (levelChoice==1)
+								{
+									numCorrect=0;
+									wrongChoice=0;
+									gameType='e';
+									puts("easy game no problem! remember you can quit by entering '3'");
+									printMan(wrongChoice, gameType);
+									char gameWord[]={'e','l','e','p','h','a','n','t','\0'};
+									char wordBlank[]={'_','_','_','_','_','_','_','_','\0'};  //this will be the word we fill in w/ guesses
+
+									ptr= gameWord; //pointer for char array
+
+
+									puts("enter your letter guess:");
+									scanf(" %s", &gameGuess);
+									//urGuess = gameGuess[0];
+									//fgets(gameGuess,MAX_STRING_SIZE,stdin);
+									//gameGuess[strlen(gameGuess) -1] = '\0';  //clear ending charcter
+									//printf("The user has entered %c\n", gameGuess[0]);
+
+
+									//printf( "collected1: %s", *urGuess);
+									while (gameGuess[0] != '3'){
+										//printf( "collected: %s", gameGuess);  //************************************
+
+										if( gameGuess[0]== 'e'){
+											printMan(wrongChoice, gameType);
+											wordBlank[0]='e';
+											wordBlank[2]='e';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='l'){
+											printMan (wrongChoice, gameType);
+											wordBlank[1]='l';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='p'){
+											printMan (wrongChoice, gameType);
+											wordBlank[3]='p';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='h'){
+											printMan (wrongChoice, gameType);
+											wordBlank[4]='h';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='a'){
+											printMan (wrongChoice, gameType);
+											wordBlank[5]='a';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='n'){
+											printMan (wrongChoice, gameType);
+											wordBlank[6]='n';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='t'){
+											printMan (wrongChoice, gameType);
+											wordBlank[7]='t';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]!='e' && gameGuess[0]!='l' && gameGuess[0]!='p' && gameGuess[0]!='h' && gameGuess[0]!='a' && gameGuess[0]!='n' && gameGuess[0]!='t'){
+											wrongChoice++;
+											printMan(wrongChoice, gameType);
+											printf(" %s\n", wordBlank);
+										}
+										if(wrongChoice==6 && gameType=='e'){
+											break;
+										} else if (wrongChoice==4 && gameType=='h'){
+											break;
+										}
+
+										if (numCorrect==7){
+											puts("YOU WIN!");
+											break;
+										}
+
+										puts("\nenter your next guess:");
+										scanf(" %s", &gameGuess);
+										//fgets(gameGuess,1,stdin);
+										//printf("inputNext = %c \n", gameGuess);
+									}
+
+								}else if (levelChoice==2)
+								{
+									numCorrect=0;
+									wrongChoice=0;
+									gameType='h';
+									puts("hard mode, let's go! remember you can quit by entering '3'");
+									printMan(wrongChoice, gameType);
+									char gameWord[]={'a','b','y','s','s','\0'};
+									char wordBlank[]={'_','_','_','_','_','\0'};  //this will be the word we fill in w/ guesses
+
+									ptr= gameWord; //pointer for char array
+
+
+									puts("enter your letter guess:");
+									scanf(" %s", &gameGuess);
+									//urGuess = gameGuess[0];
+									//fgets(gameGuess,MAX_STRING_SIZE,stdin);
+									//gameGuess[strlen(gameGuess) -1] = '\0';  //clear ending charcter
+									//printf("The user has entered %c\n", gameGuess[0]);
+
+
+									//printf( "collected1: %s", *urGuess);
+									while (gameGuess[0] != '3'){
+										//printf( "collected: %s", gameGuess);  //************************************
+
+										if( gameGuess[0]== 'a'){
+											printMan(wrongChoice, gameType);
+											wordBlank[0]='a';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='b'){
+											printMan (wrongChoice, gameType);
+											wordBlank[1]='b';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='y'){
+											printMan (wrongChoice, gameType);
+											wordBlank[2]='y';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]=='s'){
+											printMan (wrongChoice, gameType);
+											wordBlank[4]='s';
+											wordBlank[3]='s';
+											numCorrect++;
+											printf(" %s\n", wordBlank);
+										}
+										if (gameGuess[0]!='a' && gameGuess[0]!='b' && gameGuess[0]!='y' && gameGuess[0]!='s'){
+											wrongChoice++;
+											printMan(wrongChoice, gameType);
+											printf(" %s\n", wordBlank);
+										}
+
+										if(wrongChoice==6 && gameType=='e'){
+											break;
+										} else if (wrongChoice==4 && gameType=='h'){
+											break;
+										}
+										if (numCorrect==4){
+											puts("YOU WIN!");
+											break;
+										}
+
+										puts("\nenter your next guess:");
+										scanf(" %s", &gameGuess);
+										//fgets(gameGuess,1,stdin);
+										//printf("inputNext = %c \n", gameGuess);
+									}
+
+								} else if (levelChoice==3)
+								{
+									break;
+								} else {
+									puts("choose a valid option from the menu please");
 								}
 
-
-
-							} else if(levelChoice==2)
-							{
-								gameType='m';
-								puts("medium game no problem!");
-								printMan(0, gameType);
-
-
-							} else if (levelChoice==3)
-							{
-								gameType='h';
-								puts("hard game, here we go!");
-								printMan(0, gameType);
-
-
-							} else if (levelChoice==4)
-							{
-								break;
-							} else {
-								puts("choose a valid option from the menu please");
 							}
-
-						}
+					}
 					break;
 			}
 			case 13: // this is mine
@@ -1950,7 +2080,7 @@ break;
 							puts("Cup9    Cup10   Cup11   Cup12");
 							puts("Cup13   Cup14   Cup15   Cup16");
 							puts("");
-							puts("The order that the cups are arranged in:"); 
+							puts("The order that the cups are arranged in:");
 							randomFillRoom15(array,pntr);
 							printerRoom15(array,pntr);
 							puts("Do you want to put the cups in order from lowest number to highest? (Enter \"yes\" or \"no\")");
@@ -2197,11 +2327,11 @@ break;
                             				puts("Its a rather plain bed with nothing there");
                             				puts("It looks rather comfortable so you decide to take a nap");
                             				puts("zzzzzz");
-                            				puts("zzzzzz");puts("zzzzzz");  
-                            				puts("zzzzzz");puts("zzzzzz");  
-                            				puts("zzzzzz");puts("zzzzzz");  
-                            				puts("zzzzzz");puts("zzzzzz");  
-                            				puts("zzzzzz");puts("zzzzzz");  
+                            				puts("zzzzzz");puts("zzzzzz");
+                            				puts("zzzzzz");puts("zzzzzz");
+                            				puts("zzzzzz");puts("zzzzzz");
+                            				puts("zzzzzz");puts("zzzzzz");
+                            				puts("zzzzzz");puts("zzzzzz");
                             				puts("zzzzzz");puts("zzzzzz");
                             				puts("You awaken and notice somthing in your pocket");
                             				wRiter = fopen("Looking_for_help.txt","w");
@@ -2245,7 +2375,7 @@ break;
 													switch(userd)
 													{
 													    case 2:
-													        puts("You head towards the door and discover there is slot for the cube."); 
+													        puts("You head towards the door and discover there is slot for the cube.");
 														puts("So you put the cube inside the slot with the two facing towrds you.");
 													        puts("you hear a loud crashing sound coming from the other side you begin to open the door..");
 													        printf("Abetha:Wait don't leave me!! \n");
@@ -2281,7 +2411,7 @@ break;
 													                    {
 													                        printf("Abetha:Where is note did you not make it? Now I'm stuck here forever\n");
 													                    }
-													                    else 
+													                    else
 													                    {
 													                        while(!feof(reAder))
 													                        {
@@ -2321,7 +2451,7 @@ break;
 										default:
 											puts("You failed and now you do not exist. Better follow directions next time");
 											break;
-									}	
+									}
 									break;
 								case 2:
 									puts("You hear sobbing and you slowly feel yourself fade from exisitance");
@@ -2330,26 +2460,26 @@ break;
 									puts("You wait aimlessy wondring if you missed somthing maybe checking your files will help.");
 									break;
 							}
-                            				choice =99;     
+                            				choice =99;
                         			}
                         			else if(choice == 2)
-                        			{	   
+                        			{
                             				puts("There seems to be somthing odd about this wardrobe");
                             				puts("you step inside and...");
                             				puts("...\n...\n...\n...\n...\n...");
                             				puts("find nothing but an empty wardrobe");
-                            				choice =99;      
+                            				choice =99;
 						}
 						else if(choice ==3)
 						{
 							puts("You go to open the door but find that the other side of the door has been walled off");
-							choice =99;	
+							choice =99;
 						}
-						else 
+						else
 						{
 							puts("You continue standing at the entrance contemplating life");
-							choice =99;	
-						}	
+							choice =99;
+						}
 					}
 				break;
                        	}
@@ -2510,8 +2640,9 @@ break;
 		}
 	}
 
-   }
 }
+
+
 //case 1 functions
 
 int combo()
@@ -2549,14 +2680,14 @@ int displayRiddle()
 	}
 
 	// Read contents from file
-	
+
 	c = fgetc(fptr);
 	while (c != EOF)
 	{
 		printf ("%c", c);
 		c = fgetc(fptr);
 	}
-	
+
 	fclose(fptr);
 	return 0;
 }
@@ -4389,7 +4520,7 @@ int arrayCheck(int *pnt)
 
         {
 
-            
+
 
             x=2;
 
@@ -4559,7 +4690,7 @@ void StringCheckLast( char *pnt)
 
         puts("you return back to your regular life.");
 
-        
+
 
     }
 
@@ -4865,7 +4996,7 @@ void printMan(int numWrong, char gameType)
 {
 	if(numWrong==0)
 	{
-		puts("\nRemember you can exit at any time by entering the character '4'\n");
+		puts("\nRemember you can exit at any time by entering the character '3'\n");
 		puts("       ______");
 		puts("      |/     |");
 		puts("      |");
@@ -4875,9 +5006,9 @@ void printMan(int numWrong, char gameType)
 		puts("      |");
 		puts("      |");
 		puts("     _|___");
-	} else if(numWrong==1)
+	} else if(numWrong==1 && gameType=='e')
 	{
-		puts("       ______");
+		printf("       ______        guesses left: %d \n", (6-numWrong));
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |");
@@ -4886,9 +5017,20 @@ void printMan(int numWrong, char gameType)
 		puts("      |");
 		puts("      |");
 		puts("     _|___");
-	} else if (numWrong==2 && (gameType=='e' || gameType=='m'))
+	}else if(numWrong==1 && gameType=='h')
 	{
-		puts("       ______");
+		printf("       ______        guesses left: %d \n", (4-numWrong));
+		puts("      |/     |");
+		puts("      |     (_)");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("      |");
+		puts("     _|___");
+	} else if (numWrong==2 && (gameType=='e' ))
+	{
+		printf("       ______        guesses left: %d \n", (6-numWrong));
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|");
@@ -4899,7 +5041,7 @@ void printMan(int numWrong, char gameType)
 		puts("     _|___");
 	} else if (numWrong==2&& gameType=='h')
 	{
-		puts("       ______");
+		printf("       ______        guesses left: %d \n", (4-numWrong));
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|/");
@@ -4908,9 +5050,9 @@ void printMan(int numWrong, char gameType)
 		puts("      |");
 		puts("      |");
 		puts("     _|___");
-	} else if (numWrong==3 && (gameType=='e' || gameType=='m'))
+	} else if (numWrong==3 && (gameType=='e'))
 	{
-		puts("       ______");
+		printf("       ______        guesses left: %d \n", (6-numWrong));
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|/");
@@ -4921,18 +5063,18 @@ void printMan(int numWrong, char gameType)
 		puts("     _|___");
 	} else if (numWrong==3 && gameType=='h')
 	{
-		puts("       ______");
+		printf("       ______        guesses left: %d \n", (4-numWrong));
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|/");
-		puts("      |			|");
+	  puts("      |      |");
 		puts("      |");
 		puts("      |");
 		puts("      |");
 		puts("     _|___");
-	} else if (numWrong==4 && (gameType=='e' || gameType=='m'))
+	} else if (numWrong==4 && (gameType=='e'))
 	{
-		puts("       ______");
+		printf("       ______        guesses left: %d \n", (6-numWrong));
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|/");
@@ -4943,7 +5085,7 @@ void printMan(int numWrong, char gameType)
 		puts("     _|___");
 	} else if (numWrong==4 && gameType == 'h')
 	{
-		puts("       ______");      //game over for hard mode
+		printf("       ______        guesses left: %d \n", (4-numWrong));  //game over for hard mode
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|/");
@@ -4952,9 +5094,11 @@ void printMan(int numWrong, char gameType)
 		puts("      |");
 		puts("      |");
 		puts("     _|___");
+		puts("GAME OVER!");
+
 	} else if (numWrong==5 && gameType=='e')
 	{
-		puts("       ______");
+		printf("       ______        guesses left: %d \n", (6-numWrong));
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|/");
@@ -4963,20 +5107,10 @@ void printMan(int numWrong, char gameType)
 		puts("      |");
 		puts("      |");
 		puts("     _|___");
-	} else if (numWrong==5 && gameType=='m')
-	{
-		puts("       ______");   //game over for medium
-		puts("      |/     |");
-		puts("      |     (_)");
-		puts("      |     \\|/");
-		puts("      |      |");
-		puts("      |     /\\");
-		puts("      |");
-		puts("      |");
-		puts("     _|___");
+
 	} else if (numWrong==6 && gameType=='e')
 	{
-		puts("       ______");   //game over for easy
+		printf("       ______        guesses left: %d \n", (6-numWrong));  //game over for easy
 		puts("      |/     |");
 		puts("      |     (_)");
 		puts("      |     \\|/");
@@ -4985,59 +5119,9 @@ void printMan(int numWrong, char gameType)
 		puts("      |");
 		puts("      |");
 		puts("     _|___");
-	}
-}
+		puts("GAME OVER!");
 
-void findWord(char *pointer, char gameType)
-{
-	char easyWords[5][MAX_STRING_SIZE] =
-	{ "happiness",
-  	"videogames",
-  	"elephant",
-  	"dedication",
-		"revelation"
-	};
-	char medWords[5][MAX_STRING_SIZE] =
-	{ "calculus",
-  	"scientist",
-  	"naughty",
-  	"mexico",
-		"agent"
-	};
-	char hardWords[5][MAX_STRING_SIZE] =
-	{ "jazz",
-  	"funny",
-  	"honey",
-  	"moss",
-		"father"
-	};
-	int x;
-	srand(time(0));
-	x=(rand()%5);  //gets random word from string arrays
-	if (gameType=='e')
-	{
-		pointer=easyWords[x];
-		printf("'%s'", easyWords[x]);  //prints answer
-	} else if (gameType=='m')
-	{
-		pointer=medWords[x];
-		printf("'%s'", medWords[x]); //prints answer
-	} else if (gameType=='h')
-	{
-		pointer=hardWords[x];
-		printf("'%s'", hardWords[x]); //prints answer
 	}
-}
-
-void checkCharacter(char *ptr1, char *ptr2)
-{
-	int returnNum =99;
-	char *letterPtr = (strstr(ptr1, ptr2));
-	if(letterPtr !=NULL)
-	{
-		printf("lp = %s", letterPtr);
-	}
-	//this method wils return index of character if found and update the array of characters that have been guessed
 }
 
 
@@ -5047,7 +5131,7 @@ int rollingdice1(void)
     int i;
     for (i=0;i<=2;i++)
 {
- (rand() % 6)+ 1; 
+ (rand() % 6)+ 1;
 }
 return 0;
 }
@@ -5076,7 +5160,7 @@ void printerRoom15(int arr1[16], int *pointer)
 		{
 			puts("");
 			count = 0;
-		}	
+		}
 	}
 
 	puts("");
@@ -5089,7 +5173,7 @@ void randomFillRoom15(int arr1[16], int *pointer)
 	for(i=0; i<16; i++)
 	{
 		*pointer = rand() % (99) + 1;
-		pointer++;	
+		pointer++;
 	}
 }
 
@@ -5119,7 +5203,7 @@ void printLowerRoom15(char *array)
 	for(i=0; i<256; i++)
 	{
 		ch = *array;
-		
+
 		if(islower(ch)>0)
 		{
 			printf("%c",ch);
@@ -5163,7 +5247,7 @@ void printUpperRoom15(char *array)
 }
 
 int numVowelsRoom15(char *array)
-{	
+{
 	int i;
 	char ch;
 	int count = 0;
@@ -5181,7 +5265,7 @@ int numVowelsRoom15(char *array)
 				break;
 			case 'e':
 				count++;
-				break;	
+				break;
 			case 'E':
 				count++;
 				break;
@@ -5210,4 +5294,3 @@ int numVowelsRoom15(char *array)
 
 	return count;
 }
-
